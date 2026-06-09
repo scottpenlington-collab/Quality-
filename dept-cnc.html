@@ -147,10 +147,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
       <textarea id="f-desc" rows="3" style="resize:vertical" placeholder="Describe the issue in detail..."></textarea>
     </div>
     <div class="form-group">
-      <label>Corrective action taken</label>
-      <textarea id="f-action" rows="2" style="resize:vertical" placeholder="What was communicated or done?"></textarea>
-    </div>
-    <div class="form-group">
       <label>Photo (optional)</label>
       <div class="photo-zone" id="photo-zone">
         <input type="file" accept="image/*" capture="environment" id="f-photo" onchange="handlePhoto(this)">
@@ -219,10 +215,9 @@ function submitEntry(){
   const severity=document.getElementById('f-severity').value;
   const supervisor=document.getElementById('f-supervisor').value.trim();
   const desc=document.getElementById('f-desc').value.trim();
-  const action=document.getElementById('f-action').value.trim();
   if(!assembler||!type||!desc){alert('Please fill in assembler name, issue type, and description.');return;}
   const entries=getEntries();
-  entries.unshift({id:Date.now(),ts:new Date().toISOString(),assembler,type,severity,supervisor,desc,action,photo:photoData||null});
+  entries.unshift({id:Date.now(),ts:new Date().toISOString(),assembler,type,severity,supervisor,desc,photo:photoData||null});
   saveEntries(entries);
   resetForm();
   const level=getEscalationLevel(assembler,normaliseIssue(type),entries);
@@ -235,7 +230,7 @@ function getEscalationLevel(assembler,issueKey,entries){
   return c>=3?3:c===2?2:1;
 }
 function resetForm(){
-  ['f-assembler','f-type','f-severity','f-supervisor','f-desc','f-action'].forEach(id=>{const el=document.getElementById(id);el.selectedIndex=0;if(el.tagName!=='SELECT')el.value='';});
+  ['f-assembler','f-type','f-severity','f-supervisor','f-desc'].forEach(id=>{const el=document.getElementById(id);el.selectedIndex=0;if(el.tagName!=='SELECT')el.value='';});
   photoData=null;
   document.getElementById('photo-preview').style.display='none';document.getElementById('photo-preview').src='';
   document.querySelector('#photo-zone p').textContent='Tap to take or upload a photo';document.getElementById('f-photo').value='';
@@ -267,7 +262,6 @@ function renderHistory(){
       </div>
       <div style="font-size:13px;font-weight:500;color:var(--text-secondary);margin:4px 0">${esc(e.type)}</div>
       <div style="font-size:13px;color:var(--text-primary);margin-top:4px">${esc(e.desc)}</div>
-      ${e.action?'<div style="font-size:12px;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border-light)"><i class="ti ti-tool" style="font-size:11px;margin-right:4px"></i>'+esc(e.action)+'</div>':''}
     </div>`;
   }).join('');
 }
