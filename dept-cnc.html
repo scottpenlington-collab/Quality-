@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNC — Quality &amp; Safety Log</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-primary:#fff;--bg-secondary:#f5f5f4;--bg-tertiary:#F0EDE8;
+  --text-primary:#1a1a18;--text-secondary:#6b6b68;--text-tertiary:#9a9a97;
+  --border-light:rgba(0,0,0,0.09);--border-mid:rgba(0,0,0,0.18);--border-strong:rgba(0,0,0,0.28);
+  --radius-md:8px;--radius-lg:12px;
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --accent:#F59E0B;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg-primary:#1e1e1c;--bg-secondary:#2a2a28;--bg-tertiary:#111110;
+  --text-primary:#f0ece4;--text-secondary:#9a9a97;--text-tertiary:#6b6b68;
+  --border-light:rgba(255,255,255,0.07);--border-mid:rgba(255,255,255,0.14);--border-strong:rgba(255,255,255,0.24);
+}}
+body{font-family:var(--font-sans);background:var(--bg-tertiary);color:var(--text-primary);min-height:100vh}
+.app{max-width:960px;margin:0 auto;padding:1.25rem 1rem}
+.header{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:0.5px solid var(--border-light)}
+.back-btn{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--text-secondary);text-decoration:none;padding:6px 10px;background:var(--bg-secondary);border:0.5px solid var(--border-mid);border-radius:var(--radius-md);transition:opacity .15s;flex-shrink:0;white-space:nowrap}
+.back-btn:hover{opacity:.7}
+.header-icon{width:40px;height:40px;background:var(--accent);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.header h1{font-size:17px;font-weight:600;color:var(--text-primary);line-height:1.2}
+.header p{font-size:12px;color:var(--text-secondary)}
+.tabs{display:flex;gap:4px;margin-bottom:1.25rem;background:var(--bg-secondary);padding:4px;border-radius:var(--radius-md)}
+.tab{flex:1;padding:8px 0;font-size:13px;font-weight:500;text-align:center;border-radius:6px;cursor:pointer;border:none;background:transparent;color:var(--text-secondary);transition:all .15s;font-family:var(--font-sans)}
+.tab.active{background:var(--bg-primary);color:var(--text-primary);border:0.5px solid var(--border-light)}
+.section{display:none}.section.active{display:block}
+.card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem}
+label{display:block;font-size:11px;font-weight:500;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+input,select,textarea{width:100%;font-family:var(--font-sans);font-size:14px;padding:8px 10px;background:var(--bg-secondary);border:0.5px solid var(--border-mid);border-radius:var(--radius-md);color:var(--text-primary);outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+.form-group{margin-bottom:12px}
+.photo-zone{border:1.5px dashed var(--border-mid);border-radius:var(--radius-md);padding:1.5rem;text-align:center;cursor:pointer;transition:all .15s;position:relative;background:var(--bg-secondary)}
+.photo-zone:hover{border-color:var(--border-strong)}
+.photo-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.photo-zone i{font-size:28px;color:var(--text-tertiary);display:block;margin-bottom:6px}
+.photo-zone p{font-size:13px;color:var(--text-secondary)}
+.photo-preview{width:100%;max-height:200px;object-fit:cover;border-radius:var(--radius-md);margin-top:8px;display:none}
+.btn-submit{width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-md);font-size:14px;font-weight:500;cursor:pointer;transition:opacity .15s;font-family:var(--font-sans);display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{opacity:.88}
+.log-filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.log-filters select,.log-filters input{width:auto;flex:1;min-width:120px;font-size:13px}
+.log-entry{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:.75rem;border-left:3px solid var(--border-light)}
+.log-entry.status-1{border-left-color:#1D9E75}
+.log-entry.status-2{border-left-color:#EF9F27}
+.log-entry.status-3{border-left-color:#E24B4A}
+.entry-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.entry-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.badge-green{background:#E1F5EE;color:#0F6E56}
+.badge-amber{background:#FAEEDA;color:#854F0B}
+.badge-red{background:#FCEBEB;color:#A32D2D}
+.badge-gray{background:var(--bg-secondary);color:var(--text-secondary)}
+.escalation-card{border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:.75rem;border:0.5px solid}
+.esc-ok{background:#E1F5EE;border-color:#5DCAA5}
+.esc-warn{background:#FAEEDA;border-color:#EF9F27}
+.esc-crit{background:#FCEBEB;border-color:#E24B4A;animation:flashBorder 1s infinite}
+@keyframes flashBorder{0%,100%{border-color:#E24B4A;box-shadow:0 0 0 1px #E24B4A40}50%{border-color:#F09595;box-shadow:0 0 0 3px #E24B4A20}}
+.esc-assembler{font-size:15px;font-weight:500}
+.esc-ok .esc-assembler{color:#0F6E56}.esc-warn .esc-assembler{color:#854F0B}.esc-crit .esc-assembler{color:#A32D2D}
+.esc-details{font-size:12px;margin-top:4px;opacity:.8}
+.esc-ok .esc-details{color:#085041}.esc-warn .esc-details{color:#633806}.esc-crit .esc-details{color:#791F1F}
+.meet-alert{background:#FCEBEB;border:1.5px solid #E24B4A;border-radius:var(--radius-md);padding:.75rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:10px;animation:flashBorder 1s infinite}
+.meet-alert i{font-size:20px;color:#A32D2D;flex-shrink:0}
+.meet-alert p{font-size:13px;color:#A32D2D;font-weight:500}
+.entry-img{width:64px;height:48px;object-fit:cover;border-radius:6px;cursor:pointer;flex-shrink:0;border:0.5px solid var(--border-light)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:var(--radius-md)}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text-secondary);font-size:14px}
+.empty i{font-size:36px;display:block;margin-bottom:.75rem;color:var(--text-tertiary)}
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:var(--radius-md);font-size:13px;font-weight:500;z-index:9999;transition:opacity .3s;pointer-events:none;max-width:340px;text-align:center;display:none}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+  <a href="index.html" class="back-btn"><i class="ti ti-arrow-left"></i> Home</a>
+  <div class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+  <div>
+    <h1>CNC</h1>
+    <p>CNC machining &amp; precision cutting operations</p>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('log')"><i class="ti ti-plus"></i> Log Issue</button>
+  <button class="tab" onclick="switchTab('history')"><i class="ti ti-history"></i> History</button>
+  <button class="tab" onclick="switchTab('escalations')"><i class="ti ti-alert-triangle"></i> Escalations</button>
+</div>
+
+<div id="tab-log" class="section active">
+  <div class="card">
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Assembler name</label>
+        <select id="f-assembler">
+          <option value="">Select assembler...</option>
+          <option>OWEN HENDERSON</option><option>JORDAN ROBERTS</option><option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option><option>THOMAS HOPKINS</option><option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option><option>JERMAINE ARTHUR</option><option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option><option>KACPER GRUDZINSKI</option><option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option><option>ANDREAS PETROPOULOUS</option><option>KYE DALY</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Issue type</label>
+        <select id="f-type">
+          <option value="">Select type...</option>
+          <option>Quality — Finish / surface defect</option>
+          <option>Quality — Measurement / fit issue</option>
+          <option>Quality — Assembly error</option>
+          <option>Quality — Material defect</option>
+          <option>Safety — PPE not worn</option>
+          <option>Safety — Unsafe working practice</option>
+          <option>Safety — Housekeeping / trip hazard</option>
+          <option>Safety — Near miss</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Severity</label>
+        <select id="f-severity">
+          <option value="low">Low — Minor, noted only</option>
+          <option value="medium">Medium — Requires correction</option>
+          <option value="high">High — Stop and fix</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Supervisor / logged by</label>
+        <input type="text" id="f-supervisor" placeholder="Your name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="f-desc" rows="3" style="resize:vertical" placeholder="Describe the issue in detail..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Corrective action taken</label>
+      <textarea id="f-action" rows="2" style="resize:vertical" placeholder="What was communicated or done?"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Photo (optional)</label>
+      <div class="photo-zone" id="photo-zone">
+        <input type="file" accept="image/*" capture="environment" id="f-photo" onchange="handlePhoto(this)">
+        <i class="ti ti-camera"></i>
+        <p>Tap to take or upload a photo</p>
+      </div>
+      <img id="photo-preview" class="photo-preview" alt="Issue photo preview">
+    </div>
+    <button class="btn-submit" onclick="submitEntry()"><i class="ti ti-check"></i> Log Issue</button>
+  </div>
+</div>
+
+<div id="tab-history" class="section">
+  <div class="card log-filters" style="padding:.75rem 1rem;margin-bottom:.75rem">
+    <select id="filter-assembler" onchange="renderHistory()">
+      <option value="">All assemblers</option>
+      <option>OWEN HENDERSON</option><option>JORDAN ROBERTS</option><option>MARCUS MIRCETIC</option>
+      <option>PAWEL BARYLA</option><option>THOMAS HOPKINS</option><option>SADMAN RAIFID</option>
+      <option>PETRICA HAIDAU</option><option>JERMAINE ARTHUR</option><option>LEWIS QUINN</option>
+      <option>ABDUL HALIM AKOTO</option><option>KACPER GRUDZINSKI</option><option>STEVEN WALDREN</option>
+      <option>MARIAN DZIEMBA</option><option>ANDREAS PETROPOULOUS</option><option>KYE DALY</option>
+    </select>
+    <select id="filter-type" onchange="renderHistory()">
+      <option value="">All issue types</option>
+      <option>Quality</option><option>Safety</option>
+    </select>
+    <input type="date" id="filter-date" onchange="renderHistory()">
+    <button onclick="clearFilters()" style="padding:8px 14px;background:var(--bg-secondary);border:0.5px solid var(--border-mid);border-radius:var(--radius-md);cursor:pointer;color:var(--text-secondary);font-family:var(--font-sans);font-size:13px;white-space:nowrap">Clear</button>
+  </div>
+  <div id="history-list"></div>
+</div>
+
+<div id="tab-escalations" class="section">
+  <div id="meeting-alerts"></div>
+  <div id="escalation-list"></div>
+</div>
+</div>
+
+<div id="lightbox" class="lightbox" style="display:none" onclick="this.style.display='none'">
+  <img id="lb-img" src="" alt="Full size issue photo">
+</div>
+<div id="toast"></div>
+
+<script>
+const STORE_KEY='qsl_cnc_v1';
+let photoData=null;
+function getEntries(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'[]')}catch{return[]}}
+function saveEntries(e){localStorage.setItem(STORE_KEY,JSON.stringify(e))}
+function normaliseIssue(t){return(t||'').split('—')[0].trim().toLowerCase()}
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',['log','history','escalations'][i]===t));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(t==='history')renderHistory();
+  if(t==='escalations')renderEscalations();
+}
+function handlePhoto(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{photoData=e.target.result;const p=document.getElementById('photo-preview');p.src=photoData;p.style.display='block';document.querySelector('#photo-zone p').textContent='Photo attached — tap to change';};
+  r.readAsDataURL(f);
+}
+function submitEntry(){
+  const assembler=document.getElementById('f-assembler').value;
+  const type=document.getElementById('f-type').value;
+  const severity=document.getElementById('f-severity').value;
+  const supervisor=document.getElementById('f-supervisor').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+  const action=document.getElementById('f-action').value.trim();
+  if(!assembler||!type||!desc){alert('Please fill in assembler name, issue type, and description.');return;}
+  const entries=getEntries();
+  entries.unshift({id:Date.now(),ts:new Date().toISOString(),assembler,type,severity,supervisor,desc,action,photo:photoData||null});
+  saveEntries(entries);
+  resetForm();
+  const level=getEscalationLevel(assembler,normaliseIssue(type),entries);
+  if(level>=3)showToast('⚠️ Third occurrence — hold a meeting with '+assembler,'red');
+  else if(level===2)showToast('Amber alert — second occurrence for '+assembler,'amber');
+  else showToast('Issue logged for '+assembler,'green');
+}
+function getEscalationLevel(assembler,issueKey,entries){
+  const c=entries.filter(e=>e.assembler===assembler&&normaliseIssue(e.type)===issueKey).length;
+  return c>=3?3:c===2?2:1;
+}
+function resetForm(){
+  ['f-assembler','f-type','f-severity','f-supervisor','f-desc','f-action'].forEach(id=>{const el=document.getElementById(id);el.selectedIndex=0;if(el.tagName!=='SELECT')el.value='';});
+  photoData=null;
+  document.getElementById('photo-preview').style.display='none';document.getElementById('photo-preview').src='';
+  document.querySelector('#photo-zone p').textContent='Tap to take or upload a photo';document.getElementById('f-photo').value='';
+}
+function renderHistory(){
+  const assembler=document.getElementById('filter-assembler').value;
+  const typeF=document.getElementById('filter-type').value;
+  const dateF=document.getElementById('filter-date').value;
+  let entries=getEntries();
+  if(assembler)entries=entries.filter(e=>e.assembler===assembler);
+  if(typeF)entries=entries.filter(e=>e.type.toLowerCase().startsWith(typeF.toLowerCase()));
+  if(dateF)entries=entries.filter(e=>e.ts.startsWith(dateF));
+  const el=document.getElementById('history-list');
+  if(!entries.length){el.innerHTML='<div class="empty"><i class="ti ti-clipboard-x"></i>No entries match your filters</div>';return;}
+  const all=getEntries();
+  el.innerHTML=entries.map(e=>{
+    const level=getEscalationLevel(e.assembler,normaliseIssue(e.type),all);
+    const badge=level>=3?'<span class="badge badge-red"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Hold meeting</span>':level===2?'<span class="badge badge-amber"><i class="ti ti-alert-circle" style="font-size:11px"></i> Amber warning</span>':'<span class="badge badge-green">First occurrence</span>';
+    const sev={'low':'<span class="badge badge-gray">Low</span>','medium':'<span class="badge badge-amber">Medium</span>','high':'<span class="badge badge-red">High</span>'}[e.severity]||'';
+    const dt=new Date(e.ts);
+    const dtStr=dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    const imgHTML=e.photo?'<img src="'+e.photo+'" class="entry-img" onclick="openLightbox('+e.id+')" alt="Photo" title="Click to enlarge">':``;
+    return`<div class="log-entry status-${level}">
+      <div class="entry-header">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-size:14px;font-weight:500">${esc(e.assembler)}</span>${badge}${sev}</div>
+          <div class="entry-meta">${dtStr}${e.supervisor?' &middot; '+esc(e.supervisor):''}</div>
+        </div>${imgHTML}
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--text-secondary);margin:4px 0">${esc(e.type)}</div>
+      <div style="font-size:13px;color:var(--text-primary);margin-top:4px">${esc(e.desc)}</div>
+      ${e.action?'<div style="font-size:12px;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border-light)"><i class="ti ti-tool" style="font-size:11px;margin-right:4px"></i>'+esc(e.action)+'</div>':''}
+    </div>`;
+  }).join('');
+}
+function openLightbox(id){const e=getEntries().find(x=>x.id==id);if(!e||!e.photo)return;document.getElementById('lb-img').src=e.photo;document.getElementById('lightbox').style.display='flex';}
+function renderEscalations(){
+  const entries=getEntries();const map={};
+  entries.forEach(e=>{if(!map[e.assembler])map[e.assembler]={};const k=normaliseIssue(e.type);if(!map[e.assembler][k])map[e.assembler][k]={count:0,lastType:e.type};map[e.assembler][k].count++;});
+  const crits=[],warns=[],oks=[];
+  Object.keys(map).sort().forEach(a=>{Object.keys(map[a]).forEach(k=>{const{count,lastType}=map[a][k];const obj={assembler:a,issue:lastType,count};if(count>=3)crits.push(obj);else if(count===2)warns.push(obj);else oks.push(obj);});});
+  document.getElementById('meeting-alerts').innerHTML=crits.length?'<div class="meet-alert"><i class="ti ti-alarm"></i><p>Meeting required — '+crits.length+' assembler/issue combination'+(crits.length>1?'s':'')+' have reached 3+ occurrences</p></div>':'';
+  const el=document.getElementById('escalation-list');
+  const all=[...crits,...warns,...oks];
+  if(!all.length){el.innerHTML='<div class="empty"><i class="ti ti-shield-check"></i>No issues logged yet</div>';return;}
+  el.innerHTML=all.map(x=>{
+    const cls=x.count>=3?'esc-crit':x.count===2?'esc-warn':'esc-ok';
+    const icon=x.count>=3?'ti-alert-triangle':x.count===2?'ti-alert-circle':'ti-check';
+    const label=x.count>=3?'Hold meeting':x.count===2?'Amber warning':'First occurrence';
+    return'<div class="escalation-card '+cls+'"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span class="esc-assembler"><i class="ti '+icon+'" style="font-size:14px;margin-right:6px"></i>'+esc(x.assembler)+'</span><span style="font-size:11px;font-weight:500">'+label+' &middot; '+x.count+'x</span></div><div class="esc-details">'+esc(x.issue)+'</div></div>';
+  }).join('');
+}
+function clearFilters(){document.getElementById('filter-assembler').value='';document.getElementById('filter-type').value='';document.getElementById('filter-date').value='';renderHistory();}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+let toastTimer;
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  const cols={green:['#E1F5EE','#0F6E56'],amber:['#FAEEDA','#854F0B'],red:['#FCEBEB','#A32D2D']};
+  const[bg,fg]=cols[type]||cols.green;
+  t.style.background=bg;t.style.color=fg;t.style.border='1px solid '+fg+'40';
+  t.textContent=msg;t.style.display='block';t.style.opacity='1';
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',300)},3500);
+}
+renderHistory();
+</script>
+</body>
+</html>
