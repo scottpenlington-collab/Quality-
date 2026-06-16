@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1st Fix Stair Parts — Quality &amp; Safety Log</title>
+<title>1st Fix Assembly — Quality &amp; Safety Log</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -13,7 +13,7 @@
   --border-light:rgba(0,0,0,0.09);--border-mid:rgba(0,0,0,0.18);--border-strong:rgba(0,0,0,0.28);
   --radius-md:8px;--radius-lg:12px;
   --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --accent:#8B5CF6;
+  --accent:#3B82F6;
 }
 @media(prefers-color-scheme:dark){:root{
   --bg-primary:#1e1e1c;--bg-secondary:#2a2a28;--bg-tertiary:#111110;
@@ -126,10 +126,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
 <div class="app">
 <div class="header">
   <a href="index.html" class="back-btn"><i class="ti ti-arrow-left"></i> Home</a>
-  <div class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="16" width="7" height="5" rx="1"/><rect x="2" y="9" width="13" height="5" rx="1"/><rect x="2" y="2" width="20" height="5" rx="1"/></svg></div>
+  <div class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 20 3 14 8 14 8 9 13 9 13 4 21 4"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
   <div>
-    <h1>1st Fix Stair Parts</h1>
-    <p>Treads, risers &amp; pre-cut stair components</p>
+    <h1>1st Fix Assembly</h1>
+    <p>Stair frames, strings &amp; structural components</p>
   </div>
   <button class="lock-btn" onclick="openAdminModal()" title="Admin login"><i class="ti ti-lock"></i></button>
 </div>
@@ -155,22 +155,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
         </select>
       </div>
       <div class="form-group" style="margin-bottom:0">
-        <label>Issue type</label>
-        <select id="f-type">
-          <option value="">Select type...</option>
-          <option>Quality — Finish / surface defect</option>
-          <option>Quality — Measurement / fit issue</option>
-          <option>Quality — Assembly error</option>
-          <option>Quality — Material defect</option>
-          <option>Safety — PPE not worn</option>
-          <option>Safety — Unsafe working practice</option>
-          <option>Safety — Housekeeping / trip hazard</option>
-          <option>Safety — Near miss</option>
-          <option>Other</option>
+        <label>Category</label>
+        <select id="f-category" onchange="updateIssueOptions()">
+          <option value="">Select category...</option>
+          <option value="Quality">Quality</option>
+          <option value="Safety">Safety</option>
         </select>
       </div>
     </div>
     <div class="form-row">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Issue type</label>
+        <select id="f-type" disabled>
+          <option value="">Select category first...</option>
+        </select>
+      </div>
       <div class="form-group" style="margin-bottom:0">
         <label>Department</label>
         <select id="f-severity">
@@ -345,7 +344,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
 <div id="toast"></div>
 
 <script>
-const STORE_KEY='qsl_parts_v1';
+const STORE_KEY='qsl_1stfix_v1';
 let photoData=null;
 function getEntries(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'[]')}catch{return[]}}
 function saveEntries(e){localStorage.setItem(STORE_KEY,JSON.stringify(e))}
@@ -365,9 +364,36 @@ function handlePhoto(inp){
 }
 
 const ISSUE_OPTIONS = {
-  Quality: ['Quality — Finish / surface defect','Quality — Measurement / fit issue','Quality — Assembly error','Quality — Material defect'],
-  Safety: ['Safety — PPE not worn','Safety — Unsafe working practice','Safety — Housekeeping / trip hazard','Safety — Near miss','Safety — Not wearing ear protection']
+  Quality: [
+    'Quality — Nails sticking out the face of the tread',
+    'Quality — Poor paint quality',
+    'Quality — Missing nails',
+    'Quality — Missing pins',
+    'Quality — Cut out too big / small',
+    'Quality — Wrong pairing of strings',
+    'Quality — No screw in the winder tread'
+  ],
+  Safety: [
+    'Safety — No ear protection',
+    'Safety — Not wearing goggles',
+    'Safety — No gloves',
+    'Safety — Misuse of tools',
+    'Safety — No hi-viz'
+  ]
 };
+
+function updateIssueOptions() {
+  const cat = document.getElementById('f-category').value;
+  const sel = document.getElementById('f-type');
+  if (!cat) {
+    sel.innerHTML = '<option value="">Select category first...</option>';
+    sel.disabled = true;
+    return;
+  }
+  const opts = ISSUE_OPTIONS[cat] || [];
+  sel.innerHTML = '<option value="">Select issue type...</option>' + opts.map(o => '<option>' + o + '</option>').join('');
+  sel.disabled = false;
+}
 function submitEntry(){
   const assembler=document.getElementById('f-assembler').value;
   const type=document.getElementById('f-type').value;
@@ -389,9 +415,9 @@ function getEscalationLevel(assembler,issueKey,entries){
   return c>=3?3:c===2?2:1;
 }
 function resetForm(){
-  ['f-assembler','f-type','f-severity','f-supervisor','f-desc'].forEach(id=>{const el=document.getElementById(id);el.selectedIndex=0;if(el.tagName!=='SELECT')el.value='';});
+  ['f-assembler','f-category','f-type','f-severity','f-supervisor','f-desc'].forEach(id=>{const el=document.getElementById(id);el.selectedIndex=0;if(el.tagName!=='SELECT')el.value='';});
   photoData=null;
-  document.getElementById('photo-preview').style.display='none';document.getElementById('photo-preview').src='';
+  updateIssueOptions();document.getElementById('photo-preview').style.display='none';document.getElementById('photo-preview').src='';
   document.querySelector('#photo-zone p').textContent='Tap to take or upload a photo';document.getElementById('f-photo').value='';
 }
 function renderHistory(){

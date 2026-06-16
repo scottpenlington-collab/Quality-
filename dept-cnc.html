@@ -79,9 +79,50 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
 .empty{text-align:center;padding:3rem 1rem;color:var(--text-secondary);font-size:14px}
 .empty i{font-size:36px;display:block;margin-bottom:.75rem;color:var(--text-tertiary)}
 #toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:var(--radius-md);font-size:13px;font-weight:500;z-index:9999;transition:opacity .3s;pointer-events:none;max-width:340px;text-align:center;display:none}
+
+.admin-bar{display:none;background:#1a1a18;color:#fff;padding:6px 1rem;font-size:12px;font-weight:500;text-align:center;letter-spacing:.3px;position:sticky;top:0;z-index:100}
+.admin-bar.visible{display:flex;align-items:center;justify-content:center;gap:10px}
+.admin-bar button{font-size:11px;padding:3px 10px;background:rgba(255,255,255,0.15);border:none;border-radius:20px;color:#fff;cursor:pointer;font-family:var(--font-sans)}
+.admin-bar button:hover{background:rgba(255,255,255,0.25)}
+.lock-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text-tertiary);background:none;border:none;cursor:pointer;padding:4px 6px;margin-left:auto;font-family:var(--font-sans);border-radius:var(--radius-md);transition:opacity .15s}
+.lock-btn:hover{opacity:.7}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal{background:var(--bg-primary);border:0.5px solid var(--border-mid);border-radius:var(--radius-lg);padding:1.5rem;width:100%;max-width:360px}
+.modal h2{font-size:16px;font-weight:600;margin-bottom:6px}
+.modal p{font-size:13px;color:var(--text-secondary);margin-bottom:1rem}
+.modal input{margin-bottom:12px}
+.modal-btns{display:flex;gap:8px}
+.modal-btns button{flex:1;padding:9px;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);border:none}
+.btn-cancel{background:var(--bg-secondary);color:var(--text-secondary)}
+.btn-confirm{background:var(--accent);color:#fff}
+.btn-danger{background:#EA4B4B;color:#fff}
+.entry-actions{display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border-light)}
+.entry-actions button{font-size:12px;padding:5px 12px;border-radius:var(--radius-md);border:0.5px solid var(--border-mid);background:var(--bg-secondary);color:var(--text-secondary);cursor:pointer;font-family:var(--font-sans);display:inline-flex;align-items:center;gap:4px}
+.entry-actions .btn-edit{color:var(--accent);border-color:var(--accent);background:transparent}
+.entry-actions .btn-delete{color:#EA4B4B;border-color:#EA4B4B;background:transparent}
+
+.settings-modal{background:var(--bg-primary);border:0.5px solid var(--border-mid);border-radius:var(--radius-lg);padding:1.5rem;width:100%;max-width:520px;max-height:88vh;overflow-y:auto}
+.settings-modal h2{font-size:16px;font-weight:600;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.settings-section{margin-bottom:1.5rem}
+.settings-section h3{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:0.5px solid var(--border-light)}
+.settings-list{list-style:none;margin-bottom:.75rem}
+.settings-list li{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg-secondary);border-radius:var(--radius-md);margin-bottom:5px;font-size:13px;gap:8px}
+.settings-list li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.settings-list li button{font-size:11px;padding:3px 8px;border-radius:6px;border:none;background:#FCEBEB;color:#A32D2D;cursor:pointer;font-family:var(--font-sans);flex-shrink:0}
+.settings-list li button:hover{background:#f8d0d0}
+.add-row{display:flex;gap:8px}
+.add-row input,.add-row select{flex:1;font-size:13px;margin-bottom:0}
+.add-row button{padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);white-space:nowrap;flex-shrink:0}
+.add-row button:hover{opacity:.88}
+.settings-close{width:100%;padding:9px;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);border:0.5px solid var(--border-mid);background:var(--bg-secondary);color:var(--text-secondary);margin-top:.5rem}
 </style>
 </head>
 <body>
+<div class="admin-bar" id="admin-bar">
+  <i class="ti ti-shield-lock"></i> Admin Mode Active
+  <button onclick="openSettings()"><i class="ti ti-settings" style="font-size:11px"></i> Settings</button>
+  <button onclick="lockAdmin()">Lock</button>
+</div>
 <div class="app">
 <div class="header">
   <a href="index.html" class="back-btn"><i class="ti ti-arrow-left"></i> Home</a>
@@ -90,6 +131,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
     <h1>CNC</h1>
     <p>CNC machining &amp; precision cutting operations</p>
   </div>
+  <button class="lock-btn" onclick="openAdminModal()" title="Admin login"><i class="ti ti-lock"></i></button>
 </div>
 
 <div class="tabs">
@@ -130,11 +172,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
     </div>
     <div class="form-row">
       <div class="form-group" style="margin-bottom:0">
-        <label>Severity</label>
+        <label>Department</label>
         <select id="f-severity">
-          <option value="low">Low — Minor, noted only</option>
-          <option value="medium">Medium — Requires correction</option>
-          <option value="high">High — Stop and fix</option>
+          <option value="internal">Internal</option>
+          <option value="external">External</option>
         </select>
       </div>
       <div class="form-group" style="margin-bottom:0">
@@ -185,6 +226,119 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
 </div>
 </div>
 
+
+<!-- Admin login modal -->
+<div class="modal-overlay" id="admin-modal" style="display:none">
+  <div class="modal">
+    <h2><i class="ti ti-lock" style="font-size:16px;margin-right:6px"></i>Admin Access</h2>
+    <p>Enter the admin password to edit or delete entries.</p>
+    <input type="password" id="admin-pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
+      <button class="btn-confirm" onclick="checkAdminPw()">Unlock</button>
+    </div>
+    <div id="pw-error" style="font-size:12px;color:#EA4B4B;margin-top:8px;display:none">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- Edit modal -->
+<div class="modal-overlay" id="edit-modal" style="display:none">
+  <div class="modal" style="max-width:480px">
+    <h2 style="margin-bottom:1rem"><i class="ti ti-edit" style="font-size:16px;margin-right:6px"></i>Edit Entry</h2>
+    <label>Assembler</label>
+    <select id="edit-assembler" style="margin-bottom:12px">
+      <option value="">Select assembler...</option>
+      <option>OWEN HENDERSON</option>
+      <option>JORDAN ROBERTS</option>
+      <option>MARCUS MIRCETIC</option>
+      <option>PAWEL BARYLA</option>
+      <option>THOMAS HOPKINS</option>
+      <option>SADMAN RAIFID</option>
+      <option>PETRICA HAIDAU</option>
+      <option>JERMAINE ARTHUR</option>
+      <option>LEWIS QUINN</option>
+      <option>ABDUL HALIM AKOTO</option>
+      <option>KACPER GRUDZINSKI</option>
+      <option>STEVEN WALDREN</option>
+      <option>MARIAN DZIEMBA</option>
+      <option>ANDREAS PETROPOULOUS</option>
+      <option>KYE DALY</option>
+    </select>
+    <label>Category</label>
+    <select id="edit-category" onchange="updateEditIssueOptions()" style="margin-bottom:12px">
+      <option value="">Select category...</option>
+      <option value="Quality">Quality</option>
+      <option value="Safety">Safety</option>
+    </select>
+    <label>Issue type</label>
+    <select id="edit-type" style="margin-bottom:12px">
+      <option value="">Select category first...</option>
+    </select>
+    <label>Department</label>
+    <select id="edit-severity" style="margin-bottom:12px">
+      <option value="internal">Internal</option>
+      <option value="external">External</option>
+    </select>
+    <label>Supervisor</label>
+    <input type="text" id="edit-supervisor" placeholder="Supervisor name" style="margin-bottom:12px">
+    <label>Description</label>
+    <textarea id="edit-desc" rows="3" style="resize:vertical;margin-bottom:16px"></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+      <button class="btn-confirm" onclick="saveEdit()">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirm modal -->
+<div class="modal-overlay" id="delete-modal" style="display:none">
+  <div class="modal">
+    <h2>Delete entry?</h2>
+    <p>This will permanently remove this log entry. This cannot be undone.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Settings modal -->
+<div class="modal-overlay" id="settings-modal" style="display:none">
+  <div class="settings-modal">
+    <h2><i class="ti ti-settings" style="font-size:16px"></i> Admin Settings</h2>
+
+    <div class="settings-section">
+      <h3>Assemblers</h3>
+      <ul class="settings-list" id="settings-assembler-list"></ul>
+      <div class="add-row">
+        <input type="text" id="new-assembler-input" placeholder="Full name (e.g. JOHN SMITH)" style="text-transform:uppercase">
+        <button onclick="addAssembler()"><i class="ti ti-plus" style="font-size:12px"></i> Add</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Quality Issue Types</h3>
+      <ul class="settings-list" id="settings-quality-list"></ul>
+      <div class="add-row">
+        <input type="text" id="new-quality-input" placeholder="e.g. Incorrect tread spacing">
+        <button onclick="addIssueType('Quality')"><i class="ti ti-plus" style="font-size:12px"></i> Add</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Safety Issue Types</h3>
+      <ul class="settings-list" id="settings-safety-list"></ul>
+      <div class="add-row">
+        <input type="text" id="new-safety-input" placeholder="e.g. No safety footwear">
+        <button onclick="addIssueType('Safety')"><i class="ti ti-plus" style="font-size:12px"></i> Add</button>
+      </div>
+    </div>
+
+    <button class="settings-close" onclick="closeSettings()">Done</button>
+  </div>
+</div>
+
 <div id="lightbox" class="lightbox" style="display:none" onclick="this.style.display='none'">
   <img id="lb-img" src="" alt="Full size issue photo">
 </div>
@@ -209,6 +363,11 @@ function handlePhoto(inp){
   r.onload=e=>{photoData=e.target.result;const p=document.getElementById('photo-preview');p.src=photoData;p.style.display='block';document.querySelector('#photo-zone p').textContent='Photo attached — tap to change';};
   r.readAsDataURL(f);
 }
+
+const ISSUE_OPTIONS = {
+  Quality: ['Quality — Finish / surface defect','Quality — Measurement / fit issue','Quality — Assembly error','Quality — Material defect'],
+  Safety: ['Safety — PPE not worn','Safety — Unsafe working practice','Safety — Housekeeping / trip hazard','Safety — Near miss','Safety — Not wearing ear protection']
+};
 function submitEntry(){
   const assembler=document.getElementById('f-assembler').value;
   const type=document.getElementById('f-type').value;
@@ -249,7 +408,7 @@ function renderHistory(){
   el.innerHTML=entries.map(e=>{
     const level=getEscalationLevel(e.assembler,normaliseIssue(e.type),all);
     const badge=level>=3?'<span class="badge badge-red"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Hold meeting</span>':level===2?'<span class="badge badge-amber"><i class="ti ti-alert-circle" style="font-size:11px"></i> Amber warning</span>':'<span class="badge badge-green">First occurrence</span>';
-    const sev={'low':'<span class="badge badge-gray">Low</span>','medium':'<span class="badge badge-amber">Medium</span>','high':'<span class="badge badge-red">High</span>'}[e.severity]||'';
+    const sev={'internal':'<span class="badge badge-gray">Internal</span>','external':'<span class="badge badge-amber">External</span>'}[e.severity]||'';
     const dt=new Date(e.ts);
     const dtStr=dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
     const imgHTML=e.photo?'<img src="'+e.photo+'" class="entry-img" onclick="openLightbox('+e.id+')" alt="Photo" title="Click to enlarge">':``;
@@ -262,6 +421,10 @@ function renderHistory(){
       </div>
       <div style="font-size:13px;font-weight:500;color:var(--text-secondary);margin:4px 0">${esc(e.type)}</div>
       <div style="font-size:13px;color:var(--text-primary);margin-top:4px">${esc(e.desc)}</div>
+      ${isAdmin()?`<div class="entry-actions">
+        <button class="btn-edit" onclick="openEdit(${e.id})"><i class="ti ti-edit" style="font-size:12px"></i> Edit</button>
+        <button class="btn-delete" onclick="openDelete(${e.id})"><i class="ti ti-trash" style="font-size:12px"></i> Delete</button>
+      </div>`:''}
     </div>`;
   }).join('');
 }
@@ -293,6 +456,223 @@ function showToast(msg,type){
   t.textContent=msg;t.style.display='block';t.style.opacity='1';
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',300)},3500);
 }
+// --- ADMIN ---
+const DEFAULT_ASSEMBLERS = ['OWEN HENDERSON', 'JORDAN ROBERTS', 'MARCUS MIRCETIC', 'PAWEL BARYLA', 'THOMAS HOPKINS', 'SADMAN RAIFID', 'PETRICA HAIDAU', 'JERMAINE ARTHUR', 'LEWIS QUINN', 'ABDUL HALIM AKOTO', 'KACPER GRUDZINSKI', 'STEVEN WALDREN', 'MARIAN DZIEMBA', 'ANDREAS PETROPOULOUS', 'KYE DALY'];
+
+const ADMIN_PW = 'staircraft123';
+let adminUnlocked = sessionStorage.getItem('sc_admin') === '1';
+let editingId = null;
+let deletingId = null;
+
+function isAdmin(){return adminUnlocked;}
+
+function showAdminBar(){
+  const bar = document.getElementById('admin-bar');
+  if(adminUnlocked) bar.classList.add('visible'); else bar.classList.remove('visible');
+}
+
+function openAdminModal(){
+  document.getElementById('admin-modal').style.display='flex';
+  document.getElementById('admin-pw-input').value='';
+  document.getElementById('pw-error').style.display='none';
+  setTimeout(()=>document.getElementById('admin-pw-input').focus(),100);
+}
+
+function closeAdminModal(){document.getElementById('admin-modal').style.display='none';}
+
+function checkAdminPw(){
+  const pw = document.getElementById('admin-pw-input').value;
+  if(pw === ADMIN_PW){
+    adminUnlocked = true;
+    sessionStorage.setItem('sc_admin','1');
+    closeAdminModal();
+    showAdminBar();
+    renderHistory();
+    showToast('Admin mode unlocked','green');
+  } else {
+    document.getElementById('pw-error').style.display='block';
+    document.getElementById('admin-pw-input').value='';
+  }
+}
+
+function lockAdmin(){
+  adminUnlocked = false;
+  sessionStorage.removeItem('sc_admin');
+  showAdminBar();
+  renderHistory();
+  showToast('Admin mode locked','amber');
+}
+
+// Edit
+function openEdit(id){
+  const e = getEntries().find(x=>x.id==id);
+  if(!e) return;
+  editingId = id;
+  document.getElementById('edit-assembler').value = e.assembler||'';
+  // Set category based on type
+  const cat = (e.type||'').split('—')[0].trim();
+  const catSel = document.getElementById('edit-category');
+  catSel.value = (cat==='Quality'||cat==='Safety') ? cat : '';
+  updateEditIssueOptions();
+  document.getElementById('edit-type').value = e.type||'';
+  document.getElementById('edit-severity').value = e.severity||'internal';
+  document.getElementById('edit-supervisor').value = e.supervisor||'';
+  document.getElementById('edit-desc').value = e.desc||'';
+  document.getElementById('edit-modal').style.display='flex';
+}
+
+function updateEditIssueOptions(){
+  const cat = document.getElementById('edit-category').value;
+  const sel = document.getElementById('edit-type');
+  if(!cat){sel.innerHTML='<option value="">Select category first...</option>';return;}
+  const opts = ISSUE_OPTIONS[cat]||[];
+  sel.innerHTML='<option value="">Select issue type...</option>'+opts.map(o=>'<option>'+o+'</option>').join('');
+}
+
+function closeEditModal(){document.getElementById('edit-modal').style.display='none';editingId=null;}
+
+function saveEdit(){
+  if(!editingId) return;
+  const assembler = document.getElementById('edit-assembler').value;
+  const type = document.getElementById('edit-type').value;
+  const severity = document.getElementById('edit-severity').value;
+  const supervisor = document.getElementById('edit-supervisor').value.trim();
+  const desc = document.getElementById('edit-desc').value.trim();
+  if(!assembler||!type||!desc){alert('Please fill in assembler, issue type, and description.');return;}
+  const entries = getEntries();
+  const idx = entries.findIndex(x=>x.id==editingId);
+  if(idx>-1){entries[idx]={...entries[idx],assembler,type,severity,supervisor,desc};}
+  saveEntries(entries);
+  closeEditModal();
+  renderHistory();
+  showToast('Entry updated','green');
+}
+
+// Delete
+function openDelete(id){deletingId=id;document.getElementById('delete-modal').style.display='flex';}
+function closeDeleteModal(){document.getElementById('delete-modal').style.display='none';deletingId=null;}
+function confirmDelete(){
+  if(!deletingId) return;
+  const entries = getEntries().filter(x=>x.id!=deletingId);
+  saveEntries(entries);
+  closeDeleteModal();
+  renderHistory();
+  showToast('Entry deleted','amber');
+}
+
+showAdminBar();
+
+// --- SETTINGS / LIST MANAGEMENT ---
+const STORE_ASSEMBLERS = 'sc_assemblers_' + STORE_KEY;
+const STORE_QUALITY    = 'sc_quality_'    + STORE_KEY;
+const STORE_SAFETY     = 'sc_safety_'     + STORE_KEY;
+
+function getAssemblerList(){
+  try{ const s=localStorage.getItem(STORE_ASSEMBLERS); if(s) return JSON.parse(s); } catch{}
+  return DEFAULT_ASSEMBLERS.slice();
+}
+function getQualityList(){
+  try{ const s=localStorage.getItem(STORE_QUALITY); if(s) return JSON.parse(s); } catch{}
+  return ISSUE_OPTIONS.Quality.slice();
+}
+function getSafetyList(){
+  try{ const s=localStorage.getItem(STORE_SAFETY); if(s) return JSON.parse(s); } catch{}
+  return ISSUE_OPTIONS.Safety.slice();
+}
+function saveAssemblerList(arr){localStorage.setItem(STORE_ASSEMBLERS,JSON.stringify(arr));refreshAllDropdowns();}
+function saveQualityList(arr){localStorage.setItem(STORE_QUALITY,JSON.stringify(arr));refreshAllDropdowns();}
+function saveSafetyList(arr){localStorage.setItem(STORE_SAFETY,JSON.stringify(arr));refreshAllDropdowns();}
+
+function refreshAllDropdowns(){
+  // Refresh log form assembler dropdowns
+  const assemblers = getAssemblerList();
+  ['f-assembler','edit-assembler','filter-assembler'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    const cur = el.value;
+    const isFilter = id === 'filter-assembler';
+    el.innerHTML = (isFilter ? '<option value="">All assemblers</option>' : '<option value="">Select assembler...</option>')
+      + assemblers.map(a=>`<option${a===cur?' selected':''}>${a}</option>`).join('');
+  });
+  // Refresh ISSUE_OPTIONS live
+  ISSUE_OPTIONS.Quality = getQualityList();
+  ISSUE_OPTIONS.Safety  = getSafetyList();
+  // Refresh log form category dropdown if visible
+  if(typeof updateIssueOptions === 'function') updateIssueOptions();
+}
+
+function openSettings(){
+  renderSettingsLists();
+  document.getElementById('settings-modal').style.display='flex';
+}
+function closeSettings(){
+  document.getElementById('settings-modal').style.display='none';
+  refreshAllDropdowns();
+}
+
+function renderSettingsLists(){
+  const assemblers = getAssemblerList();
+  const quality    = getQualityList();
+  const safety     = getSafetyList();
+
+  document.getElementById('settings-assembler-list').innerHTML =
+    assemblers.map((a,i)=>`<li><span>${esc(a)}</span><button onclick="removeAssembler(${i})">Remove</button></li>`).join('') || '<li style="color:var(--text-tertiary);font-size:12px;justify-content:center">No assemblers added</li>';
+
+  document.getElementById('settings-quality-list').innerHTML =
+    quality.map((q,i)=>`<li><span>${esc(q.replace('Quality — ',''))}</span><button onclick="removeIssueType('Quality',${i})">Remove</button></li>`).join('') || '<li style="color:var(--text-tertiary);font-size:12px;justify-content:center">No quality issues added</li>';
+
+  document.getElementById('settings-safety-list').innerHTML =
+    safety.map((s,i)=>`<li><span>${esc(s.replace('Safety — ',''))}</span><button onclick="removeIssueType('Safety',${i})">Remove</button></li>`).join('') || '<li style="color:var(--text-tertiary);font-size:12px;justify-content:center">No safety issues added</li>';
+}
+
+function addAssembler(){
+  const inp = document.getElementById('new-assembler-input');
+  const val = inp.value.trim().toUpperCase();
+  if(!val){inp.focus();return;}
+  const list = getAssemblerList();
+  if(list.includes(val)){showToast('Assembler already exists','amber');return;}
+  list.push(val);
+  saveAssemblerList(list);
+  inp.value='';
+  renderSettingsLists();
+  showToast(val+' added','green');
+}
+
+function removeAssembler(idx){
+  const list = getAssemblerList();
+  const name = list[idx];
+  list.splice(idx,1);
+  saveAssemblerList(list);
+  renderSettingsLists();
+  showToast(name+' removed','amber');
+}
+
+function addIssueType(cat){
+  const inputId = cat==='Quality' ? 'new-quality-input' : 'new-safety-input';
+  const inp = document.getElementById(inputId);
+  const val = inp.value.trim();
+  if(!val){inp.focus();return;}
+  const prefixed = cat+' — '+val;
+  const list = cat==='Quality' ? getQualityList() : getSafetyList();
+  if(list.includes(prefixed)){showToast('Issue type already exists','amber');return;}
+  list.push(prefixed);
+  if(cat==='Quality') saveQualityList(list); else saveSafetyList(list);
+  inp.value='';
+  renderSettingsLists();
+  showToast('Issue type added','green');
+}
+
+function removeIssueType(cat,idx){
+  const list = cat==='Quality' ? getQualityList() : getSafetyList();
+  list.splice(idx,1);
+  if(cat==='Quality') saveQualityList(list); else saveSafetyList(list);
+  renderSettingsLists();
+  showToast('Issue type removed','amber');
+}
+
+// Init: apply stored lists on load
+refreshAllDropdowns();
+
 renderHistory();
 </script>
 </body>
