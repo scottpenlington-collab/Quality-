@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1st Fix Stair Parts — Quality &amp; Safety Log</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f5f5f4;--bg3:#F0EDE8;
+  --tx:#1a1a18;--tx2:#6b6b68;--tx3:#9a9a97;
+  --bl:rgba(0,0,0,0.09);--bm:rgba(0,0,0,0.18);--bs:rgba(0,0,0,0.28);
+  --rm:8px;--rl:12px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ac:#8B5CF6;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1e1e1c;--bg2:#2a2a28;--bg3:#111110;
+  --tx:#f0ece4;--tx2:#9a9a97;--tx3:#6b6b68;
+  --bl:rgba(255,255,255,0.07);--bm:rgba(255,255,255,0.14);--bs:rgba(255,255,255,0.24);
+}}
+body{font-family:var(--font);background:var(--bg3);color:var(--tx);min-height:100vh}
+.app{max-width:960px;margin:0 auto;padding:1.25rem 1rem}
+.hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:0.5px solid var(--bl)}
+.back{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--tx2);text-decoration:none;padding:6px 10px;background:var(--bg2);border:0.5px solid var(--bm);border-radius:var(--rm);flex-shrink:0;white-space:nowrap}
+.back:hover{opacity:.7}
+.hicon{width:40px;height:40px;background:var(--ac);border-radius:var(--rm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hicon svg{width:22px;height:22px}
+.hdr h1{font-size:17px;font-weight:600;line-height:1.2}
+.hdr p{font-size:12px;color:var(--tx2)}
+.lockbtn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--tx3);background:none;border:none;cursor:pointer;padding:4px 6px;margin-left:auto;font-family:var(--font);border-radius:var(--rm)}
+.lockbtn:hover{opacity:.7}
+.tabs{display:flex;gap:4px;margin-bottom:1.25rem;background:var(--bg2);padding:4px;border-radius:var(--rm)}
+.tab{flex:1;padding:8px 0;font-size:13px;font-weight:500;text-align:center;border-radius:6px;cursor:pointer;border:none;background:transparent;color:var(--tx2);font-family:var(--font)}
+.tab.active{background:var(--bg);color:var(--tx);border:0.5px solid var(--bl)}
+.sec{display:none}.sec.active{display:block}
+.card{background:var(--bg);border:0.5px solid var(--bl);border-radius:var(--rl);padding:1.25rem;margin-bottom:1rem}
+label{display:block;font-size:11px;font-weight:500;color:var(--tx2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+input,select,textarea{width:100%;font-family:var(--font);font-size:14px;padding:8px 10px;background:var(--bg2);border:0.5px solid var(--bm);border-radius:var(--rm);color:var(--tx);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--bs)}
+select:disabled{opacity:.5;cursor:not-allowed}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:540px){.frow{grid-template-columns:1fr}}
+.fg{margin-bottom:12px}
+.pzone{border:1.5px dashed var(--bm);border-radius:var(--rm);padding:1.5rem;text-align:center;cursor:pointer;position:relative;background:var(--bg2)}
+.pzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.pzone i{font-size:28px;color:var(--tx3);display:block;margin-bottom:6px}
+.pzone p{font-size:13px;color:var(--tx2)}
+.ppreview{width:100%;max-height:200px;object-fit:cover;border-radius:var(--rm);margin-top:8px;display:none}
+.submit{width:100%;padding:11px;background:var(--ac);color:#fff;border:none;border-radius:var(--rm);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px}
+.submit:hover{opacity:.88}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filters select,.filters input{width:auto;flex:1;min-width:120px;font-size:13px}
+.entry{background:var(--bg);border:0.5px solid var(--bl);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:.75rem;border-left:3px solid var(--bl)}
+.entry.s1{border-left-color:#1D9E75}.entry.s2{border-left-color:#EF9F27}.entry.s3{border-left-color:#E24B4A}
+.emeta{font-size:12px;color:var(--tx3);margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.bg{background:#E1F5EE;color:#0F6E56}.ba{background:#FAEEDA;color:#854F0B}.br{background:#FCEBEB;color:#A32D2D}.bgr{background:var(--bg2);color:var(--tx2)}
+.ecard{border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:.75rem;border:0.5px solid}
+.eok{background:#E1F5EE;border-color:#5DCAA5}.ewarn{background:#FAEEDA;border-color:#EF9F27}
+.ecrit{background:#FCEBEB;border-color:#E24B4A;animation:fb 1s infinite}
+@keyframes fb{0%,100%{border-color:#E24B4A;box-shadow:0 0 0 1px #E24B4A40}50%{border-color:#F09595;box-shadow:0 0 0 3px #E24B4A20}}
+.eok .en{color:#0F6E56}.ewarn .en{color:#854F0B}.ecrit .en{color:#A32D2D}
+.en{font-size:15px;font-weight:500}
+.ed{font-size:12px;margin-top:4px;opacity:.8}
+.eok .ed{color:#085041}.ewarn .ed{color:#633806}.ecrit .ed{color:#791F1F}
+.malert{background:#FCEBEB;border:1.5px solid #E24B4A;border-radius:var(--rm);padding:.75rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:10px;animation:fb 1s infinite}
+.malert i{font-size:20px;color:#A32D2D;flex-shrink:0}
+.malert p{font-size:13px;color:#A32D2D;font-weight:500}
+.eimg{width:64px;height:48px;object-fit:cover;border-radius:6px;cursor:pointer;flex-shrink:0;border:0.5px solid var(--bl)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:var(--rm)}
+.empty{text-align:center;padding:3rem 1rem;color:var(--tx2);font-size:14px}
+.empty i{font-size:36px;display:block;margin-bottom:.75rem;color:var(--tx3)}
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:var(--rm);font-size:13px;font-weight:500;z-index:9999;transition:opacity .3s;pointer-events:none;max-width:340px;text-align:center;display:none}
+.adminbar{display:none;background:#1a1a18;color:#fff;padding:6px 1rem;font-size:12px;font-weight:500;text-align:center;position:sticky;top:0;z-index:100}
+.adminbar.on{display:flex;align-items:center;justify-content:center;gap:10px}
+.adminbar button{font-size:11px;padding:3px 10px;background:rgba(255,255,255,0.15);border:none;border-radius:20px;color:#fff;cursor:pointer;font-family:var(--font)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal{background:var(--bg);border:0.5px solid var(--bm);border-radius:var(--rl);padding:1.5rem;width:100%;max-width:360px}
+.modal h2{font-size:16px;font-weight:600;margin-bottom:6px}
+.modal p{font-size:13px;color:var(--tx2);margin-bottom:1rem}
+.modal input{margin-bottom:12px}
+.mbtns{display:flex;gap:8px}
+.mbtns button{flex:1;padding:9px;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);border:none}
+.bcancel{background:var(--bg2);color:var(--tx2)}.bconfirm{background:var(--ac);color:#fff}.bdanger{background:#EA4B4B;color:#fff}
+.eactions{display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--bl)}
+.eactions button{font-size:12px;padding:5px 12px;border-radius:var(--rm);border:0.5px solid var(--bm);background:var(--bg2);color:var(--tx2);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.bedit{color:var(--ac)!important;border-color:var(--ac)!important;background:transparent!important}
+.bdel{color:#EA4B4B!important;border-color:#EA4B4B!important;background:transparent!important}
+.smodal{background:var(--bg);border:0.5px solid var(--bm);border-radius:var(--rl);padding:1.5rem;width:100%;max-width:520px;max-height:88vh;overflow-y:auto}
+.smodal h2{font-size:16px;font-weight:600;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.ssec{margin-bottom:1.5rem}
+.ssec h3{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--tx2);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:0.5px solid var(--bl)}
+.slist{list-style:none;margin-bottom:.75rem}
+.slist li{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg2);border-radius:var(--rm);margin-bottom:5px;font-size:13px;gap:8px}
+.slist li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slist li button{font-size:11px;padding:3px 8px;border-radius:6px;border:none;background:#FCEBEB;color:#A32D2D;cursor:pointer;font-family:var(--font);flex-shrink:0}
+.addrow{display:flex;gap:8px}
+.addrow input{flex:1;font-size:13px;margin-bottom:0}
+.addrow button{padding:8px 14px;background:var(--ac);color:#fff;border:none;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);white-space:nowrap;flex-shrink:0}
+.sdone{width:100%;padding:9px;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);border:0.5px solid var(--bm);background:var(--bg2);color:var(--tx2);margin-top:.5rem}
+</style>
+</head>
+<body>
+<div class="adminbar" id="adminbar">
+  <i class="ti ti-shield-lock"></i> Admin Mode Active
+  <button id="btn-settings">&#9881; Settings</button>
+  <button id="btn-lock">Lock</button>
+</div>
+<div class="app">
+<div class="hdr">
+  <a href="index.html" class="back"><i class="ti ti-arrow-left"></i> Home</a>
+  <div class="hicon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="16" width="7" height="5" rx="1"/><rect x="2" y="9" width="13" height="5" rx="1"/><rect x="2" y="2" width="20" height="5" rx="1"/></svg></div>
+  <div><h1>1st Fix Stair Parts</h1><p>Treads, risers &amp; pre-cut stair components</p></div>
+  <button class="lockbtn" id="btn-adminlogin"><i class="ti ti-lock"></i></button>
+</div>
+
+<div class="tabs">
+  <button class="tab active" id="tab-log-btn">&#43; Log Issue</button>
+  <button class="tab" id="tab-hist-btn">&#128336; History</button>
+  <button class="tab" id="tab-esc-btn">&#9888; Escalations</button>
+</div>
+
+<div id="sec-log" class="sec active">
+  <div class="card">
+    <div class="frow">
+      <div class="fg" style="margin-bottom:0">
+        <label>Operator name</label>
+        <select id="f-assembler">
+          <option value="">Select operator...</option>
+          <option>OWEN HENDERSON</option>
+          <option>JORDAN ROBERTS</option>
+          <option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option>
+          <option>THOMAS HOPKINS</option>
+          <option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option>
+          <option>JERMAINE ARTHUR</option>
+          <option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option>
+          <option>KACPER GRUDZINSKI</option>
+          <option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option>
+          <option>ANDREAS PETROPOULOUS</option>
+          <option>KYE DALY</option>
+        </select>
+      </div>
+      <div class="fg" style="margin-bottom:0">
+        <label>Category</label>
+        <select id="f-category">
+          <option value="">Select category...</option>
+          <option value="Quality">Quality</option>
+          <option value="Safety">Safety</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg" style="margin-bottom:0">
+        <label>Issue type</label>
+        <select id="f-type" disabled>
+          <option value="">Select category first...</option>
+        </select>
+      </div>
+      <div class="fg" style="margin-bottom:0">
+        <label>Department</label>
+        <select id="f-severity">
+          <option value="internal">Internal</option>
+          <option value="external">External</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Supervisor / logged by</label>
+      <input type="text" id="f-supervisor" placeholder="Your name">
+    </div>
+    <div class="fg">
+      <label>Description</label>
+      <textarea id="f-desc" rows="3" style="resize:vertical" placeholder="Describe the issue in detail..."></textarea>
+    </div>
+    <div class="fg">
+      <label>Photo (optional)</label>
+      <div class="pzone" id="pzone">
+        <input type="file" accept="image/*" capture="environment" id="f-photo">
+        <i class="ti ti-camera"></i>
+        <p>Tap to take or upload a photo</p>
+      </div>
+      <img id="ppreview" class="ppreview" alt="Preview">
+    </div>
+    <button class="submit" id="btn-submit"><i class="ti ti-check"></i> Log Issue</button>
+  </div>
+</div>
+
+<div id="sec-hist" class="sec">
+  <div class="card filters" style="padding:.75rem 1rem;margin-bottom:.75rem">
+    <select id="filter-assembler">
+      <option value="">All operators</option>
+          <option>OWEN HENDERSON</option>
+          <option>JORDAN ROBERTS</option>
+          <option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option>
+          <option>THOMAS HOPKINS</option>
+          <option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option>
+          <option>JERMAINE ARTHUR</option>
+          <option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option>
+          <option>KACPER GRUDZINSKI</option>
+          <option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option>
+          <option>ANDREAS PETROPOULOUS</option>
+          <option>KYE DALY</option>
+    </select>
+    <select id="filter-type">
+      <option value="">All issue types</option>
+      <option>Quality</option><option>Safety</option>
+    </select>
+    <input type="date" id="filter-date">
+    <button id="btn-clearfilters" style="padding:8px 14px;background:var(--bg2);border:0.5px solid var(--bm);border-radius:var(--rm);cursor:pointer;color:var(--tx2);font-family:var(--font);font-size:13px;white-space:nowrap">Clear</button>
+  </div>
+  <div id="history-list"></div>
+</div>
+
+<div id="sec-esc" class="sec">
+  <div id="meet-alerts"></div>
+  <div id="esc-list"></div>
+</div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" style="display:none">
+  <img id="lb-img" src="" alt="Full size photo">
+</div>
+<!-- Admin login -->
+<div class="overlay" id="modal-login" style="display:none">
+  <div class="modal">
+    <h2><i class="ti ti-lock" style="font-size:16px;margin-right:6px"></i>Admin Access</h2>
+    <p>Enter the admin password to edit or delete entries.</p>
+    <input type="password" id="pw-input" placeholder="Password">
+    <div class="mbtns">
+      <button class="bcancel" id="btn-login-cancel">Cancel</button>
+      <button class="bconfirm" id="btn-login-confirm">Unlock</button>
+    </div>
+    <div id="pw-error" style="font-size:12px;color:#EA4B4B;margin-top:8px;display:none">Incorrect password.</div>
+  </div>
+</div>
+<!-- Edit modal -->
+<div class="overlay" id="modal-edit" style="display:none">
+  <div class="modal" style="max-width:480px">
+    <h2 style="margin-bottom:1rem"><i class="ti ti-edit" style="font-size:16px;margin-right:6px"></i>Edit Entry</h2>
+    <label>Operator</label>
+    <select id="edit-assembler" style="margin-bottom:12px">
+      <option value="">Select operator...</option>
+          <option>OWEN HENDERSON</option>
+          <option>JORDAN ROBERTS</option>
+          <option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option>
+          <option>THOMAS HOPKINS</option>
+          <option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option>
+          <option>JERMAINE ARTHUR</option>
+          <option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option>
+          <option>KACPER GRUDZINSKI</option>
+          <option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option>
+          <option>ANDREAS PETROPOULOUS</option>
+          <option>KYE DALY</option>
+    </select>
+    <label>Category</label>
+    <select id="edit-category" style="margin-bottom:12px">
+      <option value="">Select category...</option>
+      <option value="Quality">Quality</option>
+      <option value="Safety">Safety</option>
+    </select>
+    <label>Issue type</label>
+    <select id="edit-type" style="margin-bottom:12px">
+      <option value="">Select category first...</option>
+    </select>
+    <label>Department</label>
+    <select id="edit-severity" style="margin-bottom:12px">
+      <option value="internal">Internal</option>
+      <option value="external">External</option>
+    </select>
+    <label>Supervisor</label>
+    <input type="text" id="edit-supervisor" placeholder="Supervisor name" style="margin-bottom:12px">
+    <label>Description</label>
+    <textarea id="edit-desc" rows="3" style="resize:vertical;margin-bottom:16px"></textarea>
+    <div class="mbtns">
+      <button class="bcancel" id="btn-edit-cancel">Cancel</button>
+      <button class="bconfirm" id="btn-edit-save">Save changes</button>
+    </div>
+  </div>
+</div>
+<!-- Delete modal -->
+<div class="overlay" id="modal-delete" style="display:none">
+  <div class="modal">
+    <h2>Delete entry?</h2>
+    <p>This will permanently remove this log entry. This cannot be undone.</p>
+    <div class="mbtns">
+      <button class="bcancel" id="btn-delete-cancel">Cancel</button>
+      <button class="bdanger" id="btn-delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+<!-- Settings modal -->
+<div class="overlay" id="modal-settings" style="display:none">
+  <div class="smodal">
+    <h2><i class="ti ti-settings" style="font-size:16px"></i> Admin Settings</h2>
+    <div class="ssec">
+      <h3>Operators</h3>
+      <ul class="slist" id="s-assembler-list"></ul>
+      <div class="addrow">
+        <input type="text" id="s-new-assembler" placeholder="Full name (e.g. JOHN SMITH)">
+        <button id="btn-add-assembler">+ Add</button>
+      </div>
+    </div>
+    <div class="ssec">
+      <h3>Quality Issue Types</h3>
+      <ul class="slist" id="s-quality-list"></ul>
+      <div class="addrow">
+        <input type="text" id="s-new-quality" placeholder="e.g. Incorrect tread spacing">
+        <button id="btn-add-quality">+ Add</button>
+      </div>
+    </div>
+    <div class="ssec">
+      <h3>Safety Issue Types</h3>
+      <ul class="slist" id="s-safety-list"></ul>
+      <div class="addrow">
+        <input type="text" id="s-new-safety" placeholder="e.g. No safety footwear">
+        <button id="btn-add-safety">+ Add</button>
+      </div>
+    </div>
+    <button class="sdone" id="btn-settings-done">Done</button>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+const _app = initializeApp({
+  apiKey:"AIzaSyAHqHBugwn_bGewSYpyXRDXwce0z7wt71Q",
+  authDomain:"quality-log-9162a.firebaseapp.com",
+  databaseURL:"https://quality-log-9162a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"quality-log-9162a",
+  storageBucket:"quality-log-9162a.firebasestorage.app",
+  messagingSenderId:"651416044407",
+  appId:"1:651416044407:web:88cb513aced8bd520e5772"
+});
+const db = getDatabase(_app);
+
+// ── Constants ──
+const NODE = 'stairparts';
+const DB_E = 'entries/' + NODE;
+const DB_S = 'settings/' + NODE;
+const ADMIN_PW = 'staircraft123';
+
+const DEFAULT_ASSEMBLERS = ['OWEN HENDERSON', 'JORDAN ROBERTS', 'MARCUS MIRCETIC', 'PAWEL BARYLA', 'THOMAS HOPKINS', 'SADMAN RAIFID', 'PETRICA HAIDAU', 'JERMAINE ARTHUR', 'LEWIS QUINN', 'ABDUL HALIM AKOTO', 'KACPER GRUDZINSKI', 'STEVEN WALDREN', 'MARIAN DZIEMBA', 'ANDREAS PETROPOULOUS', 'KYE DALY'];
+const DEFAULT_QUALITY    = ['Quality — Nails sticking out the face of the tread', 'Quality — Poor paint quality', 'Quality — Missing nails', 'Quality — Missing pins', 'Quality — Cut out too big / small', 'Quality — Wrong pairing of strings', 'Quality — No screw in the winder tread'];
+const DEFAULT_SAFETY     = ['Safety — No ear protection', 'Safety — Not wearing goggles', 'Safety — No gloves', 'Safety — Misuse of tools', 'Safety — No hi-viz'];
+
+// ── State ──
+let localEntries = [];
+let cachedAssemblers = null;
+let cachedQuality    = null;
+let cachedSafety     = null;
+let photoData = null;
+let editingId = null;
+let deletingId = null;
+let adminUnlocked = sessionStorage.getItem('sc_admin') === '1';
+
+// ── Helpers ──
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function getAssemblers(){return cachedAssemblers||DEFAULT_ASSEMBLERS.slice()}
+function getQuality(){return cachedQuality||DEFAULT_QUALITY.slice()}
+function getSafety(){return cachedSafety||DEFAULT_SAFETY.slice()}
+function norm(t){return(t||'').split('—')[0].trim().toLowerCase()}
+function escalLevel(assembler,key,entries){
+  const c=entries.filter(e=>e.assembler===assembler&&norm(e.type)===key).length;
+  return c>=3?3:c===2?2:1;
+}
+
+// ── Toast ──
+let toastT;
+function toast(msg,type){
+  const el=document.getElementById('toast');
+  const cols={green:['#E1F5EE','#0F6E56'],amber:['#FAEEDA','#854F0B'],red:['#FCEBEB','#A32D2D']};
+  const[bg,fg]=cols[type]||cols.green;
+  el.style.cssText='position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:500;z-index:9999;pointer-events:none;max-width:340px;text-align:center;display:block;opacity:1;transition:opacity .3s';
+  el.style.background=bg;el.style.color=fg;el.style.border='1px solid '+fg+'40';
+  el.textContent=msg;
+  clearTimeout(toastT);toastT=setTimeout(()=>{el.style.opacity='0';setTimeout(()=>el.style.display='none',300)},3500);
+}
+
+// ── Tabs ──
+function showTab(t){
+  ['log','hist','esc'].forEach(id=>{
+    document.getElementById('sec-'+id).classList.toggle('active',id===t);
+    document.getElementById('tab-'+id+'-btn').classList.toggle('active',id===t);
+  });
+  if(t==='hist')renderHistory();
+  if(t==='esc')renderEscalations();
+}
+document.getElementById('tab-log-btn').addEventListener('click',()=>showTab('log'));
+document.getElementById('tab-hist-btn').addEventListener('click',()=>showTab('hist'));
+document.getElementById('tab-esc-btn').addEventListener('click',()=>showTab('esc'));
+
+// ── Category → Issue type ──
+function updateIssueOptions(){
+  const cat=document.getElementById('f-category').value;
+  const sel=document.getElementById('f-type');
+  if(!cat){sel.innerHTML='<option value="">Select category first...</option>';sel.disabled=true;return;}
+  const opts=cat==='Quality'?getQuality():getSafety();
+  sel.innerHTML='<option value="">Select issue type...</option>'+opts.map(o=>'<option>'+o+'</option>').join('');
+  sel.disabled=false;
+}
+document.getElementById('f-category').addEventListener('change',updateIssueOptions);
+
+function updateEditIssueOptions(){
+  const cat=document.getElementById('edit-category').value;
+  const sel=document.getElementById('edit-type');
+  if(!cat){sel.innerHTML='<option value="">Select category first...</option>';return;}
+  const opts=cat==='Quality'?getQuality():getSafety();
+  sel.innerHTML='<option value="">Select issue type...</option>'+opts.map(o=>'<option>'+o+'</option>').join('');
+}
+document.getElementById('edit-category').addEventListener('change',updateEditIssueOptions);
+
+// ── Photo ──
+document.getElementById('f-photo').addEventListener('change',function(){
+  const f=this.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{photoData=e.target.result;const p=document.getElementById('ppreview');p.src=photoData;p.style.display='block';document.querySelector('#pzone p').textContent='Photo attached — tap to change';};
+  r.readAsDataURL(f);
+});
+
+// ── Submit ──
+document.getElementById('btn-submit').addEventListener('click',()=>{
+  const assembler=document.getElementById('f-assembler').value;
+  const type=document.getElementById('f-type').value;
+  const severity=document.getElementById('f-severity').value;
+  const supervisor=document.getElementById('f-supervisor').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+  if(!assembler||!type||!desc){alert('Please fill in operator name, issue type, and description.');return;}
+  const entry={id:Date.now(),ts:new Date().toISOString(),assembler,type,severity,supervisor,desc,photo:photoData||null};
+  set(ref(db,DB_E+'/'+entry.id),entry);
+  resetForm();
+  const level=escalLevel(assembler,norm(type),[...localEntries,entry]);
+  if(level>=3)toast('⚠️ Third occurrence — hold a meeting with '+assembler,'red');
+  else if(level===2)toast('Amber alert — second occurrence for '+assembler,'amber');
+  else toast('Issue logged for '+assembler,'green');
+});
+
+function resetForm(){
+  ['f-assembler','f-category','f-severity','f-supervisor','f-desc'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
+  });
+  updateIssueOptions();
+  photoData=null;
+  document.getElementById('ppreview').style.display='none';
+  document.getElementById('ppreview').src='';
+  document.querySelector('#pzone p').textContent='Tap to take or upload a photo';
+  document.getElementById('f-photo').value='';
+}
+
+// ── History ──
+document.getElementById('filter-assembler').addEventListener('change',renderHistory);
+document.getElementById('filter-type').addEventListener('change',renderHistory);
+document.getElementById('filter-date').addEventListener('change',renderHistory);
+document.getElementById('btn-clearfilters').addEventListener('click',()=>{
+  document.getElementById('filter-assembler').value='';
+  document.getElementById('filter-type').value='';
+  document.getElementById('filter-date').value='';
+  renderHistory();
+});
+
+function renderHistory(){
+  const fa=document.getElementById('filter-assembler').value;
+  const ft=document.getElementById('filter-type').value;
+  const fd=document.getElementById('filter-date').value;
+  let entries=localEntries;
+  if(fa)entries=entries.filter(e=>e.assembler===fa);
+  if(ft)entries=entries.filter(e=>e.type.toLowerCase().startsWith(ft.toLowerCase()));
+  if(fd)entries=entries.filter(e=>e.ts.startsWith(fd));
+  const el=document.getElementById('history-list');
+  if(!entries.length){el.innerHTML='<div class="empty"><i class="ti ti-clipboard-x"></i>No entries match your filters</div>';return;}
+  el.innerHTML=entries.map(e=>{
+    const lv=escalLevel(e.assembler,norm(e.type),localEntries);
+    const badge=lv>=3?'<span class="badge br"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Hold meeting</span>':lv===2?'<span class="badge ba"><i class="ti ti-alert-circle" style="font-size:11px"></i> Amber warning</span>':'<span class="badge bg">First occurrence</span>';
+    const sev={'internal':'<span class="badge bgr">Internal</span>','external':'<span class="badge ba">External</span>'}[e.severity]||'';
+    const dt=new Date(e.ts);
+    const ds=dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    const img=e.photo?`<img src="${e.photo}" class="eimg" data-id="${e.id}" alt="Photo">`:'';
+    const actions=adminUnlocked?`<div class="eactions"><button class="bedit" data-edit="${e.id}"><i class="ti ti-edit" style="font-size:12px"></i> Edit</button><button class="bdel" data-del="${e.id}"><i class="ti ti-trash" style="font-size:12px"></i> Delete</button></div>`:'';
+    return `<div class="entry s${lv}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-size:14px;font-weight:500">${esc(e.assembler)}</span>${badge}${sev}</div>
+          <div class="emeta">${ds}${e.supervisor?' &middot; '+esc(e.supervisor):''}</div>
+        </div>${img}
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--tx2);margin:4px 0">${esc(e.type)}</div>
+      <div style="font-size:13px;margin-top:4px">${esc(e.desc)}</div>
+      ${actions}
+    </div>`;
+  }).join('');
+  // Attach edit/delete listeners
+  el.querySelectorAll('[data-edit]').forEach(btn=>btn.addEventListener('click',()=>openEdit(btn.dataset.edit)));
+  el.querySelectorAll('[data-del]').forEach(btn=>btn.addEventListener('click',()=>openDelete(btn.dataset.del)));
+  el.querySelectorAll('.eimg').forEach(img=>img.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lightbox').style.display='flex';}));
+}
+
+// ── Escalations ──
+function renderEscalations(){
+  const map={};
+  localEntries.forEach(e=>{
+    if(!map[e.assembler])map[e.assembler]={};
+    const k=norm(e.type);
+    if(!map[e.assembler][k])map[e.assembler][k]={count:0,lastType:e.type};
+    map[e.assembler][k].count++;
+  });
+  const crits=[],warns=[],oks=[];
+  Object.keys(map).sort().forEach(a=>Object.keys(map[a]).forEach(k=>{
+    const{count,lastType}=map[a][k];
+    const o={assembler:a,issue:lastType,count};
+    if(count>=3)crits.push(o);else if(count===2)warns.push(o);else oks.push(o);
+  }));
+  document.getElementById('meet-alerts').innerHTML=crits.length?`<div class="malert"><i class="ti ti-alarm"></i><p>Meeting required — ${crits.length} assembler/issue combination${crits.length>1?'s':''} have reached 3+ occurrences</p></div>`:'';
+  const all=[...crits,...warns,...oks];
+  const el=document.getElementById('esc-list');
+  if(!all.length){el.innerHTML='<div class="empty"><i class="ti ti-shield-check"></i>No issues logged yet</div>';return;}
+  el.innerHTML=all.map(x=>{
+    const cls=x.count>=3?'ecrit':x.count===2?'ewarn':'eok';
+    const icon=x.count>=3?'ti-alert-triangle':x.count===2?'ti-alert-circle':'ti-check';
+    const label=x.count>=3?'Hold meeting':x.count===2?'Amber warning':'First occurrence';
+    return`<div class="ecard ${cls}"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span class="en"><i class="ti ${icon}" style="font-size:14px;margin-right:6px"></i>${esc(x.assembler)}</span><span style="font-size:11px;font-weight:500">${label} &middot; ${x.count}x</span></div><div class="ed">${esc(x.issue)}</div></div>`;
+  }).join('');
+}
+
+// ── Lightbox ──
+document.getElementById('lightbox').addEventListener('click',()=>document.getElementById('lightbox').style.display='none');
+
+// ── Admin ──
+function showAdminBar(){
+  document.getElementById('adminbar').classList.toggle('on',adminUnlocked);
+}
+document.getElementById('btn-adminlogin').addEventListener('click',()=>{
+  document.getElementById('pw-input').value='';
+  document.getElementById('pw-error').style.display='none';
+  document.getElementById('modal-login').style.display='flex';
+  setTimeout(()=>document.getElementById('pw-input').focus(),100);
+});
+document.getElementById('btn-login-cancel').addEventListener('click',()=>document.getElementById('modal-login').style.display='none');
+document.getElementById('btn-login-confirm').addEventListener('click',()=>{
+  if(document.getElementById('pw-input').value===ADMIN_PW){
+    adminUnlocked=true;sessionStorage.setItem('sc_admin','1');
+    document.getElementById('modal-login').style.display='none';
+    showAdminBar();renderHistory();toast('Admin mode unlocked','green');
+  }else{document.getElementById('pw-error').style.display='block';document.getElementById('pw-input').value='';}
+});
+document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('btn-login-confirm').click();});
+document.getElementById('btn-lock').addEventListener('click',()=>{
+  adminUnlocked=false;sessionStorage.removeItem('sc_admin');showAdminBar();renderHistory();toast('Admin mode locked','amber');
+});
+document.getElementById('btn-settings').addEventListener('click',()=>{renderSettingsLists();document.getElementById('modal-settings').style.display='flex';});
+
+// Edit
+function openEdit(id){
+  const e=localEntries.find(x=>x.id==id);if(!e)return;
+  editingId=id;
+  document.getElementById('edit-assembler').value=e.assembler||'';
+  const cat=(e.type||'').split('—')[0].trim();
+  document.getElementById('edit-category').value=(cat==='Quality'||cat==='Safety')?cat:'';
+  updateEditIssueOptions();
+  setTimeout(()=>document.getElementById('edit-type').value=e.type||'',50);
+  document.getElementById('edit-severity').value=e.severity||'internal';
+  document.getElementById('edit-supervisor').value=e.supervisor||'';
+  document.getElementById('edit-desc').value=e.desc||'';
+  document.getElementById('modal-edit').style.display='flex';
+}
+document.getElementById('btn-edit-cancel').addEventListener('click',()=>{document.getElementById('modal-edit').style.display='none';editingId=null;});
+document.getElementById('btn-edit-save').addEventListener('click',()=>{
+  if(!editingId)return;
+  const assembler=document.getElementById('edit-assembler').value;
+  const type=document.getElementById('edit-type').value;
+  const severity=document.getElementById('edit-severity').value;
+  const supervisor=document.getElementById('edit-supervisor').value.trim();
+  const desc=document.getElementById('edit-desc').value.trim();
+  if(!assembler||!type||!desc){alert('Please fill in all required fields.');return;}
+  const existing=localEntries.find(x=>x.id==editingId);
+  if(existing)set(ref(db,DB_E+'/'+editingId),{...existing,assembler,type,severity,supervisor,desc});
+  document.getElementById('modal-edit').style.display='none';
+  editingId=null;toast('Entry updated','green');
+});
+
+// Delete
+function openDelete(id){deletingId=id;document.getElementById('modal-delete').style.display='flex';}
+document.getElementById('btn-delete-cancel').addEventListener('click',()=>{document.getElementById('modal-delete').style.display='none';deletingId=null;});
+document.getElementById('btn-delete-confirm').addEventListener('click',()=>{
+  if(!deletingId)return;
+  remove(ref(db,DB_E+'/'+deletingId));
+  document.getElementById('modal-delete').style.display='none';
+  deletingId=null;toast('Entry deleted','amber');
+});
+
+// ── Settings ──
+function refreshDropdowns(){
+  const asm=getAssemblers();
+  ['f-assembler','edit-assembler','filter-assembler'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const cur=el.value;
+    const isFilter=id==='filter-assembler';
+    el.innerHTML=(isFilter?'<option value="">All operators</option>':'<option value="">Select operator...</option>')+asm.map(a=>`<option${a===cur?' selected':''}>${a}</option>`).join('');
+  });
+  updateIssueOptions();
+}
+
+function renderSettingsLists(){
+  const asm=getAssemblers(),q=getQuality(),s=getSafety();
+  document.getElementById('s-assembler-list').innerHTML=asm.map((a,i)=>`<li><span>${esc(a)}</span><button data-rem-asm="${i}">Remove</button></li>`).join('')||'<li style="color:var(--tx3);font-size:12px;justify-content:center">None added</li>';
+  document.getElementById('s-quality-list').innerHTML=q.map((v,i)=>`<li><span>${esc(v.replace('Quality — ',''))}</span><button data-rem-q="${i}">Remove</button></li>`).join('')||'<li style="color:var(--tx3);font-size:12px;justify-content:center">None added</li>';
+  document.getElementById('s-safety-list').innerHTML=s.map((v,i)=>`<li><span>${esc(v.replace('Safety — ',''))}</span><button data-rem-s="${i}">Remove</button></li>`).join('')||'<li style="color:var(--tx3);font-size:12px;justify-content:center">None added</li>';
+  document.getElementById('s-assembler-list').querySelectorAll('[data-rem-asm]').forEach(b=>b.addEventListener('click',()=>{const l=getAssemblers();const n=l[b.dataset.remAsm];l.splice(b.dataset.remAsm,1);cachedAssemblers=l;set(ref(db,DB_S+'/assemblers'),l);refreshDropdowns();renderSettingsLists();toast(n+' removed','amber');}));
+  document.getElementById('s-quality-list').querySelectorAll('[data-rem-q]').forEach(b=>b.addEventListener('click',()=>{const l=getQuality();l.splice(b.dataset.remQ,1);cachedQuality=l;set(ref(db,DB_S+'/quality'),l);refreshDropdowns();renderSettingsLists();toast('Issue type removed','amber');}));
+  document.getElementById('s-safety-list').querySelectorAll('[data-rem-s]').forEach(b=>b.addEventListener('click',()=>{const l=getSafety();l.splice(b.dataset.remS,1);cachedSafety=l;set(ref(db,DB_S+'/safety'),l);refreshDropdowns();renderSettingsLists();toast('Issue type removed','amber');}));
+}
+
+document.getElementById('btn-add-assembler').addEventListener('click',()=>{
+  const inp=document.getElementById('s-new-assembler');
+  const val=inp.value.trim().toUpperCase();if(!val)return;
+  const l=getAssemblers();if(l.includes(val)){toast('Already exists','amber');return;}
+  l.push(val);cachedAssemblers=l;set(ref(db,DB_S+'/assemblers'),l);inp.value='';refreshDropdowns();renderSettingsLists();toast(val+' added','green');
+});
+document.getElementById('btn-add-quality').addEventListener('click',()=>{
+  const inp=document.getElementById('s-new-quality');
+  const val=inp.value.trim();if(!val)return;
+  const pref='Quality — '+val;const l=getQuality();if(l.includes(pref)){toast('Already exists','amber');return;}
+  l.push(pref);cachedQuality=l;set(ref(db,DB_S+'/quality'),l);inp.value='';refreshDropdowns();renderSettingsLists();toast('Added','green');
+});
+document.getElementById('btn-add-safety').addEventListener('click',()=>{
+  const inp=document.getElementById('s-new-safety');
+  const val=inp.value.trim();if(!val)return;
+  const pref='Safety — '+val;const l=getSafety();if(l.includes(pref)){toast('Already exists','amber');return;}
+  l.push(pref);cachedSafety=l;set(ref(db,DB_S+'/safety'),l);inp.value='';refreshDropdowns();renderSettingsLists();toast('Added','green');
+});
+document.getElementById('btn-settings-done').addEventListener('click',()=>{document.getElementById('modal-settings').style.display='none';refreshDropdowns();});
+
+// ── Firebase listeners ──
+onValue(ref(db,DB_E),snap=>{
+  const data=snap.val()||{};
+  localEntries=Object.values(data).sort((a,b)=>b.id-a.id);
+  renderHistory();renderEscalations();
+});
+onValue(ref(db,DB_S+'/assemblers'),snap=>{if(snap.val()){cachedAssemblers=snap.val();refreshDropdowns();}});
+onValue(ref(db,DB_S+'/quality'),snap=>{if(snap.val()){cachedQuality=snap.val();updateIssueOptions();}});
+onValue(ref(db,DB_S+'/safety'),snap=>{if(snap.val()){cachedSafety=snap.val();updateIssueOptions();}});
+
+showAdminBar();
+</script>
+</body>
+</html>
