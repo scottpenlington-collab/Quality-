@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1st Fix Assembly — Quality &amp; Safety Log</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f5f5f4;--bg3:#F0EDE8;
+  --tx:#1a1a18;--tx2:#6b6b68;--tx3:#9a9a97;
+  --bl:rgba(0,0,0,0.09);--bm:rgba(0,0,0,0.18);--bs:rgba(0,0,0,0.28);
+  --rm:8px;--rl:12px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ac:#3B82F6;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1e1e1c;--bg2:#2a2a28;--bg3:#111110;
+  --tx:#f0ece4;--tx2:#9a9a97;--tx3:#6b6b68;
+  --bl:rgba(255,255,255,0.07);--bm:rgba(255,255,255,0.14);--bs:rgba(255,255,255,0.24);
+}}
+body{font-family:var(--font);background:var(--bg3);color:var(--tx);min-height:100vh}
+.app{max-width:960px;margin:0 auto;padding:1.25rem 1rem}
+.hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:0.5px solid var(--bl)}
+.back{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--tx2);text-decoration:none;padding:6px 10px;background:var(--bg2);border:0.5px solid var(--bm);border-radius:var(--rm);flex-shrink:0;white-space:nowrap}
+.back:hover{opacity:.7}
+.hicon{width:40px;height:40px;background:var(--ac);border-radius:var(--rm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hicon svg{width:22px;height:22px}
+.hdr h1{font-size:17px;font-weight:600;line-height:1.2}
+.hdr p{font-size:12px;color:var(--tx2)}
+.lockbtn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--tx3);background:none;border:none;cursor:pointer;padding:4px 6px;margin-left:auto;font-family:var(--font);border-radius:var(--rm)}
+.lockbtn:hover{opacity:.7}
+.tabs{display:flex;gap:4px;margin-bottom:1.25rem;background:var(--bg2);padding:4px;border-radius:var(--rm)}
+.tab{flex:1;padding:8px 0;font-size:13px;font-weight:500;text-align:center;border-radius:6px;cursor:pointer;border:none;background:transparent;color:var(--tx2);font-family:var(--font)}
+.tab.active{background:var(--bg);color:var(--tx);border:0.5px solid var(--bl)}
+.sec{display:none}.sec.active{display:block}
+.card{background:var(--bg);border:0.5px solid var(--bl);border-radius:var(--rl);padding:1.25rem;margin-bottom:1rem}
+label{display:block;font-size:11px;font-weight:500;color:var(--tx2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+input,select,textarea{width:100%;font-family:var(--font);font-size:14px;padding:8px 10px;background:var(--bg2);border:0.5px solid var(--bm);border-radius:var(--rm);color:var(--tx);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--bs)}
+select:disabled{opacity:.5;cursor:not-allowed}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:540px){.frow{grid-template-columns:1fr}}
+.fg{margin-bottom:12px}
+.pzone{border:1.5px dashed var(--bm);border-radius:var(--rm);padding:1.5rem;text-align:center;cursor:pointer;position:relative;background:var(--bg2)}
+.pzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.pzone i{font-size:28px;color:var(--tx3);display:block;margin-bottom:6px}
+.pzone p{font-size:13px;color:var(--tx2)}
+.ppreview{width:100%;max-height:200px;object-fit:cover;border-radius:var(--rm);margin-top:8px;display:none}
+.submit{width:100%;padding:11px;background:var(--ac);color:#fff;border:none;border-radius:var(--rm);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px}
+.submit:hover{opacity:.88}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filters select,.filters input{width:auto;flex:1;min-width:120px;font-size:13px}
+.entry{background:var(--bg);border:0.5px solid var(--bl);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:.75rem;border-left:3px solid var(--bl)}
+.entry.s1{border-left-color:#1D9E75}.entry.s2{border-left-color:#EF9F27}.entry.s3{border-left-color:#E24B4A}
+.emeta{font-size:12px;color:var(--tx3);margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.bg{background:#E1F5EE;color:#0F6E56}.ba{background:#FAEEDA;color:#854F0B}.br{background:#FCEBEB;color:#A32D2D}.bgr{background:var(--bg2);color:var(--tx2)}
+.ecard{border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:.75rem;border:0.5px solid}
+.eok{background:#E1F5EE;border-color:#5DCAA5}.ewarn{background:#FAEEDA;border-color:#EF9F27}
+.ecrit{background:#FCEBEB;border-color:#E24B4A;animation:fb 1s infinite}
+@keyframes fb{0%,100%{border-color:#E24B4A;box-shadow:0 0 0 1px #E24B4A40}50%{border-color:#F09595;box-shadow:0 0 0 3px #E24B4A20}}
+.eok .en{color:#0F6E56}.ewarn .en{color:#854F0B}.ecrit .en{color:#A32D2D}
+.en{font-size:15px;font-weight:500}
+.ed{font-size:12px;margin-top:4px;opacity:.8}
+.eok .ed{color:#085041}.ewarn .ed{color:#633806}.ecrit .ed{color:#791F1F}
+.malert{background:#FCEBEB;border:1.5px solid #E24B4A;border-radius:var(--rm);padding:.75rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:10px;animation:fb 1s infinite}
+.malert i{font-size:20px;color:#A32D2D;flex-shrink:0}
+.malert p{font-size:13px;color:#A32D2D;font-weight:500}
+.eimg{width:64px;height:48px;object-fit:cover;border-radius:6px;cursor:pointer;flex-shrink:0;border:0.5px solid var(--bl)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:var(--rm)}
+.empty{text-align:center;padding:3rem 1rem;color:var(--tx2);font-size:14px}
+.empty i{font-size:36px;display:block;margin-bottom:.75rem;color:var(--tx3)}
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:var(--rm);font-size:13px;font-weight:500;z-index:9999;transition:opacity .3s;pointer-events:none;max-width:340px;text-align:center;display:none}
+.adminbar{display:none;background:#1a1a18;color:#fff;padding:6px 1rem;font-size:12px;font-weight:500;text-align:center;position:sticky;top:0;z-index:100}
+.adminbar.on{display:flex;align-items:center;justify-content:center;gap:10px}
+.adminbar button{font-size:11px;padding:3px 10px;background:rgba(255,255,255,0.15);border:none;border-radius:20px;color:#fff;cursor:pointer;font-family:var(--font)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal{background:var(--bg);border:0.5px solid var(--bm);border-radius:var(--rl);padding:1.5rem;width:100%;max-width:360px}
+.modal h2{font-size:16px;font-weight:600;margin-bottom:6px}
+.modal p{font-size:13px;color:var(--tx2);margin-bottom:1rem}
+.modal input{margin-bottom:12px}
+.mbtns{display:flex;gap:8px}
+.mbtns button{flex:1;padding:9px;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);border:none}
+.bcancel{background:var(--bg2);color:var(--tx2)}.bconfirm{background:var(--ac);color:#fff}.bdanger{background:#EA4B4B;color:#fff}
+.eactions{display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--bl)}
+.eactions button{font-size:12px;padding:5px 12px;border-radius:var(--rm);border:0.5px solid var(--bm);background:var(--bg2);color:var(--tx2);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.bedit{color:var(--ac)!important;border-color:var(--ac)!important;background:transparent!important}
+.bdel{color:#EA4B4B!important;border-color:#EA4B4B!important;background:transparent!important}
+.smodal{background:var(--bg);border:0.5px solid var(--bm);border-radius:var(--rl);padding:1.5rem;width:100%;max-width:520px;max-height:88vh;overflow-y:auto}
+.smodal h2{font-size:16px;font-weight:600;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.ssec{margin-bottom:1.5rem}
+.ssec h3{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--tx2);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:0.5px solid var(--bl)}
+.slist{list-style:none;margin-bottom:.75rem}
+.slist li{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg2);border-radius:var(--rm);margin-bottom:5px;font-size:13px;gap:8px}
+.slist li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slist li button{font-size:11px;padding:3px 8px;border-radius:6px;border:none;background:#FCEBEB;color:#A32D2D;cursor:pointer;font-family:var(--font);flex-shrink:0}
+.slist li .btn-edit-item{background:#E8F0FE;color:#1D4ED8;margin-right:4px}
+.slist li .edit-input{flex:1;font-size:13px;padding:5px 8px;margin-bottom:0;min-width:0}
+.slist li .btn-save-item{background:#E1F5EE;color:#0F6E56;margin-right:4px}
+.addrow{display:flex;gap:8px}
+.addrow input{flex:1;font-size:13px;margin-bottom:0}
+.addrow button{padding:8px 14px;background:var(--ac);color:#fff;border:none;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);white-space:nowrap;flex-shrink:0}
+.sdone{width:100%;padding:9px;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);border:0.5px solid var(--bm);background:var(--bg2);color:var(--tx2);margin-top:.5rem}
+
+.tab-data{display:none}
+.tab-data.show{display:flex;align-items:center;justify-content:center}
+.data-toggle{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:var(--rm);margin-bottom:1rem}
+.data-toggle button{flex:1;padding:7px 0;font-size:13px;font-weight:500;text-align:center;border-radius:6px;cursor:pointer;border:none;background:transparent;color:var(--tx2);font-family:var(--font)}
+.data-toggle button.active{background:var(--bg);color:var(--tx);border:0.5px solid var(--bl)}
+.data-period-label{font-size:12px;color:var(--tx2);text-align:center;margin-bottom:1rem}
+.rank-section{margin-bottom:1.5rem}
+.rank-section h3{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--tx2);margin-bottom:.75rem;display:flex;align-items:center;gap:6px}
+.rank-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--bl)}
+.rank-row:last-child{border-bottom:none}
+.rank-num{width:22px;height:22px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--tx2);flex-shrink:0}
+.rank-row:nth-child(1) .rank-num{background:#FCEBEB;color:#A32D2D}
+.rank-row:nth-child(2) .rank-num{background:#FAEEDA;color:#854F0B}
+.rank-row:nth-child(3) .rank-num{background:#FEF6E0;color:#92660B}
+.rank-label{flex:1;font-size:13px;min-width:0}
+.rank-bar-wrap{flex:2;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden;max-width:160px}
+.rank-bar{height:100%;border-radius:4px}
+.rank-count{font-size:13px;font-weight:600;width:28px;text-align:right;flex-shrink:0}
+.rank-row.clickable{cursor:pointer;border-radius:8px;padding-left:8px;padding-right:8px;margin:0 -8px;transition:background .1s}
+.rank-row.clickable:hover{background:var(--bg2)}
+.rank-row.clickable.selected{background:#EFF6FF}
+.rank-row.clickable.selected .rank-label{font-weight:600;color:#1D4ED8}
+.dd-filter-note{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#EFF6FF;border-radius:8px;padding:7px 10px;font-size:11.5px;color:#1D4ED8;margin-top:.85rem}
+.dd-filter-note button{background:none;border:none;color:#1D4ED8;font-weight:600;font-size:11.5px;cursor:pointer;text-decoration:underline;padding:0;font-family:var(--font)}
+.breakdown-section{margin-bottom:1.5rem}
+.breakdown-section:last-child{margin-bottom:0}
+.breakdown-section h3{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--tx2);margin-bottom:.75rem;display:flex;align-items:center;gap:6px}
+.bd-issue{margin-bottom:14px}
+.bd-issue:last-child{margin-bottom:0}
+.bd-issue-head{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;padding-bottom:4px;border-bottom:0.5px solid var(--bl);margin-bottom:6px}
+.bd-issue-count{color:var(--tx2);font-weight:500}
+.bd-who{display:flex;flex-wrap:wrap;gap:6px}
+.bd-chip{font-size:11.5px;background:var(--bg2);border-radius:6px;padding:4px 8px;color:var(--tx2)}
+.bd-chip b{color:var(--tx);font-weight:600}
+.print-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--ac);color:#fff;border:none;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font)}
+.snapshot-history{margin-top:2rem}
+.snap-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--bg2);border-radius:var(--rm);margin-bottom:6px;font-size:12px;cursor:pointer}
+.snap-row:hover{opacity:.8}
+.snap-row .snap-date{color:var(--tx);font-weight:500}
+.snap-row .snap-meta{color:var(--tx3)}
+@media print{
+  @page{margin:14mm}
+  .adminbar,.tabs,.hdr .back,.hdr .lockbtn,.print-btn,.data-toggle,.snapshot-history{display:none!important}
+  .graph-hint,.graph-anchor-note button,.dd-toggle,.dd-close,.dd-filter-note button{display:none!important}
+  body{background:#fff!important}
+  .app{max-width:100%;padding:0}
+  .card{border:none;box-shadow:none}
+  .rank-row.clickable{cursor:default}
+  .bd-who{display:block!important}
+  .bd-chip{display:block!important;background:none!important;padding:2px 0!important;font-size:12px!important}
+  .breakdown-section{page-break-inside:avoid}
+  .bd-issue{page-break-inside:avoid}
+}
+
+.graph-card{margin-bottom:1.5rem}
+.graph-select-row{display:flex;gap:8px;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+.graph-select-row select{flex:1;min-width:160px;font-size:13px}
+.graph-wrap{position:relative;width:100%;overflow-x:auto}
+.graph-svg{width:100%;height:220px;display:block}
+.graph-empty{text-align:center;padding:2rem 1rem;color:var(--tx2);font-size:13px}
+.graph-legend{display:flex;align-items:center;gap:16px;margin-top:.75rem;font-size:12px;color:var(--tx2);flex-wrap:wrap}
+.graph-legend span{display:inline-flex;align-items:center;gap:5px}
+.graph-legend .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.graph-hint{font-size:11px;color:var(--tx3);margin-top:.5rem;text-align:center}
+.graph-drilldown{margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--bl);display:none;animation:ddfade .15s ease}
+.graph-drilldown.show{display:block}
+@keyframes ddfade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:.85rem;flex-wrap:wrap}
+.dd-title{font-size:14px;font-weight:600}
+.dd-sub{font-size:11px;color:var(--tx2);margin-top:2px}
+.dd-toggle{display:flex;gap:2px;background:var(--bg2);border-radius:20px;padding:2px}
+.dd-toggle button{font-size:11px;font-weight:500;padding:5px 12px;border:none;background:none;border-radius:20px;cursor:pointer;color:var(--tx2);font-family:var(--font)}
+.dd-toggle button.active{background:#fff;color:var(--tx);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.dd-close{background:none;border:none;cursor:pointer;color:var(--tx3);font-size:16px;padding:2px 4px;border-radius:6px}
+.dd-close:hover{background:var(--bg2)}
+.dd-entries{margin-top:.85rem;display:flex;flex-direction:column;gap:6px;max-height:320px;overflow-y:auto}
+.dd-entry{padding:8px 10px;background:var(--bg2);border-radius:8px;font-size:12px}
+.dd-entry .ddname{font-weight:500}
+.dd-entry .ddtype{color:var(--tx2);margin-top:2px}
+.dd-empty{font-size:12px;color:var(--tx3);text-align:center;padding:1rem 0}
+.graph-anchor-note{display:none;align-items:center;justify-content:space-between;gap:8px;background:#EFF6FF;border:0.5px solid #BFDBFE;border-radius:8px;padding:7px 11px;font-size:11.5px;color:#1D4ED8;margin-bottom:.85rem}
+.graph-anchor-note.show{display:flex}
+.graph-anchor-note button{background:none;border:none;color:#1D4ED8;font-weight:600;font-size:11.5px;cursor:pointer;text-decoration:underline;padding:0;font-family:var(--font)}
+</style>
+</head>
+<body>
+<div class="adminbar" id="adminbar">
+  <i class="ti ti-shield-lock"></i> Admin Mode Active
+  <button id="btn-settings">&#9881; Settings</button>
+  <button id="btn-lock">Lock</button>
+</div>
+<div class="app">
+<div class="hdr">
+  <a href="index.html" class="back"><i class="ti ti-arrow-left"></i> Home</a>
+  <div class="hicon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 20 3 14 8 14 8 9 13 9 13 4 21 4"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
+  <div><h1>1st Fix Assembly</h1><p>Stair frames, strings &amp; structural components</p></div>
+  <button class="lockbtn" id="btn-adminlogin"><i class="ti ti-lock"></i></button>
+</div>
+
+<div class="tabs">
+  <button class="tab active" id="tab-log-btn">&#43; Log Issue</button>
+  <button class="tab" id="tab-hist-btn">&#128336; History</button>
+  <button class="tab" id="tab-esc-btn">&#9888; Escalations</button>
+  <button class="tab tab-data" id="tab-data-btn">&#128202; Data</button>
+</div>
+
+<div id="sec-log" class="sec active">
+  <div class="card">
+    <div class="frow">
+      <div class="fg" style="margin-bottom:0">
+        <label>Assembler name</label>
+        <select id="f-assembler">
+          <option value="">Select assembler...</option>
+          <option>OWEN HENDERSON</option>
+          <option>JORDAN ROBERTS</option>
+          <option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option>
+          <option>THOMAS HOPKINS</option>
+          <option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option>
+          <option>JERMAINE ARTHUR</option>
+          <option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option>
+          <option>KACPER GRUDZINSKI</option>
+          <option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option>
+          <option>ANDREAS PETROPOULOUS</option>
+          <option>KYE DALY</option>
+        </select>
+      </div>
+      <div class="fg" style="margin-bottom:0">
+        <label>Category</label>
+        <select id="f-category">
+          <option value="">Select category...</option>
+          <option value="Quality">Quality</option>
+          <option value="Safety">Safety</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg" style="margin-bottom:0">
+        <label>Issue type</label>
+        <select id="f-type" disabled>
+          <option value="">Select category first...</option>
+        </select>
+      </div>
+      <div class="fg" style="margin-bottom:0">
+        <label>Department</label>
+        <select id="f-severity">
+          <option value="internal">Internal</option>
+          <option value="external">External</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Supervisor / logged by</label>
+      <input type="text" id="f-supervisor" placeholder="Your name">
+    </div>
+    <div class="fg">
+      <label>Description</label>
+      <textarea id="f-desc" rows="3" style="resize:vertical" placeholder="Describe the issue in detail..."></textarea>
+    </div>
+    <div class="fg">
+      <label>Photo (optional)</label>
+      <div class="pzone" id="pzone">
+        <input type="file" accept="image/*" capture="environment" id="f-photo">
+        <i class="ti ti-camera"></i>
+        <p>Tap to take or upload a photo</p>
+      </div>
+      <img id="ppreview" class="ppreview" alt="Preview">
+    </div>
+    <button class="submit" id="btn-submit"><i class="ti ti-check"></i> Log Issue</button>
+  </div>
+</div>
+
+<div id="sec-hist" class="sec">
+  <div class="card filters" style="padding:.75rem 1rem;margin-bottom:.75rem">
+    <select id="filter-assembler">
+      <option value="">All assemblers</option>
+          <option>OWEN HENDERSON</option>
+          <option>JORDAN ROBERTS</option>
+          <option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option>
+          <option>THOMAS HOPKINS</option>
+          <option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option>
+          <option>JERMAINE ARTHUR</option>
+          <option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option>
+          <option>KACPER GRUDZINSKI</option>
+          <option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option>
+          <option>ANDREAS PETROPOULOUS</option>
+          <option>KYE DALY</option>
+    </select>
+    <select id="filter-type">
+      <option value="">All issue types</option>
+      <option>Quality</option><option>Safety</option>
+    </select>
+    <input type="date" id="filter-date">
+    <button id="btn-clearfilters" style="padding:8px 14px;background:var(--bg2);border:0.5px solid var(--bm);border-radius:var(--rm);cursor:pointer;color:var(--tx2);font-family:var(--font);font-size:13px;white-space:nowrap">Clear</button>
+  </div>
+  <div id="history-list"></div>
+</div>
+
+<div id="sec-esc" class="sec">
+  <div id="meet-alerts"></div>
+  <div id="esc-list"></div>
+</div>
+
+<div id="sec-data" class="sec">
+  <div class="card" style="margin-bottom:1rem">
+    <div class="data-toggle">
+      <button class="active" id="btn-period-daily">Daily</button>
+      <button id="btn-period-weekly">Weekly</button>
+    </div>
+    <div class="data-period-label" id="data-period-label"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="print-btn" id="btn-print-report"><i class="ti ti-printer" style="font-size:14px"></i> Print Report</button>
+      <button class="print-btn" id="btn-weekly-ppt" style="background:#1F2937"><i class="ti ti-presentation" style="font-size:14px"></i> Weekly Presentation</button>
+      <button class="print-btn" id="btn-rpm-ppt" style="background:#1F2937"><i class="ti ti-presentation" style="font-size:14px"></i> Replacement Parts Meeting</button>
+    </div>
+  </div>
+
+  <div class="card graph-card">
+    <div class="graph-select-row">
+      <select id="graph-category">
+        <option value="Quality">Quality issues</option>
+        <option value="Safety">Safety issues</option>
+        <option value="Both">Both (Quality &amp; Safety)</option>
+      </select>
+      <select id="graph-issue">
+        <option value="__all__">All issues (total)</option>
+      </select>
+    </div>
+    <div class="graph-anchor-note" id="graph-anchor-note"></div>
+    <div class="graph-wrap">
+      <svg id="trend-svg" class="graph-svg" viewBox="0 0 700 220" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+    <div class="graph-legend" id="graph-legend"></div>
+    <div class="graph-hint" id="graph-hint">Tap a point on the graph to see exactly what was logged</div>
+    <div class="graph-drilldown" id="graph-drilldown">
+      <div class="dd-head">
+        <div>
+          <div class="dd-title" id="dd-title"></div>
+          <div class="dd-sub" id="dd-sub"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="dd-toggle">
+            <button class="active" id="dd-btn-quality">Quality</button>
+            <button id="dd-btn-safety">Safety</button>
+          </div>
+          <button class="dd-close" id="dd-close"><i class="ti ti-x"></i></button>
+        </div>
+      </div>
+      <div id="dd-ranklist"></div>
+      <div class="dd-filter-note" id="dd-filter-note" style="display:none"></div>
+      <div class="dd-entries" id="dd-entries"></div>
+    </div>
+  </div>
+
+  <div class="card" id="data-report-card">
+    <h2 style="font-size:16px;font-weight:600;margin-bottom:.25rem" id="report-title"></h2>
+    <p style="font-size:12px;color:var(--tx2);margin-bottom:1.25rem" id="report-subtitle"></p>
+
+    <div class="rank-section">
+      <h3><i class="ti ti-tools" style="font-size:14px"></i> Quality Issues — Most to Least Logged</h3>
+      <div id="rank-quality"></div>
+    </div>
+
+    <div class="rank-section">
+      <h3><i class="ti ti-shield-exclamation" style="font-size:14px"></i> Safety Issues — Most to Least Logged</h3>
+      <div id="rank-safety"></div>
+    </div>
+  </div>
+
+  <div class="card" id="breakdown-card">
+    <h2 style="font-size:16px;font-weight:600;margin-bottom:1rem">Full Breakdown — Who Logged What</h2>
+    <div class="breakdown-section">
+      <h3><i class="ti ti-tools" style="font-size:14px"></i> Quality Issues — Full Detail</h3>
+      <div id="breakdown-quality"></div>
+    </div>
+    <div class="breakdown-section">
+      <h3><i class="ti ti-shield-exclamation" style="font-size:14px"></i> Safety Issues — Full Detail</h3>
+      <div id="breakdown-safety"></div>
+    </div>
+  </div>
+
+  <div class="card snapshot-history">
+    <h3 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--tx2);margin-bottom:.75rem">Saved Report History</h3>
+    <div id="snapshot-list"></div>
+  </div>
+</div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" style="display:none">
+  <img id="lb-img" src="" alt="Full size photo">
+</div>
+<!-- Admin login -->
+<div class="overlay" id="modal-login" style="display:none">
+  <div class="modal">
+    <h2><i class="ti ti-lock" style="font-size:16px;margin-right:6px"></i>Admin Access</h2>
+    <p>Enter the admin password to edit or delete entries.</p>
+    <input type="password" id="pw-input" placeholder="Password">
+    <div class="mbtns">
+      <button class="bcancel" id="btn-login-cancel">Cancel</button>
+      <button class="bconfirm" id="btn-login-confirm">Unlock</button>
+    </div>
+    <div id="pw-error" style="font-size:12px;color:#EA4B4B;margin-top:8px;display:none">Incorrect password.</div>
+  </div>
+</div>
+<!-- Edit modal -->
+<div class="overlay" id="modal-edit" style="display:none">
+  <div class="modal" style="max-width:480px">
+    <h2 style="margin-bottom:1rem"><i class="ti ti-edit" style="font-size:16px;margin-right:6px"></i>Edit Entry</h2>
+    <label>Assembler</label>
+    <select id="edit-assembler" style="margin-bottom:12px">
+      <option value="">Select assembler...</option>
+          <option>OWEN HENDERSON</option>
+          <option>JORDAN ROBERTS</option>
+          <option>MARCUS MIRCETIC</option>
+          <option>PAWEL BARYLA</option>
+          <option>THOMAS HOPKINS</option>
+          <option>SADMAN RAIFID</option>
+          <option>PETRICA HAIDAU</option>
+          <option>JERMAINE ARTHUR</option>
+          <option>LEWIS QUINN</option>
+          <option>ABDUL HALIM AKOTO</option>
+          <option>KACPER GRUDZINSKI</option>
+          <option>STEVEN WALDREN</option>
+          <option>MARIAN DZIEMBA</option>
+          <option>ANDREAS PETROPOULOUS</option>
+          <option>KYE DALY</option>
+    </select>
+    <label>Category</label>
+    <select id="edit-category" style="margin-bottom:12px">
+      <option value="">Select category...</option>
+      <option value="Quality">Quality</option>
+      <option value="Safety">Safety</option>
+    </select>
+    <label>Issue type</label>
+    <select id="edit-type" style="margin-bottom:12px">
+      <option value="">Select category first...</option>
+    </select>
+    <label>Department</label>
+    <select id="edit-severity" style="margin-bottom:12px">
+      <option value="internal">Internal</option>
+      <option value="external">External</option>
+    </select>
+    <label>Supervisor</label>
+    <input type="text" id="edit-supervisor" placeholder="Supervisor name" style="margin-bottom:12px">
+    <label>Description</label>
+    <textarea id="edit-desc" rows="3" style="resize:vertical;margin-bottom:16px"></textarea>
+    <div class="mbtns">
+      <button class="bcancel" id="btn-edit-cancel">Cancel</button>
+      <button class="bconfirm" id="btn-edit-save">Save changes</button>
+    </div>
+  </div>
+</div>
+<!-- Delete modal -->
+<div class="overlay" id="modal-delete" style="display:none">
+  <div class="modal">
+    <h2>Delete entry?</h2>
+    <p>This will permanently remove this log entry. This cannot be undone.</p>
+    <div class="mbtns">
+      <button class="bcancel" id="btn-delete-cancel">Cancel</button>
+      <button class="bdanger" id="btn-delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+<!-- Settings modal -->
+<div class="overlay" id="modal-settings" style="display:none">
+  <div class="smodal">
+    <h2><i class="ti ti-settings" style="font-size:16px"></i> Admin Settings</h2>
+    <div class="ssec">
+      <h3>Assemblers</h3>
+      <ul class="slist" id="s-assembler-list"></ul>
+      <div class="addrow">
+        <input type="text" id="s-new-assembler" placeholder="Full name (e.g. JOHN SMITH)">
+        <button id="btn-add-assembler">+ Add</button>
+      </div>
+    </div>
+    <div class="ssec">
+      <h3>Quality Issue Types</h3>
+      <ul class="slist" id="s-quality-list"></ul>
+      <div class="addrow">
+        <input type="text" id="s-new-quality" placeholder="e.g. Incorrect tread spacing">
+        <button id="btn-add-quality">+ Add</button>
+      </div>
+    </div>
+    <div class="ssec">
+      <h3>Safety Issue Types</h3>
+      <ul class="slist" id="s-safety-list"></ul>
+      <div class="addrow">
+        <input type="text" id="s-new-safety" placeholder="e.g. No safety footwear">
+        <button id="btn-add-safety">+ Add</button>
+      </div>
+    </div>
+    <button class="sdone" id="btn-settings-done">Done</button>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+const _app = initializeApp({
+  apiKey:"AIzaSyAHqHBugwn_bGewSYpyXRDXwce0z7wt71Q",
+  authDomain:"quality-log-9162a.firebaseapp.com",
+  databaseURL:"https://quality-log-9162a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"quality-log-9162a",
+  storageBucket:"quality-log-9162a.firebasestorage.app",
+  messagingSenderId:"651416044407",
+  appId:"1:651416044407:web:88cb513aced8bd520e5772"
+});
+const db = getDatabase(_app);
+
+// ── Constants ──
+const NODE = '1stfix';
+const DB_E = 'entries/' + NODE;
+const DB_S = 'settings/' + NODE;
+const ADMIN_PW = 'staircraft123';
+
+const DEFAULT_ASSEMBLERS = ['OWEN HENDERSON', 'JORDAN ROBERTS', 'MARCUS MIRCETIC', 'PAWEL BARYLA', 'THOMAS HOPKINS', 'SADMAN RAIFID', 'PETRICA HAIDAU', 'JERMAINE ARTHUR', 'LEWIS QUINN', 'ABDUL HALIM AKOTO', 'KACPER GRUDZINSKI', 'STEVEN WALDREN', 'MARIAN DZIEMBA', 'ANDREAS PETROPOULOUS', 'KYE DALY'];
+const DEFAULT_QUALITY    = ['Quality — Nails sticking out the face of the tread', 'Quality — Poor paint quality', 'Quality — Missing nails', 'Quality — Missing pins', 'Quality — Cut out too big / small', 'Quality — Wrong pairing of strings', 'Quality — No screw in the winder tread'];
+const DEFAULT_SAFETY     = ['Safety — No ear protection', 'Safety — Not wearing goggles', 'Safety — No gloves', 'Safety — Misuse of tools', 'Safety — No hi-viz'];
+
+// ── State ──
+let localEntries = [];
+let entriesLoaded = false; // true once the Firebase entries listener has fired at least once
+let cachedAssemblers = null;
+let cachedQuality    = null;
+let cachedSafety     = null;
+let photoData = null;
+let editingId = null;
+let deletingId = null;
+let cachedMeetings = {};
+let adminUnlocked = sessionStorage.getItem('sc_admin') === '1';
+
+// ── Helpers ──
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function getAssemblers(){return cachedAssemblers||DEFAULT_ASSEMBLERS.slice()}
+function getQuality(){return cachedQuality||DEFAULT_QUALITY.slice()}
+function getSafety(){return cachedSafety||DEFAULT_SAFETY.slice()}
+function norm(t){return(t||'').trim().toLowerCase()}
+function meetingKey(assembler,key){return assembler+'||'+key;}
+function findMeeting(assembler,key){
+  if(!cachedMeetings) return null;
+  const match = Object.values(cachedMeetings).find(m=>m.assembler===assembler && m.issueKey===key);
+  return match || null;
+}
+function lastMeetingTime(assembler,key){
+  const m = findMeeting(assembler,key);
+  return m ? new Date(m.ts) : null;
+}
+function escalLevel(assembler,key,entries){
+  const lastMeeting = lastMeetingTime(assembler,key);
+  const relevant = entries.filter(e=>e.assembler===assembler&&norm(e.type)===key);
+  const countSinceMeeting = lastMeeting
+    ? relevant.filter(e=>new Date(e.ts) > lastMeeting).length
+    : relevant.length;
+  return countSinceMeeting>=3?3:countSinceMeeting===2?2:1;
+}
+
+// ── Toast ──
+let toastT;
+function toast(msg,type){
+  const el=document.getElementById('toast');
+  const cols={green:['#E1F5EE','#0F6E56'],amber:['#FAEEDA','#854F0B'],red:['#FCEBEB','#A32D2D']};
+  const[bg,fg]=cols[type]||cols.green;
+  el.style.cssText='position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:500;z-index:9999;pointer-events:none;max-width:340px;text-align:center;display:block;opacity:1;transition:opacity .3s';
+  el.style.background=bg;el.style.color=fg;el.style.border='1px solid '+fg+'40';
+  el.textContent=msg;
+  clearTimeout(toastT);toastT=setTimeout(()=>{el.style.opacity='0';setTimeout(()=>el.style.display='none',300)},3500);
+}
+
+// ── Tabs ──
+function showTab(t){
+  ['log','hist','esc','data'].forEach(id=>{
+    document.getElementById('sec-'+id).classList.toggle('active',id===t);
+    document.getElementById('tab-'+id+'-btn').classList.toggle('active',id===t);
+  });
+  if(t==='hist')renderHistory();
+  if(t==='esc')renderEscalations();
+  if(t==='data')renderDataTab();
+}
+document.getElementById('tab-log-btn').addEventListener('click',()=>showTab('log'));
+document.getElementById('tab-hist-btn').addEventListener('click',()=>showTab('hist'));
+document.getElementById('tab-esc-btn').addEventListener('click',()=>showTab('esc'));
+document.getElementById('tab-data-btn').addEventListener('click',()=>{ if(adminUnlocked) showTab('data'); });
+
+// ── Category → Issue type ──
+function updateIssueOptions(){
+  const cat=document.getElementById('f-category').value;
+  const sel=document.getElementById('f-type');
+  if(!cat){sel.innerHTML='<option value="">Select category first...</option>';sel.disabled=true;return;}
+  const opts=cat==='Quality'?getQuality():getSafety();
+  sel.innerHTML='<option value="">Select issue type...</option>'+opts.map(o=>'<option>'+o+'</option>').join('');
+  sel.disabled=false;
+}
+document.getElementById('f-category').addEventListener('change',updateIssueOptions);
+
+function updateEditIssueOptions(){
+  const cat=document.getElementById('edit-category').value;
+  const sel=document.getElementById('edit-type');
+  if(!cat){sel.innerHTML='<option value="">Select category first...</option>';return;}
+  const opts=cat==='Quality'?getQuality():getSafety();
+  sel.innerHTML='<option value="">Select issue type...</option>'+opts.map(o=>'<option>'+o+'</option>').join('');
+}
+document.getElementById('edit-category').addEventListener('change',updateEditIssueOptions);
+
+// ── Photo (compressed client-side to avoid mobile browser memory crashes) ──
+function compressImage(file, maxDim, quality){
+  return new Promise((resolve, reject)=>{
+    const r = new FileReader();
+    r.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if(w > maxDim || h > maxDim){
+          if(w > h){ h = Math.round(h * (maxDim / w)); w = maxDim; }
+          else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+document.getElementById('f-photo').addEventListener('change', async function(){
+  const f = this.files[0]; if(!f) return;
+  const pzoneText = document.querySelector('#pzone p');
+  pzoneText.textContent = 'Compressing photo...';
+  try{
+    const compressed = await compressImage(f, 1200, 0.7);
+    photoData = compressed;
+    const p = document.getElementById('ppreview');
+    p.src = photoData; p.style.display = 'block';
+    pzoneText.textContent = 'Photo attached — tap to change';
+  }catch(err){
+    pzoneText.textContent = 'Could not process photo — tap to try again';
+    photoData = null;
+  }
+});
+
+// ── Submit ──
+document.getElementById('btn-submit').addEventListener('click',()=>{
+  const assembler=document.getElementById('f-assembler').value;
+  const type=document.getElementById('f-type').value;
+  const severity=document.getElementById('f-severity').value;
+  const supervisor=document.getElementById('f-supervisor').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+  if(!assembler||!type||!desc){alert('Please fill in assembler name, issue type, and description.');return;}
+  const entry={id:Date.now(),ts:new Date().toISOString(),assembler,type,severity,supervisor,desc,photo:photoData||null};
+  // Calculate escalation level BEFORE writing, based on existing entries only,
+  // then add 1 for the entry we're about to create — avoids double-count race
+  // condition with the Firebase onValue listener firing before this line runs.
+  const priorCount=localEntries.filter(e=>e.assembler===assembler&&norm(e.type)===norm(type)).length;
+  const level=priorCount+1>=3?3:priorCount+1===2?2:1;
+  set(ref(db,DB_E+'/'+entry.id),entry);
+  resetForm();
+  if(level>=3)toast('⚠️ Third occurrence — hold a meeting with '+assembler,'red');
+  else if(level===2)toast('Amber alert — second occurrence for '+assembler,'amber');
+  else toast('Issue logged for '+assembler,'green');
+});
+
+function resetForm(){
+  ['f-assembler','f-category','f-severity','f-supervisor','f-desc'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
+  });
+  updateIssueOptions();
+  photoData=null;
+  document.getElementById('ppreview').style.display='none';
+  document.getElementById('ppreview').src='';
+  document.querySelector('#pzone p').textContent='Tap to take or upload a photo';
+  document.getElementById('f-photo').value='';
+}
+
+// ── History ──
+document.getElementById('filter-assembler').addEventListener('change',renderHistory);
+document.getElementById('filter-type').addEventListener('change',renderHistory);
+document.getElementById('filter-date').addEventListener('change',()=>{ renderHistory(); syncGraphToHistoryDate(); });
+document.getElementById('btn-clearfilters').addEventListener('click',()=>{
+  document.getElementById('filter-assembler').value='';
+  document.getElementById('filter-type').value='';
+  document.getElementById('filter-date').value='';
+  graphAnchorDate = null;
+  renderHistory();
+});
+
+function renderHistory(){
+  const fa=document.getElementById('filter-assembler').value;
+  const ft=document.getElementById('filter-type').value;
+  const fd=document.getElementById('filter-date').value;
+  let entries=localEntries;
+  if(fa)entries=entries.filter(e=>e.assembler===fa);
+  if(ft)entries=entries.filter(e=>e.type.toLowerCase().startsWith(ft.toLowerCase()));
+  if(fd)entries=entries.filter(e=>e.ts.startsWith(fd));
+  const el=document.getElementById('history-list');
+  if(!entries.length){el.innerHTML='<div class="empty"><i class="ti ti-clipboard-x"></i>No entries match your filters</div>';return;}
+  el.innerHTML=entries.map(e=>{
+    const lv=escalLevel(e.assembler,norm(e.type),localEntries);
+    const badge=lv>=3?'<span class="badge br"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Hold meeting</span>':lv===2?'<span class="badge ba"><i class="ti ti-alert-circle" style="font-size:11px"></i> Amber warning</span>':'<span class="badge bg">First occurrence</span>';
+    const sev={'internal':'<span class="badge bgr">Internal</span>','external':'<span class="badge ba">External</span>'}[e.severity]||'';
+    const dt=new Date(e.ts);
+    const ds=dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    const img=e.photo?`<img src="${e.photo}" class="eimg" data-id="${e.id}" alt="Photo">`:'';
+    const actions=adminUnlocked?`<div class="eactions"><button class="bedit" data-edit="${e.id}"><i class="ti ti-edit" style="font-size:12px"></i> Edit</button><button class="bdel" data-del="${e.id}"><i class="ti ti-trash" style="font-size:12px"></i> Delete</button></div>`:'';
+    return `<div class="entry s${lv}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-size:14px;font-weight:500">${esc(e.assembler)}</span>${badge}${sev}</div>
+          <div class="emeta">${ds}${e.supervisor?' &middot; '+esc(e.supervisor):''}</div>
+        </div>${img}
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--tx2);margin:4px 0">${esc(e.type)}</div>
+      <div style="font-size:13px;margin-top:4px">${esc(e.desc)}</div>
+      ${actions}
+    </div>`;
+  }).join('');
+  // Attach edit/delete listeners
+  el.querySelectorAll('[data-edit]').forEach(btn=>btn.addEventListener('click',()=>openEdit(btn.dataset.edit)));
+  el.querySelectorAll('[data-del]').forEach(btn=>btn.addEventListener('click',()=>openDelete(btn.dataset.del)));
+  el.querySelectorAll('.eimg').forEach(img=>img.addEventListener('click',()=>{document.getElementById('lb-img').src=img.src;document.getElementById('lightbox').style.display='flex';}));
+}
+
+
+function markMeetingHeld(mk){
+  const idx = mk.indexOf('||');
+  const assembler = mk.substring(0, idx);
+  const issueKey = mk.substring(idx + 2);
+  const meeting = { assembler, issueKey, ts: new Date().toISOString() };
+  set(ref(db, 'meetings/' + NODE + '/' + Date.now()), meeting);
+  toast('Meeting marked as held for ' + assembler, 'green');
+}
+
+// ── Escalations ──
+function renderEscalations(){
+  const map={};
+  localEntries.forEach(e=>{
+    if(!map[e.assembler])map[e.assembler]={};
+    const k=norm(e.type);
+    if(!map[e.assembler][k])map[e.assembler][k]={lastType:e.type,entries:[]};
+    map[e.assembler][k].entries.push(e);
+  });
+  const crits=[],warns=[],oks=[];
+  Object.keys(map).sort().forEach(a=>Object.keys(map[a]).forEach(k=>{
+    const{lastType,entries}=map[a][k];
+    const lastMeeting = lastMeetingTime(a,k);
+    const countSinceMeeting = lastMeeting ? entries.filter(e=>new Date(e.ts)>lastMeeting).length : entries.length;
+    const justResolved = lastMeeting && entries.length>0 && entries.every(e=>new Date(e.ts)<=lastMeeting) === false && countSinceMeeting===0;
+    const o={assembler:a,issue:lastType,count:countSinceMeeting,totalCount:entries.length,meetingHeld:!!lastMeeting,meetingTs:lastMeeting};
+    if(countSinceMeeting>=3)crits.push(o);else if(countSinceMeeting===2)warns.push(o);else oks.push(o);
+  }));
+  document.getElementById('meet-alerts').innerHTML=crits.length?`<div class="malert"><i class="ti ti-alarm"></i><p>Meeting required — ${crits.length} assembler/issue combination${crits.length>1?'s':''} have reached 3+ occurrences</p></div>`:'';
+  const all=[...crits,...warns,...oks];
+  const el=document.getElementById('esc-list');
+  if(!all.length){el.innerHTML='<div class="empty"><i class="ti ti-shield-check"></i>No issues logged yet</div>';return;}
+  el.innerHTML=all.map(x=>{
+    const cls=x.count>=3?'ecrit':x.count===2?'ewarn':'eok';
+    const icon=x.count>=3?'ti-alert-triangle':x.count===2?'ti-alert-circle':'ti-check';
+    const label=x.count>=3?'Hold meeting':x.count===2?'Amber warning':'First occurrence';
+    const meetingNote=(x.meetingHeld && x.count===0)?`<div style="font-size:11px;color:#0F6E56;margin-top:4px;display:flex;align-items:center;gap:4px"><i class="ti ti-check" style="font-size:12px"></i>Meeting completed${x.meetingTs?(' &middot; '+x.meetingTs.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})):''}</div>`:'';
+    const mk=meetingKey(x.assembler,norm(x.issue));
+    const meetingCheckbox=(adminUnlocked && x.count>=3)?`<label style="display:flex;align-items:center;gap:6px;font-size:12px;margin-top:8px;padding-top:8px;border-top:0.5px solid rgba(0,0,0,0.12);cursor:pointer"><input type="checkbox" data-meeting-checkbox="${esc(mk)}" style="width:auto;margin:0"> Meeting held — mark resolved</label>`:'';
+    return`<div class="ecard ${cls}"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span class="en"><i class="ti ${icon}" style="font-size:14px;margin-right:6px"></i>${esc(x.assembler)}</span><span style="font-size:11px;font-weight:500">${label} &middot; ${x.count}x since last meeting</span></div><div class="ed">${esc(x.issue)} ${x.totalCount!==x.count?'<span style=\"opacity:.6\">('+x.totalCount+' total all-time)</span>':''}</div>${meetingNote}${meetingCheckbox}</div>`;
+  }).join('');
+  el.querySelectorAll('[data-meeting-checkbox]').forEach(cb=>cb.addEventListener('change',function(){
+    if(this.checked) markMeetingHeld(this.dataset.meetingCheckbox);
+  }));
+}
+
+// ── Lightbox ──
+document.getElementById('lightbox').addEventListener('click',()=>document.getElementById('lightbox').style.display='none');
+
+// ── Admin ──
+function showAdminBar(){
+  document.getElementById('adminbar').classList.toggle('on',adminUnlocked);
+  document.getElementById('tab-data-btn').classList.toggle('show',adminUnlocked);
+  if(!adminUnlocked && document.getElementById('sec-data').classList.contains('active')){
+    showTab('log');
+  }
+}
+document.getElementById('btn-adminlogin').addEventListener('click',()=>{
+  document.getElementById('pw-input').value='';
+  document.getElementById('pw-error').style.display='none';
+  document.getElementById('modal-login').style.display='flex';
+  setTimeout(()=>document.getElementById('pw-input').focus(),100);
+});
+document.getElementById('btn-login-cancel').addEventListener('click',()=>document.getElementById('modal-login').style.display='none');
+document.getElementById('btn-login-confirm').addEventListener('click',()=>{
+  if(document.getElementById('pw-input').value===ADMIN_PW){
+    adminUnlocked=true;sessionStorage.setItem('sc_admin','1');
+    document.getElementById('modal-login').style.display='none';
+    showAdminBar();renderHistory();toast('Admin mode unlocked','green');
+  }else{document.getElementById('pw-error').style.display='block';document.getElementById('pw-input').value='';}
+});
+document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('btn-login-confirm').click();});
+document.getElementById('btn-lock').addEventListener('click',()=>{
+  adminUnlocked=false;sessionStorage.removeItem('sc_admin');showAdminBar();renderHistory();toast('Admin mode locked','amber');
+});
+document.getElementById('btn-settings').addEventListener('click',()=>{renderSettingsLists();document.getElementById('modal-settings').style.display='flex';});
+
+// Edit
+function openEdit(id){
+  const e=localEntries.find(x=>x.id==id);if(!e)return;
+  editingId=id;
+  document.getElementById('edit-assembler').value=e.assembler||'';
+  const cat=(e.type||'').split('—')[0].trim();
+  document.getElementById('edit-category').value=(cat==='Quality'||cat==='Safety')?cat:'';
+  updateEditIssueOptions();
+  setTimeout(()=>document.getElementById('edit-type').value=e.type||'',50);
+  document.getElementById('edit-severity').value=e.severity||'internal';
+  document.getElementById('edit-supervisor').value=e.supervisor||'';
+  document.getElementById('edit-desc').value=e.desc||'';
+  document.getElementById('modal-edit').style.display='flex';
+}
+document.getElementById('btn-edit-cancel').addEventListener('click',()=>{document.getElementById('modal-edit').style.display='none';editingId=null;});
+document.getElementById('btn-edit-save').addEventListener('click',()=>{
+  if(!editingId)return;
+  const assembler=document.getElementById('edit-assembler').value;
+  const type=document.getElementById('edit-type').value;
+  const severity=document.getElementById('edit-severity').value;
+  const supervisor=document.getElementById('edit-supervisor').value.trim();
+  const desc=document.getElementById('edit-desc').value.trim();
+  if(!assembler||!type||!desc){alert('Please fill in all required fields.');return;}
+  const existing=localEntries.find(x=>x.id==editingId);
+  if(existing)set(ref(db,DB_E+'/'+editingId),{...existing,assembler,type,severity,supervisor,desc});
+  document.getElementById('modal-edit').style.display='none';
+  editingId=null;toast('Entry updated','green');
+});
+
+// Delete
+function openDelete(id){deletingId=id;document.getElementById('modal-delete').style.display='flex';}
+document.getElementById('btn-delete-cancel').addEventListener('click',()=>{document.getElementById('modal-delete').style.display='none';deletingId=null;});
+document.getElementById('btn-delete-confirm').addEventListener('click',()=>{
+  if(!deletingId)return;
+  remove(ref(db,DB_E+'/'+deletingId));
+  document.getElementById('modal-delete').style.display='none';
+  deletingId=null;toast('Entry deleted','amber');
+});
+
+// ── Settings ──
+function refreshDropdowns(){
+  const asm=getAssemblers();
+  ['f-assembler','edit-assembler','filter-assembler'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const cur=el.value;
+    const isFilter=id==='filter-assembler';
+    el.innerHTML=(isFilter?'<option value="">All assemblers</option>':'<option value="">Select assembler...</option>')+asm.map(a=>`<option${a===cur?' selected':''}>${a}</option>`).join('');
+  });
+  updateIssueOptions();
+}
+
+let editingItem=null; // {listType:'asm'|'quality'|'safety', index:n}
+
+function renderSettingsLists(){
+  const asm=getAssemblers(),q=getQuality(),s=getSafety();
+
+  document.getElementById('s-assembler-list').innerHTML=asm.map((a,i)=>{
+    if(editingItem&&editingItem.listType==='asm'&&editingItem.index===i){
+      return `<li><input type="text" class="edit-input" id="edit-item-input" value="${esc(a)}"><button class="btn-save-item" data-save-asm="${i}">Save</button><button data-cancel-edit="1">Cancel</button></li>`;
+    }
+    return `<li><span>${esc(a)}</span><button class="btn-edit-item" data-edit-asm="${i}">Edit</button><button data-rem-asm="${i}">Remove</button></li>`;
+  }).join('')||'<li style="color:var(--tx3);font-size:12px;justify-content:center">None added</li>';
+
+  document.getElementById('s-quality-list').innerHTML=q.map((v,i)=>{
+    if(editingItem&&editingItem.listType==='quality'&&editingItem.index===i){
+      return `<li><input type="text" class="edit-input" id="edit-item-input" value="${esc(v.replace('Quality — ',''))}"><button class="btn-save-item" data-save-q="${i}">Save</button><button data-cancel-edit="1">Cancel</button></li>`;
+    }
+    return `<li><span>${esc(v.replace('Quality — ',''))}</span><button class="btn-edit-item" data-edit-q="${i}">Edit</button><button data-rem-q="${i}">Remove</button></li>`;
+  }).join('')||'<li style="color:var(--tx3);font-size:12px;justify-content:center">None added</li>';
+
+  document.getElementById('s-safety-list').innerHTML=s.map((v,i)=>{
+    if(editingItem&&editingItem.listType==='safety'&&editingItem.index===i){
+      return `<li><input type="text" class="edit-input" id="edit-item-input" value="${esc(v.replace('Safety — ',''))}"><button class="btn-save-item" data-save-s="${i}">Save</button><button data-cancel-edit="1">Cancel</button></li>`;
+    }
+    return `<li><span>${esc(v.replace('Safety — ',''))}</span><button class="btn-edit-item" data-edit-s="${i}">Edit</button><button data-rem-s="${i}">Remove</button></li>`;
+  }).join('')||'<li style="color:var(--tx3);font-size:12px;justify-content:center">None added</li>';
+
+  // Remove handlers
+  document.getElementById('s-assembler-list').querySelectorAll('[data-rem-asm]').forEach(b=>b.addEventListener('click',()=>{const l=getAssemblers();const n=l[b.dataset.remAsm];l.splice(b.dataset.remAsm,1);cachedAssemblers=l;set(ref(db,DB_S+'/assemblers'),l);refreshDropdowns();renderSettingsLists();toast(n+' removed','amber');}));
+  document.getElementById('s-quality-list').querySelectorAll('[data-rem-q]').forEach(b=>b.addEventListener('click',()=>{const l=getQuality();l.splice(b.dataset.remQ,1);cachedQuality=l;set(ref(db,DB_S+'/quality'),l);refreshDropdowns();renderSettingsLists();toast('Issue type removed','amber');}));
+  document.getElementById('s-safety-list').querySelectorAll('[data-rem-s]').forEach(b=>b.addEventListener('click',()=>{const l=getSafety();l.splice(b.dataset.remS,1);cachedSafety=l;set(ref(db,DB_S+'/safety'),l);refreshDropdowns();renderSettingsLists();toast('Issue type removed','amber');}));
+
+  // Edit (enter edit mode) handlers
+  document.getElementById('s-assembler-list').querySelectorAll('[data-edit-asm]').forEach(b=>b.addEventListener('click',()=>{editingItem={listType:'asm',index:parseInt(b.dataset.editAsm)};renderSettingsLists();setTimeout(()=>document.getElementById('edit-item-input')?.focus(),50);}));
+  document.getElementById('s-quality-list').querySelectorAll('[data-edit-q]').forEach(b=>b.addEventListener('click',()=>{editingItem={listType:'quality',index:parseInt(b.dataset.editQ)};renderSettingsLists();setTimeout(()=>document.getElementById('edit-item-input')?.focus(),50);}));
+  document.getElementById('s-safety-list').querySelectorAll('[data-edit-s]').forEach(b=>b.addEventListener('click',()=>{editingItem={listType:'safety',index:parseInt(b.dataset.editS)};renderSettingsLists();setTimeout(()=>document.getElementById('edit-item-input')?.focus(),50);}));
+
+  // Cancel edit handlers
+  document.querySelectorAll('[data-cancel-edit]').forEach(b=>b.addEventListener('click',()=>{editingItem=null;renderSettingsLists();}));
+
+  // Save edit handlers
+  document.getElementById('s-assembler-list').querySelectorAll('[data-save-asm]').forEach(b=>b.addEventListener('click',()=>{
+    const idx=parseInt(b.dataset.saveAsm);
+    const val=document.getElementById('edit-item-input').value.trim().toUpperCase();
+    if(!val){toast('Name cannot be empty','amber');return;}
+    const l=getAssemblers();l[idx]=val;cachedAssemblers=l;set(ref(db,DB_S+'/assemblers'),l);
+    editingItem=null;refreshDropdowns();renderSettingsLists();toast('Updated','green');
+  }));
+  document.getElementById('s-quality-list').querySelectorAll('[data-save-q]').forEach(b=>b.addEventListener('click',()=>{
+    const idx=parseInt(b.dataset.saveQ);
+    const val=document.getElementById('edit-item-input').value.trim();
+    if(!val){toast('Cannot be empty','amber');return;}
+    const l=getQuality();l[idx]='Quality — '+val;cachedQuality=l;set(ref(db,DB_S+'/quality'),l);
+    editingItem=null;refreshDropdowns();renderSettingsLists();toast('Updated','green');
+  }));
+  document.getElementById('s-safety-list').querySelectorAll('[data-save-s]').forEach(b=>b.addEventListener('click',()=>{
+    const idx=parseInt(b.dataset.saveS);
+    const val=document.getElementById('edit-item-input').value.trim();
+    if(!val){toast('Cannot be empty','amber');return;}
+    const l=getSafety();l[idx]='Safety — '+val;cachedSafety=l;set(ref(db,DB_S+'/safety'),l);
+    editingItem=null;refreshDropdowns();renderSettingsLists();toast('Updated','green');
+  }));
+
+  // Enter key saves
+  document.getElementById('edit-item-input')?.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      if(editingItem.listType==='asm')document.querySelector(`[data-save-asm="${editingItem.index}"]`)?.click();
+      if(editingItem.listType==='quality')document.querySelector(`[data-save-q="${editingItem.index}"]`)?.click();
+      if(editingItem.listType==='safety')document.querySelector(`[data-save-s="${editingItem.index}"]`)?.click();
+    }
+    if(e.key==='Escape'){editingItem=null;renderSettingsLists();}
+  });
+}
+
+document.getElementById('btn-add-assembler').addEventListener('click',()=>{
+  const inp=document.getElementById('s-new-assembler');
+  const val=inp.value.trim().toUpperCase();if(!val)return;
+  const l=getAssemblers();if(l.includes(val)){toast('Already exists','amber');return;}
+  l.push(val);cachedAssemblers=l;set(ref(db,DB_S+'/assemblers'),l);inp.value='';refreshDropdowns();renderSettingsLists();toast(val+' added','green');
+});
+document.getElementById('btn-add-quality').addEventListener('click',()=>{
+  const inp=document.getElementById('s-new-quality');
+  const val=inp.value.trim();if(!val)return;
+  const pref='Quality — '+val;const l=getQuality();if(l.includes(pref)){toast('Already exists','amber');return;}
+  l.push(pref);cachedQuality=l;set(ref(db,DB_S+'/quality'),l);inp.value='';refreshDropdowns();renderSettingsLists();toast('Added','green');
+});
+document.getElementById('btn-add-safety').addEventListener('click',()=>{
+  const inp=document.getElementById('s-new-safety');
+  const val=inp.value.trim();if(!val)return;
+  const pref='Safety — '+val;const l=getSafety();if(l.includes(pref)){toast('Already exists','amber');return;}
+  l.push(pref);cachedSafety=l;set(ref(db,DB_S+'/safety'),l);inp.value='';refreshDropdowns();renderSettingsLists();toast('Added','green');
+});
+document.getElementById('btn-settings-done').addEventListener('click',()=>{document.getElementById('modal-settings').style.display='none';refreshDropdowns();});
+
+
+// ── DATA TAB ──
+let dataPeriod = 'daily'; // 'daily' | 'weekly'
+let currentTrendBuckets = [];
+let ddCategory = 'Quality';
+let ddOpenIdx = null;
+let graphAnchorDate = null; // set when synced to a History tab date filter
+let ddSelectedIssue = null; // specific issue label selected within the drilldown rank list
+
+function getPeriodStart(period){
+  const now = new Date();
+  if(period === 'daily'){
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  } else {
+    // Start of week (Monday)
+    const d = new Date(now);
+    const day = d.getDay();
+    const diff = (day === 0 ? -6 : 1) - day; // shift to Monday
+    d.setDate(d.getDate() + diff);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+}
+
+function getPeriodKey(period){
+  const start = getPeriodStart(period);
+  const y = start.getFullYear();
+  const m = String(start.getMonth()+1).padStart(2,'0');
+  const dy = String(start.getDate()).padStart(2,'0');
+  return period + '_' + y + '-' + m + '-' + dy;
+}
+
+function rankIssues(entries, category){
+  const counts = {};
+  entries.forEach(e=>{
+    const cat = (e.type||'').split('—')[0].trim();
+    if(cat !== category) return;
+    const label = (e.type||'').split('—').slice(1).join('—').trim() || e.type;
+    counts[label] = (counts[label]||0) + 1;
+  });
+  return Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+}
+
+function renderRankList(containerId, ranked, accentColor, opts){
+  opts = opts || {};
+  const el = document.getElementById(containerId);
+  if(!ranked.length){
+    el.innerHTML = '<div class="empty" style="padding:1.5rem 0"><i class="ti ti-mood-smile" style="font-size:28px"></i>No issues logged for this period</div>';
+    return;
+  }
+  const max = ranked[0][1];
+  el.innerHTML = ranked.map(([label,count],i)=>{
+    const pct = Math.max(8, Math.round((count/max)*100));
+    const clickable = opts.onClick ? ' clickable' : '';
+    const selected = opts.selected === label ? ' selected' : '';
+    return `<div class="rank-row${clickable}${selected}" data-rank-label="${esc(label)}">
+      <div class="rank-num">${i+1}</div>
+      <div class="rank-label">${esc(label)}</div>
+      <div class="rank-bar-wrap"><div class="rank-bar" style="width:${pct}%;background:${accentColor}"></div></div>
+      <div class="rank-count">${count}</div>
+    </div>`;
+  }).join('');
+  if(opts.onClick){
+    el.querySelectorAll('[data-rank-label]').forEach(row=>{
+      row.addEventListener('click', ()=> opts.onClick(row.dataset.rankLabel));
+    });
+  }
+}
+
+function entriesForPeriod(period){
+  const start = getPeriodStart(period);
+  return localEntries.filter(e => new Date(e.ts) >= start);
+}
+
+function renderDataTab(){
+  const entries = entriesForPeriod(dataPeriod);
+  const periodStart = getPeriodStart(dataPeriod);
+  const label = dataPeriod === 'daily'
+    ? periodStart.toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})
+    : 'Week commencing ' + periodStart.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+
+  document.getElementById('data-period-label').textContent = label;
+  document.getElementById('report-title').textContent = '1st Fix Assembly — Quality & Safety Report';
+  document.getElementById('report-subtitle').textContent = (dataPeriod==='daily'?'Daily':'Weekly') + ' summary — ' + label + ' — generated ' + new Date().toLocaleString('en-GB');
+
+  const qRanked = rankIssues(entries, 'Quality');
+  const sRanked = rankIssues(entries, 'Safety');
+  renderRankList('rank-quality', qRanked, '#3B82F6');
+  renderRankList('rank-safety', sRanked, '#EA4B4B');
+  renderFullBreakdown(entries);
+
+  renderSnapshotList();
+  populateGraphIssueOptions();
+}
+
+function renderFullBreakdown(entries){
+  ['Quality','Safety'].forEach(cat=>{
+    const containerId = cat==='Quality' ? 'breakdown-quality' : 'breakdown-safety';
+    const el = document.getElementById(containerId);
+    const catEntries = entries.filter(e => (e.type||'').split('—')[0].trim() === cat);
+    if(!catEntries.length){
+      el.innerHTML = '<div class="empty" style="padding:1rem 0"><i class="ti ti-mood-smile" style="font-size:24px"></i>No '+cat.toLowerCase()+' issues logged for this period</div>';
+      return;
+    }
+    const groups = {};
+    catEntries.forEach(e=>{
+      const label = (e.type||'').split('—').slice(1).join('—').trim() || e.type;
+      (groups[label] = groups[label] || []).push(e);
+    });
+    const sortedLabels = Object.keys(groups).sort((a,b)=> groups[b].length - groups[a].length);
+    el.innerHTML = sortedLabels.map(label=>{
+      const list = groups[label].slice().sort((a,b)=> new Date(b.ts) - new Date(a.ts));
+      const chips = list.map(e=>{
+        const dt = new Date(e.ts);
+        const ds = dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}) + ' ' + dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+        return `<span class="bd-chip"><b>${esc(e.assembler)}</b> &middot; ${ds}</span>`;
+      }).join('');
+      return `<div class="bd-issue">
+        <div class="bd-issue-head"><span>${esc(label)}</span><span class="bd-issue-count">${list.length}x</span></div>
+        <div class="bd-who">${chips}</div>
+      </div>`;
+    }).join('');
+  });
+}
+
+document.getElementById('btn-period-daily').addEventListener('click',()=>{
+  dataPeriod='daily';
+  document.getElementById('btn-period-daily').classList.add('active');
+  document.getElementById('btn-period-weekly').classList.remove('active');
+  renderDataTab();
+});
+document.getElementById('btn-period-weekly').addEventListener('click',()=>{
+  dataPeriod='weekly';
+  document.getElementById('btn-period-weekly').classList.add('active');
+  document.getElementById('btn-period-daily').classList.remove('active');
+  renderDataTab();
+});
+document.getElementById('btn-print-report').addEventListener('click',()=>window.print());
+
+// ── Replacement Parts Meeting report: last 3 completed weeks vs the 3 before (admin only) ──
+document.getElementById('btn-rpm-ppt').addEventListener('click', generateReplacementPartsMeeting);
+
+async function generateReplacementPartsMeeting(){
+  const btn = document.getElementById('btn-rpm-ppt');
+  if(!adminUnlocked) return;
+  if(typeof PptxGenJS === 'undefined'){
+    alert('The presentation library failed to load. Check your internet connection and try again.');
+    return;
+  }
+  if(!entriesLoaded){
+    alert('Data is still loading from the database — please wait a moment and try again.');
+    return;
+  }
+
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="font-size:14px"></i> Generating…';
+
+  try{
+    const DEPT = '1st Fix Assembly';
+    const ACCENT = '3B82F6';
+    const PW = 12.33, PX = 0.5;
+    const FONT = 'Arial';
+    const COL = { URGENT:'DC2626', CONCERN:'F59E0B', IMPROVING:'10B981', NEW:'3B82F6', STABLE:'6B7280' };
+
+    // ── Weeks: 3 completed weeks (Mon–Sun) vs the 3 before. The current, part-finished week is excluded.
+    const now = new Date();
+    const dow = now.getDay();
+    const thisMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + ((dow === 0 ? -6 : 1) - dow));
+    const mkWeek = i => {
+      const start = new Date(thisMonday.getFullYear(), thisMonday.getMonth(), thisMonday.getDate() - i*7);
+      const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7);
+      return { start, end, label: start.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}) };
+    };
+    const weeks = [6,5,4,3,2,1].map(mkWeek);          // oldest first
+    const currentWeekLabel = thisMonday.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+    const fmtLong = d => d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    const rangeLabel = fmtLong(weeks[3].start) + ' – ' + fmtLong(new Date(weeks[5].end.getTime() - 86400000));
+
+    // ── Quality entries only, no names used anywhere
+    const q = localEntries
+      .filter(e => (e.type||'').split('—')[0].trim() === 'Quality')
+      .map(e => ({ t: new Date(e.ts).getTime(), label: (e.type||'').split('—').slice(1).join('—').trim() || e.type }));
+    const inWeek = (w, label) => q.filter(x => x.t >= w.start.getTime() && x.t < w.end.getTime() && (label === undefined || x.label === label)).length;
+    const sum = a => a.reduce((s,v) => s+v, 0);
+    const pct = (n,d) => d ? Math.round((n/d)*100) : 0;
+
+    const weekly = weeks.map(w => inWeek(w));
+    if(sum(weekly) === 0){
+      alert('No quality issues were logged in the last 6 completed weeks, so there is nothing to report.');
+      return;
+    }
+    const prevTotals = weekly.slice(0,3), lastTotals = weekly.slice(3);
+    const prevTotal = sum(prevTotals), lastTotal = sum(lastTotals);
+    const avgLast = lastTotal/3, avgPrev = prevTotal/3, avg6 = sum(weekly)/6;
+    let peakIdx = 0;
+    lastTotals.forEach((v,i) => { if(v > lastTotals[peakIdx]) peakIdx = i; });
+    const peak = lastTotals[peakIdx], peakLabel = weeks[3+peakIdx].label;
+
+    const status = (last, prev) => {
+      if(prev === 0 && last === 0) return 'STABLE';
+      if(prev === 0) return 'NEW';
+      const r = last/prev;
+      if(r <= 0.7) return 'IMPROVING';
+      if(r >= 1.5) return 'URGENT';
+      if(r >= 1.1) return 'CONCERN';
+      return 'STABLE';
+    };
+    const changeText = (last, prev) => prev > 0
+      ? (last >= prev ? '▲ ' : '▼ ') + Math.round(Math.abs((last-prev)/prev)*100) + '%'
+      : (last > 0 ? '▲ New' : '→ None');
+
+    // ── Per-issue figures
+    const labels = [...new Set(q.filter(x => x.t >= weeks[0].start.getTime() && x.t < weeks[5].end.getTime()).map(x => x.label))];
+    const issues = labels.map(label => {
+      const pw = weeks.map(w => inWeek(w, label));
+      const last3 = sum(pw.slice(3)), prev3 = sum(pw.slice(0,3));
+      return { label, pw, last3, prev3, st: status(last3, prev3) };
+    }).sort((a,b) => (b.last3 - a.last3) || (b.prev3 - a.prev3));
+    const rising = issues.filter(i => i.last3 > i.prev3)
+      .sort((a,b) => ((b.last3-b.prev3) - (a.last3-a.prev3)) || (b.last3 - a.last3));
+    const shorten = (s, n) => s.length > n ? s.slice(0, n-1) + '…' : s;
+
+    const pptx = new PptxGenJS();
+    pptx.layout = 'LAYOUT_WIDE';
+    pptx.author = 'Staircraft Group Quality & Safety Log';
+    pptx.company = 'Staircraft Group';
+    pptx.title = DEPT + ' — Replacement Parts Meeting (last 3 weeks)';
+
+    const footer = (s, note) => s.addText(note || 'Issue counts only — no individual names included',
+      { x:PX, y:7.12, w:11.5, h:0.3, fontSize:9, italic:true, color:'999999', fontFace:FONT, margin:0 });
+    const title = (s, t) => {
+      s.addText(t, { x:PX, y:0.35, w:PW, h:0.6, fontSize:24, bold:true, color:'1A1A1A', fontFace:FONT, valign:'middle', margin:0 });
+      s.addShape('rect', { x:PX, y:1.05, w:PW, h:0.035, fill:{color:ACCENT} });
+    };
+    const badge = (s, x, y, w, h, st) => {
+      s.addShape('rect', { x, y, w, h, fill:{ color:COL[st], transparency:88 } });
+      s.addText(st, { x, y, w, h, align:'center', valign:'middle', fontSize:h > 0.35 ? 13 : 10, bold:true, color:COL[st], fontFace:FONT, margin:0 });
+    };
+    const kpi = (s, x, y, w, value, label, color) => {
+      s.addShape('rect', { x, y, w, h:1.05, fill:{color:'F0F4F8'}, line:{color:'FFFFFF', width:0.5} });
+      s.addText(String(value), { x, y:y+0.12, w, h:0.58, align:'center', valign:'middle', fontSize:20, bold:true, color:color || '1A1A1A', fontFace:FONT, margin:0 });
+      s.addText(label, { x, y:y+0.66, w, h:0.35, align:'center', valign:'top', fontSize:9, color:'666666', fontFace:FONT, margin:0 });
+    };
+
+    // ───────── Slide 1: title + KPIs
+    const s1 = pptx.addSlide();
+    s1.background = { color:'FFFFFF' };
+    s1.addShape('rect', { x:0, y:0, w:'100%', h:1.5, fill:{color:'1A1A1A'} });
+    s1.addText(DEPT, { x:0.5, y:0.28, w:11.3, h:0.55, fontSize:26, bold:true, color:'FFFFFF', fontFace:FONT, margin:0 });
+    s1.addText('Replacement Parts Meeting — last 3 weeks', { x:0.5, y:0.88, w:11.3, h:0.4, fontSize:14, color:ACCENT, fontFace:FONT, margin:0 });
+    s1.addText('Weeks commencing ' + weeks[3].label + ', ' + weeks[4].label + ' & ' + weeks[5].label + '  (' + rangeLabel + ')', { x:0.5, y:1.75, w:PW, h:0.4, fontSize:13, color:'555555', fontFace:FONT, margin:0 });
+    s1.addText('Generated ' + now.toLocaleDateString('en-GB') + ' from the live tracker • W/C ' + currentWeekLabel + ' excluded (still in progress) • compared with the 3 weeks before', { x:0.5, y:2.13, w:PW, h:0.3, fontSize:10.5, italic:true, color:'999999', fontFace:FONT, margin:0 });
+
+    const delta = prevTotal > 0 ? Math.round(((lastTotal-prevTotal)/prevTotal)*100) : null;
+    const deltaTxt = delta === null ? (lastTotal > 0 ? 'New' : '0%') : (delta > 0 ? '+' : '') + delta + '%';
+    const deltaCol = lastTotal > prevTotal ? COL.URGENT : lastTotal < prevTotal ? COL.IMPROVING : COL.STABLE;
+    const bw = 2.87, bg = 0.283;
+    kpi(s1, PX + 0*(bw+bg), 2.85, bw, lastTotal, 'Issues — last 3 weeks');
+    kpi(s1, PX + 1*(bw+bg), 2.85, bw, avgLast.toFixed(1), 'Avg per week (last 3)');
+    kpi(s1, PX + 2*(bw+bg), 2.85, bw, deltaTxt, 'vs previous 3 weeks (' + prevTotal + ')', deltaCol);
+    kpi(s1, PX + 3*(bw+bg), 2.85, bw, 'W/C ' + peakLabel, 'Busiest week (' + peak + ')');
+
+    let headline;
+    if(lastTotal > prevTotal) headline = 'Issues are up on the previous 3 weeks (' + lastTotal + ' vs ' + prevTotal + ').';
+    else if(lastTotal < prevTotal) headline = 'Issues are down on the previous 3 weeks (' + lastTotal + ' vs ' + prevTotal + ').';
+    else headline = 'Issue volume is unchanged on the previous 3 weeks (' + lastTotal + ' in each).';
+    const concentrated = lastTotal > 0 && lastTotals.filter(v => v > 0).length > 1 && peak/lastTotal >= 0.5;
+    const second = concentrated
+      ? pct(peak, lastTotal) + '% of the last 3 weeks’ issues landed in one week (W/C ' + peakLabel + ', ' + peak + ').'
+      : 'Busiest of the 3 weeks was W/C ' + peakLabel + ' with ' + peak + '.';
+    s1.addText(headline + ' ' + second, { x:0.5, y:4.4, w:11.7, h:0.8, fontSize:13, color:'1A1A1A', fontFace:FONT, margin:0 });
+    footer(s1);
+
+    // ───────── Slide 2: six-week trend
+    const s2 = pptx.addSlide();
+    title(s2, 'Weekly trend — previous 3 weeks vs last 3 weeks');
+    const barColor = v => avg6 <= 0 ? 'F59E0B' : v > avg6*1.3 ? 'DC2626' : v < avg6*0.7 ? '10B981' : 'F59E0B';
+    s2.addChart(pptx.ChartType.bar, [{ name:'Issues', labels: weeks.map(w => w.label), values: weekly }], {
+      x:PX, y:1.3, w:7.6, h:4.8, showValue:true, showLegend:false, chartColors: weekly.map(barColor),
+      catAxisLabelFontSize:11, dataLabelFontSize:11, valAxisTitle:'Issues logged', valAxisMinVal:0,
+    });
+    s2.addText([
+      { text:'■ ', options:{ color:'10B981', bold:true } }, { text:'Below avg    ', options:{ color:'444444' } },
+      { text:'■ ', options:{ color:'F59E0B', bold:true } }, { text:'Average    ', options:{ color:'444444' } },
+      { text:'■ ', options:{ color:'DC2626', bold:true } }, { text:'Spike (>30% above 6-wk avg)', options:{ color:'444444' } },
+    ], { x:PX, y:6.25, w:7.6, h:0.3, fontSize:10, fontFace:FONT, margin:0 });
+    const lastWk = weekly[5], priorWk = weekly[4];
+    const zeroWeeks = weeks.filter((w,i) => weekly[i] === 0).map(w => 'W/C ' + w.label);
+    const bullets2 = [
+      'Last 3 weeks: ' + lastTotal + ' issues (' + avgLast.toFixed(1) + '/week). Previous 3 weeks: ' + prevTotal + ' (' + avgPrev.toFixed(1) + '/week).',
+      'Highest week of the six: W/C ' + weeks[weekly.indexOf(Math.max(...weekly))].label + ' with ' + Math.max(...weekly) + '.',
+      'Most recent completed week (W/C ' + weeks[5].label + '): ' + lastWk + ', ' + (lastWk > priorWk ? 'up on' : lastWk < priorWk ? 'down on' : 'level with') + ' the week before (' + priorWk + ').',
+      zeroWeeks.length ? zeroWeeks.join(', ') + ' logged nothing.' : 'Every one of the six weeks had at least one issue logged.',
+    ];
+    s2.addShape('rect', { x:8.4, y:1.35, w:4.43, h:4.9, fill:{color:'FAFBFC'}, line:{color:'E5E7EB', width:0.75} });
+    s2.addText('What the data shows', { x:8.6, y:1.5, w:4.0, h:0.35, fontSize:13, bold:true, color:'1A1A1A', fontFace:FONT, margin:0 });
+    s2.addText(bullets2.map(b => ({ text:b, options:{ bullet:true, breakLine:true } })),
+      { x:8.6, y:1.95, w:4.03, h:4.1, fontSize:11, color:'222222', fontFace:FONT, margin:0, valign:'top', paraSpaceAfter:8 });
+    footer(s2);
+
+    // ───────── Slide 3: where the last 3 weeks came from
+    const s3 = pptx.addSlide();
+    title(s3, 'Where the last 3 weeks came from');
+    const top = issues.filter(i => i.last3 > 0).slice(0,4);
+    const topSum = sum(top.map(i => i.last3));
+    s3.addText('Top ' + top.length + ' issue' + (top.length !== 1 ? 's' : '') + ' = ' + topSum + ' of ' + lastTotal + ' (' + pct(topSum, lastTotal) + '%) — the remaining ' + (lastTotal - topSum) + ' are spread across other issue types',
+      { x:PX, y:1.2, w:PW, h:0.35, fontSize:13, bold:true, color:COL.URGENT, fontFace:FONT, margin:0 });
+    const barH = 0.24, barGap = 0.06, blockH = 3*barH + 2*barGap, spacing = 0.26;
+    const maxV = Math.max(1, ...top.map(i => Math.max(...i.pw.slice(3))));
+    let y3 = 1.75;
+    top.forEach(iss => {
+      s3.addText(shorten(iss.label, 46), { x:PX, y:y3, w:4.3, h:blockH, valign:'middle', fontSize:12, bold:true, color:'1A1A1A', fontFace:FONT, margin:0 });
+      iss.pw.slice(3).forEach((v,i) => {
+        const ry = y3 + i*(barH+barGap), barX = 5.0, maxW = 5.5;
+        s3.addShape('rect', { x:barX, y:ry, w:maxW, h:barH, fill:{color:'F0F4F8'} });
+        if(v > 0) s3.addShape('rect', { x:barX, y:ry, w:(v/maxV)*maxW, h:barH, fill:{color:ACCENT} });
+        s3.addText('W/C ' + weeks[3+i].label + ': ' + v, { x:barX+maxW+0.15, y:ry, w:1.6, h:barH, valign:'middle', fontSize:9.5, color:'555555', fontFace:FONT, margin:0 });
+      });
+      s3.addText(String(iss.last3), { x:11.6, y:y3, w:1.2, h:blockH, valign:'middle', align:'center', fontSize:18, bold:true, color:'1A1A1A', fontFace:FONT, margin:0 });
+      y3 += blockH + spacing;
+    });
+    footer(s3);
+
+    // ───────── Slide 4: rising issues
+    const s4 = pptx.addSlide();
+    title(s4, 'Issues rising right now');
+    s4.addText('Last 3 weeks vs previous 3 weeks — ranked by the increase in occurrences', { x:PX, y:1.15, w:PW, h:0.35, fontSize:11.5, italic:true, color:'555555', fontFace:FONT, margin:0 });
+    if(!rising.length){
+      s4.addText('Nothing is rising — every issue type is level or down on the previous 3 weeks.', { x:PX, y:3.0, w:PW, h:0.6, fontSize:16, color:'999999', fontFace:FONT, align:'center' });
+    } else {
+      const widths = [5.0, 1.6, 1.9, 1.83, 2.0], heads = ['Issue','Last 3 wks','Previous 3 wks','Change','Status'];
+      s4.addShape('rect', { x:PX, y:1.7, w:PW, h:0.5, fill:{color:'1A1A1A'} });
+      let cx = PX;
+      heads.forEach((h,i) => { s4.addText(h, { x:cx + (i===0 ? 0.15 : 0), y:1.7, w:widths[i] - (i===0 ? 0.15 : 0), h:0.5, valign:'middle', align: i===0 ? 'left' : 'center', fontSize:11, bold:true, color:'FFFFFF', fontFace:FONT, margin:0 }); cx += widths[i]; });
+      let ry = 2.2; const rh = 0.78;
+      rising.slice(0,5).forEach((r, idx) => {
+        if(idx % 2) s4.addShape('rect', { x:PX, y:ry, w:PW, h:rh, fill:{color:'FAFBFC'} });
+        s4.addShape('rect', { x:PX, y:ry+rh-0.01, w:PW, h:0.01, fill:{color:'E5E7EB'} });
+        const vals = [shorten(r.label, 48), String(r.last3), String(r.prev3), changeText(r.last3, r.prev3)];
+        let c2 = PX;
+        vals.forEach((v,i) => {
+          s4.addText(v, { x:c2 + (i===0 ? 0.15 : 0), y:ry, w:widths[i] - (i===0 ? 0.15 : 0), h:rh, valign:'middle', align: i===0 ? 'left' : 'center', fontSize: i===0 ? 13 : 12, bold:i===0, color: i===3 ? COL.URGENT : '1A1A1A', fontFace:FONT, margin:0 });
+          c2 += widths[i];
+        });
+        badge(s4, c2 + 0.2, ry + (rh-0.4)/2, widths[4] - 0.4, 0.4, r.st);
+        ry += rh;
+      });
+      s4.addText(rising.length + ' issue type' + (rising.length !== 1 ? 's' : '') + ' rose on the previous 3 weeks' + (rising.length > 5 ? ' (top 5 shown)' : '') + '. With small counts a single extra occurrence moves the percentage a lot — read it alongside the actual numbers.',
+        { x:PX, y:ry + 0.25, w:PW, h:0.6, fontSize:11.5, color:'555555', fontFace:FONT, margin:0 });
+    }
+    footer(s4);
+
+    // ───────── Slide 5: scorecard
+    const s5 = pptx.addSlide();
+    title(s5, 'Issue scorecard — last 3 weeks vs previous 3');
+    const w5 = [4.7, 1.3, 1.4, 1.3, 1.73, 1.9], h5 = ['Issue','Last 3 wks','Prev 3 wks','% share','Change','Status'];
+    s5.addShape('rect', { x:PX, y:1.25, w:PW, h:0.42, fill:{color:'1A1A1A'} });
+    let cx5 = PX;
+    h5.forEach((h,i) => { s5.addText(h, { x:cx5 + (i===0 ? 0.12 : 0), y:1.25, w:w5[i] - (i===0 ? 0.12 : 0), h:0.42, valign:'middle', align: i===0 ? 'left' : 'center', fontSize:10, bold:true, color:'FFFFFF', fontFace:FONT, margin:0 }); cx5 += w5[i]; });
+    let ry5 = 1.67; const rh5 = 0.44;
+    issues.slice(0,10).forEach((r, idx) => {
+      if(idx % 2) s5.addShape('rect', { x:PX, y:ry5, w:PW, h:rh5, fill:{color:'FAFBFC'} });
+      s5.addShape('rect', { x:PX, y:ry5+rh5-0.01, w:PW, h:0.01, fill:{color:'E5E7EB'} });
+      const vals = [shorten(r.label, 50), String(r.last3), String(r.prev3), pct(r.last3, lastTotal) + '%', changeText(r.last3, r.prev3)];
+      let c2 = PX;
+      vals.forEach((v,i) => { s5.addText(v, { x:c2 + (i===0 ? 0.12 : 0), y:ry5, w:w5[i] - (i===0 ? 0.12 : 0), h:rh5, valign:'middle', align: i===0 ? 'left' : 'center', fontSize: 10.5, bold:i===0, color:'1A1A1A', fontFace:FONT, margin:0 }); c2 += w5[i]; });
+      badge(s5, c2 + 0.15, ry5 + (rh5-0.3)/2, w5[5] - 0.3, 0.3, r.st);
+      ry5 += rh5;
+    });
+    footer(s5, issues.length > 10 ? 'Top 10 of ' + issues.length + ' issue types shown, ranked by the last 3 weeks • issue counts only, no individual names' : undefined);
+
+    // ───────── Slide 6: focus for the coming week
+    const s6 = pptx.addSlide();
+    title(s6, 'Suggested focus for the coming week');
+    const items = [];
+    if(rising[0]){
+      const r = rising[0];
+      items.push({ st:r.st, head:'Investigate: ' + shorten(r.label, 60), body:'Up from ' + r.prev3 + ' to ' + r.last3 + ' over the last 3 weeks — the biggest increase of any issue type in ' + DEPT + '.' });
+    }
+    const topVol = issues.find(i => i.last3 > 0 && (!rising[0] || i.label !== rising[0].label));
+    if(topVol){
+      items.push({ st:topVol.st, head:'Biggest by volume: ' + shorten(topVol.label, 56), body:topVol.last3 + ' of ' + lastTotal + ' issues (' + pct(topVol.last3, lastTotal) + '%) in the last 3 weeks, against ' + topVol.prev3 + ' in the previous 3.' });
+    }
+    if(concentrated){
+      items.push({ st:'CONCERN', head:'Review what happened in W/C ' + peakLabel, body:peak + ' of the last 3 weeks’ ' + lastTotal + ' issues landed in that single week. Worth a quick look at what was different before assuming it will not repeat.' });
+    } else {
+      const better = issues.filter(i => i.prev3 >= 3 && i.last3 <= i.prev3*0.7 && (!topVol || i.label !== topVol.label))[0];
+      if(better) items.push({ st:'IMPROVING', head:'Keep the gain: ' + shorten(better.label, 56), body:'Down from ' + better.prev3 + ' to ' + better.last3 + ' — worth confirming what changed so it sticks.' });
+    }
+    if(!items.length) items.push({ st:'STABLE', head:'No major movement', body:'Nothing stands out against the previous 3 weeks. Keep the current checks in place.' });
+    let y6 = 1.4; const rh6 = 1.65;
+    items.slice(0,3).forEach(it => {
+      s6.addShape('rect', { x:PX, y:y6, w:PW, h:rh6-0.18, fill:{color:'FAFBFC'}, line:{color:'E5E7EB', width:0.75} });
+      badge(s6, 0.72, y6+0.18, 1.7, 0.4, it.st);
+      s6.addText(it.head, { x:2.65, y:y6+0.14, w:9.9, h:0.4, fontSize:14, bold:true, color:'1A1A1A', fontFace:FONT, margin:0 });
+      s6.addText(it.body, { x:2.65, y:y6+0.55, w:9.9, h:0.85, fontSize:11, color:'333333', fontFace:FONT, margin:0, valign:'top' });
+      y6 += rh6;
+    });
+    s6.addText('W/C ' + currentWeekLabel + ' is excluded as it is still in progress — it will be included in next week’s report.', { x:PX, y:y6+0.05, w:PW, h:0.4, fontSize:11, italic:true, color:'999999', fontFace:FONT, margin:0 });
+    footer(s6);
+
+    const fileRange = rangeLabel.replace(/\s+/g,'').replace(/–/g,'_to_');
+    await pptx.writeFile({ fileName: DEPT.replace(/\s+/g,'-') + '-Replacement-Parts-Meeting-' + fileRange + '.pptx' });
+  } catch(err){
+    console.error('Replacement Parts Meeting report failed:', err);
+    alert('Something went wrong generating the report. Please try again.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = origHTML;
+  }
+}
+
+document.getElementById('btn-weekly-ppt').addEventListener('click', generateWeeklyPresentation);
+
+// ── Weekly Presentation (Staircraft report format) ──
+
+function getWeekBuckets(numWeeks){
+  const now = new Date();
+  const day = now.getDay();
+  const diff = (day === 0 ? -6 : 1) - day; // shift to Monday
+  const thisMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+  const buckets = [];
+  for(let i = numWeeks - 1; i >= 0; i--){
+    const start = new Date(thisMonday.getFullYear(), thisMonday.getMonth(), thisMonday.getDate() - i*7);
+    const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7);
+    buckets.push({ label: 'W/C ' + start.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}), start, end });
+  }
+  return buckets;
+}
+
+function entriesInRange(start, end){
+  return localEntries.filter(e=>{
+    const t = new Date(e.ts);
+    return t >= start && t < end;
+  });
+}
+
+function weeklyCategoryCounts(buckets, category){
+  return buckets.map(b => entriesInRange(b.start, b.end).filter(e => (e.type||'').split('—')[0].trim() === category).length);
+}
+
+function weeklyIssueCounts(buckets, category, label){
+  return buckets.map(b => entriesInRange(b.start, b.end).filter(e=>{
+    if((e.type||'').split('—')[0].trim() !== category) return false;
+    const l = (e.type||'').split('—').slice(1).join('—').trim() || e.type;
+    return l === label;
+  }).length);
+}
+
+function sumArr(a){ return a.reduce((s,v)=>s+v,0); }
+function avgArr(a){ return a.length ? sumArr(a)/a.length : 0; }
+function pctOf(n,d){ return d ? Math.round((n/d)*100) : 0; }
+
+function weekBarColor(count, avg){
+  if(avg <= 0) return count > 0 ? 'F59E0B' : '10B981';
+  if(count > avg * 1.3) return 'DC2626';
+  if(count < avg * 0.7) return '10B981';
+  return 'F59E0B';
+}
+
+function trendBadge(weeklyTotals){
+  if(weeklyTotals.length < 6) return null;
+  const last3 = avgArr(weeklyTotals.slice(-3));
+  const prior3 = avgArr(weeklyTotals.slice(-6,-3));
+  if(prior3 === 0 && last3 === 0) return null;
+  if(prior3 === 0) return { text:'\u25B2 New activity \u2014 last 3 wks', color:'DC2626' };
+  if(last3 > prior3 * 1.1) return { text:'\u25B2 Trending up \u2014 last 3 wks', color:'DC2626' };
+  if(last3 < prior3 * 0.9) return { text:'\u25BC Trending down \u2014 last 3 wks', color:'10B981' };
+  return { text:'\u2192 Stable \u2014 last 3 wks', color:'6B7280' };
+}
+
+function issueStatus(last4, prev4){
+  if(prev4 === 0 && last4 === 0) return { label:'STABLE', color:'6B7280' };
+  if(prev4 === 0) return { label:'NEW', color:'DC2626' };
+  const ratio = last4 / prev4;
+  if(ratio <= 0.7) return { label:'IMPROVING', color:'10B981' };
+  if(ratio >= 1.5) return { label:'URGENT', color:'DC2626' };
+  if(ratio >= 1.1) return { label:'CONCERN', color:'F59E0B' };
+  return { label:'STABLE', color:'6B7280' };
+}
+
+// Slide canvas: LAYOUT_WIDE = 13.333 x 7.5 in. Content margin: x 0.5 -> 12.83 (w 12.33).
+const PW = 12.33, PX = 0.5;
+
+function addHeader(slide, title, accentHex, badge){
+  const titleW = badge ? PW - 3.3 : PW;
+  slide.addText(title, { x:PX, y:0.35, w:titleW, h:0.6, fontSize:24, bold:true, color:'1A1A1A', fontFace:'Arial', valign:'middle' });
+  slide.addShape('rect', { x:PX, y:1.05, w:PW, h:0.035, fill:{color:accentHex} });
+  if(badge){
+    const bx = PX + PW - 3.0;
+    slide.addShape('rect', { x:bx, y:0.35, w:3.0, h:0.55, fill:{color:'FEF2F2'}, line:{color:badge.color, width:0.75} });
+    slide.addText(badge.text, { x:bx, y:0.35, w:3.0, h:0.55, align:'center', valign:'middle', fontSize:10.5, bold:true, color:badge.color, fontFace:'Arial' });
+  }
+}
+
+function addStatCards(slide, cards, y, h){
+  h = h || 1.05;
+  const gap = 0.2;
+  const w = (PW - gap*(cards.length-1)) / cards.length;
+  cards.forEach((c,i)=>{
+    const x = PX + i*(w+gap);
+    slide.addShape('rect', { x, y, w, h, fill:{color:c.bg || 'F0F4F8'}, line:{color:'FFFFFF', width:0.5} });
+    slide.addText(String(c.value), { x, y:y+0.12, w, h:h*0.55, align:'center', valign:'middle', fontSize:18, bold:true, color:c.color || '1A1A1A', fontFace:'Arial' });
+    slide.addText(c.label, { x, y:y+h*0.62, w, h:h*0.34, align:'center', valign:'top', fontSize:9, color:'666666', fontFace:'Arial' });
+  });
+}
+
+function addIssueDeepDiveSlide(pptx, item, buckets, accentHex, totalAllCombined){
+  const slide = pptx.addSlide();
+  addHeader(slide, item.label + ' \u2014 ' + item.cat + ' \u2014 weekly trend', accentHex);
+
+  const weekly = weeklyIssueCounts(buckets, item.cat, item.label);
+  const total = sumArr(weekly);
+  const avgPerWeek = avgArr(weekly);
+  let worstIdx = 0;
+  weekly.forEach((v,i)=>{ if(v > weekly[worstIdx]) worstIdx = i; });
+  const last4 = sumArr(weekly.slice(-4));
+  const prev4 = sumArr(weekly.slice(-8,-4));
+  const status = issueStatus(last4, prev4);
+
+  addStatCards(slide, [
+    { value: total, label:'Total occurrences' },
+    { value: avgPerWeek.toFixed(1), label:'Avg per week' },
+    { value: status.label, label:'Trend', color: status.color },
+    { value: buckets[worstIdx].label.replace('W/C ',''), label:'Worst week (' + weekly[worstIdx] + ')' },
+  ], 1.35);
+
+  const chartW = 7.6, gap = 0.35, boxX = PX + chartW + gap, boxW = PW - chartW - gap;
+
+  slide.addChart(pptx.ChartType.bar, [
+    { name: item.label, labels: buckets.map(b=>b.label.replace('W/C ','')), values: weekly }
+  ], {
+    x:PX, y:2.65, w:chartW, h:4.4, showValue:true, chartColors:[accentHex], showLegend:false,
+    catAxisLabelFontSize:9, dataLabelFontSize:9, valAxisTitle:'Occurrences',
+  });
+
+  const bullets = [];
+  bullets.push(total + ' occurrence' + (total!==1?'s':'') + ' across the last ' + buckets.length + ' weeks (' + avgPerWeek.toFixed(1) + '/week average).');
+  bullets.push('Worst week: ' + buckets[worstIdx].label + ' (' + weekly[worstIdx] + ').');
+  if(prev4 > 0){
+    const diffPct = Math.round(Math.abs((last4-prev4)/prev4)*100);
+    bullets.push((last4>=prev4?'Up ':'Down ') + diffPct + '% over the last 4 weeks vs the previous 4 (' + last4 + ' vs ' + prev4 + ').');
+  } else if(last4 > 0){
+    bullets.push('New activity in the last 4 weeks (' + last4 + '), none in the 4 weeks before that.');
+  } else {
+    bullets.push('No occurrences logged in the last 4 weeks.');
+  }
+  bullets.push(pctOf(total, totalAllCombined) + '% share of all issues logged this period.');
+
+  slide.addShape('rect', { x:boxX, y:2.65, w:boxW, h:4.4, fill:{color:'F9FAFB'}, line:{color:'E5E7EB', width:0.75} });
+  slide.addText('Summary', { x:boxX+0.2, y:2.85, w:boxW-0.4, h:0.35, fontSize:12, bold:true, color:'1A1A1A', fontFace:'Arial' });
+  slide.addText(bullets.map(b=>({ text:b, options:{ bullet:true, breakLine:true, paraSpaceAfter:12 } })), {
+    x:boxX+0.2, y:3.3, w:boxW-0.4, h:3.6, fontSize:10.5, color:'333333', fontFace:'Arial',
+  });
+}
+
+async function generateWeeklyPresentation(){
+  const btn = document.getElementById('btn-weekly-ppt');
+  if(typeof PptxGenJS === 'undefined'){
+    alert('The presentation library failed to load. Check your internet connection and try again.');
+    return;
+  }
+  if(!entriesLoaded){
+    alert('Data is still loading from the database \u2014 please wait a moment and try again.');
+    return;
+  }
+
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="font-size:14px"></i> Generating\u2026';
+
+  try{
+    const ACCENT = '3B82F6';
+    const DEPT = '1st Fix Assembly';
+    const NUM_WEEKS = 12;
+    const buckets = getWeekBuckets(NUM_WEEKS);
+    const rangeStart = buckets[0].start, rangeEnd = buckets[buckets.length-1].end;
+    const allEntries = entriesInRange(rangeStart, rangeEnd);
+
+    const weeklyTotal = weeklyCategoryCounts(buckets, 'Quality');
+
+    const totalAllCombined = sumArr(weeklyTotal);
+    const avgWeekly = avgArr(weeklyTotal);
+    let worstIdx = 0;
+    weeklyTotal.forEach((v,i)=>{ if(v > weeklyTotal[worstIdx]) worstIdx = i; });
+    const badge = trendBadge(weeklyTotal);
+
+    const fmt = d => d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    const rangeLabel = fmt(rangeStart) + ' \u2013 ' + fmt(new Date(rangeEnd.getTime()-86400000));
+
+    const pptx = new PptxGenJS();
+    pptx.layout = 'LAYOUT_WIDE';
+    pptx.author = 'Staircraft Group Quality & Safety Log';
+    pptx.company = 'Staircraft Group';
+    pptx.subject = 'Quality Data Review';
+    pptx.title = DEPT + ' \u2014 Quality Data Review';
+
+    // Slide 1: Title + KPI band
+    const s1 = pptx.addSlide();
+    s1.background = { color:'FFFFFF' };
+    s1.addShape('rect', { x:0, y:0, w:'100%', h:1.5, fill:{color:'1A1A1A'} });
+    s1.addText(DEPT, { x:0.5, y:0.28, w:11.3, h:0.55, fontSize:26, bold:true, color:'FFFFFF', fontFace:'Arial' });
+    s1.addText('Quality Data Review', { x:0.5, y:0.88, w:11.3, h:0.4, fontSize:14, color:ACCENT, fontFace:'Arial' });
+    s1.addText('Weeks reviewed: ' + rangeLabel + '   |   ' + NUM_WEEKS + ' weeks tracked   |   Generated ' + new Date().toLocaleDateString('en-GB'), {
+      x:0.5, y:1.85, w:PW, h:0.4, fontSize:13, color:'555555', fontFace:'Arial',
+    });
+    s1.addText('Issue counts only \u2014 no individual names included', { x:0.5, y:2.28, w:PW, h:0.3, fontSize:10.5, italic:true, color:'999999', fontFace:'Arial' });
+    addStatCards(s1, [
+      { value: totalAllCombined, label:'Total issues', bg:'EFF6FF', color:'1D4ED8' },
+      { value: avgWeekly.toFixed(1), label:'Avg per week' },
+      { value: NUM_WEEKS, label:'Weeks tracked' },
+      { value: buckets[worstIdx].label.replace('W/C ',''), label:'Worst week (' + weeklyTotal[worstIdx] + ')' },
+      { value: badge ? badge.text.replace(/^[\u25B2\u25BC\u2192]\s*/,'').replace(' — last 3 wks','') : 'Stable', label:'Direction (last 3 wks)', color: badge ? badge.color : '6B7280' },
+    ], 2.95, 1.15);
+
+    // Slide 2: Weekly total, colour-coded
+    const s2 = pptx.addSlide();
+    addHeader(s2, 'Total issues \u2014 week by week (last ' + NUM_WEEKS + ' wks)', ACCENT, badge);
+    s2.addChart(pptx.ChartType.bar, [
+      { name:'Issues', labels: buckets.map(b=>b.label.replace('W/C ','')), values: weeklyTotal }
+    ], {
+      x:PX, y:1.35, w:PW, h:5.0, showValue:true, showLegend:false,
+      chartColors: weeklyTotal.map(v=>weekBarColor(v, avgWeekly)),
+      catAxisLabelFontSize:9.5, dataLabelFontSize:9.5, valAxisTitle:'Issues logged',
+    });
+    s2.addText([
+      { text:'\u25A0 ', options:{ color:'10B981', bold:true } }, { text:'Below avg    ', options:{ color:'444444' } },
+      { text:'\u25A0 ', options:{ color:'F59E0B', bold:true } }, { text:'Average    ', options:{ color:'444444' } },
+      { text:'\u25A0 ', options:{ color:'DC2626', bold:true } }, { text:'Spike (>30% above avg)', options:{ color:'444444' } },
+    ], { x:PX, y:6.5, w:PW, h:0.35, fontSize:10.5, fontFace:'Arial' });
+
+    // Slide 3: Pareto analysis
+    const combined = rankIssues(allEntries,'Quality').map(([label,count])=>({label,count,cat:'Quality'}));
+    const s3 = pptx.addSlide();
+    addHeader(s3, 'Pareto analysis \u2014 every issue type separate', ACCENT);
+    if(!combined.length){
+      s3.addText('No issues logged in this period.', { x:PX, y:3.0, w:PW, h:0.6, fontSize:16, color:'999999', fontFace:'Arial', align:'center' });
+    } else {
+      const top = combined.slice(0, 12);
+      let running = 0;
+      const cumPct = top.map(item=>{ running += item.count; return Math.round((running/totalAllCombined)*100); });
+      const labels = top.map(item => item.label.length > 24 ? item.label.slice(0,21)+'\u2026' : item.label);
+      try{
+        s3.addChart([
+          { type: pptx.ChartType.bar, data:[{ name:'Occurrences', labels, values: top.map(i=>i.count) }], options:{ chartColors: [ACCENT] } },
+          { type: pptx.ChartType.line, data:[{ name:'Cumulative %', labels, values: cumPct }], options:{ chartColors:['1A1A1A'], secondaryValAxis:true, secondaryCatAxis:true, lineSize:2, lineDataSymbol:'circle' } },
+        ], null, {
+          x:PX, y:1.35, w:PW, h:5.15, showValue:true, showLegend:true, legendPos:'b',
+          catAxisLabelFontSize:9, dataLabelFontSize:8.5,
+          valAxes: [
+            { valAxisTitle:'Occurrences', valAxisMaxVal: Math.max(...top.map(i=>i.count))*1.15 },
+            { valAxisTitle:'Cumulative %', valAxisMinVal:0, valAxisMaxVal:100 },
+          ],
+          catAxes: [
+            { catAxisTitle:'' },
+            { catAxisHidden:true },
+          ],
+        });
+      } catch(comboErr){
+        console.error('Combo Pareto chart failed, falling back to bar-only:', comboErr);
+        s3.addChart(pptx.ChartType.bar, [{ name:'Occurrences', labels, values: top.map(i=>i.count) }], {
+          x:PX, y:1.35, w:PW, h:5.15, showValue:true, showLegend:false, chartColors: [ACCENT],
+          catAxisLabelFontSize:9, dataLabelFontSize:8.5, valAxisTitle:'Occurrences',
+        });
+      }
+      if(combined.length > 12){
+        s3.addText('Showing top 12 of ' + combined.length + ' issue types logged.', { x:PX, y:6.65, w:PW, h:0.3, fontSize:9.5, italic:true, color:'888888', fontFace:'Arial' });
+      }
+    }
+
+    // Slides 4-6: Top 3 issue deep-dives
+    combined.slice(0,3).forEach(item=>{
+      addIssueDeepDiveSlide(pptx, item, buckets, ACCENT, totalAllCombined);
+    });
+
+    // Slide: Scorecard
+    const s7 = pptx.addSlide();
+    addHeader(s7, 'Issue scorecard \u2014 where to focus', ACCENT);
+    const scoreRows = [['Issue','Count','% Share','Direction','Status']];
+    combined.slice(0,10).forEach(item=>{
+      const weekly = weeklyIssueCounts(buckets, item.cat, item.label);
+      const last4 = sumArr(weekly.slice(-4));
+      const prev4 = sumArr(weekly.slice(-8,-4));
+      const status = issueStatus(last4, prev4);
+      const dirText = prev4 > 0
+        ? (last4>=prev4 ? '\u25B2 ' : '\u25BC ') + Math.round(Math.abs((last4-prev4)/prev4)*100) + '% (' + last4 + ' vs ' + prev4 + ')'
+        : (last4>0 ? '\u25B2 New (' + last4 + ')' : '\u2192 None');
+      scoreRows.push([
+        item.label.length > 44 ? item.label.slice(0,41)+'\u2026' : item.label,
+        String(item.count), pctOf(item.count, totalAllCombined) + '%', dirText, status.label,
+      ]);
+    });
+    s7.addTable(scoreRows, {
+      x:PX, y:1.35, w:PW, h:5.2, fontSize:10.5, fontFace:'Arial',
+      border:{ type:'solid', color:'E5E5E5', pt:0.5 }, fill:{color:'FFFFFF'}, color:'1A1A1A',
+      colW:[4.6,1.2,1.3,3.13,2.1], autoPage:false, rowH:0.42,
+      align:'left', valign:'middle',
+    });
+
+    const fileSafeDept = DEPT.replace(/\s+/g,'-');
+    const fileSafeRange = rangeLabel.replace(/\s+/g,'').replace(/\u2013/g,'_to_');
+    await pptx.writeFile({ fileName: fileSafeDept + '-Quality-Review-' + fileSafeRange + '.pptx' });
+  } catch(err){
+    console.error('Weekly presentation generation failed:', err);
+    alert('Something went wrong generating the presentation. Please try again.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = origHTML;
+  }
+}
+
+// ── Automatic snapshot saving ──
+function buildSnapshot(period){
+  const entries = entriesForPeriod(period);
+  const periodStart = getPeriodStart(period);
+  return {
+    period,
+    periodStart: periodStart.toISOString(),
+    generatedAt: new Date().toISOString(),
+    quality: rankIssues(entries, 'Quality'),
+    safety: rankIssues(entries, 'Safety'),
+    totalEntries: entries.length
+  };
+}
+
+function maybeSaveSnapshot(){
+  ['daily','weekly'].forEach(period=>{
+    const key = getPeriodKey(period);
+    const snapKey = 'snapshots/' + NODE + '/' + key;
+    // Only write if this period's snapshot doesn't already exist, or refresh same-day/week snapshot
+    set(ref(db, snapKey), buildSnapshot(period));
+  });
+}
+
+function renderSnapshotList(){
+  onValue(ref(db, 'snapshots/' + NODE), snap=>{
+    const data = snap.val() || {};
+    const keys = Object.keys(data).filter(k=>k.startsWith(dataPeriod+'_')).sort().reverse();
+    const el = document.getElementById('snapshot-list');
+    if(!keys.length){ el.innerHTML = '<div style="font-size:12px;color:var(--tx3);text-align:center;padding:1rem 0">No saved reports yet</div>'; return; }
+    el.innerHTML = keys.slice(0,20).map(k=>{
+      const snap = data[k];
+      const d = new Date(snap.periodStart);
+      const dateLabel = snap.period==='daily'
+        ? d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})
+        : 'W/C ' + d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+      return `<div class="snap-row" data-snap-key="${k}">
+        <span class="snap-date">${dateLabel}</span>
+        <span class="snap-meta">${snap.totalEntries} issue${snap.totalEntries!==1?'s':''} logged</span>
+      </div>`;
+    }).join('');
+    el.querySelectorAll('[data-snap-key]').forEach(row=>{
+      row.addEventListener('click',()=>{
+        const snap = data[row.dataset.snapKey];
+        renderRankList('rank-quality', snap.quality, '#3B82F6');
+        renderRankList('rank-safety', snap.safety, '#EA4B4B');
+        const d = new Date(snap.periodStart);
+        const label = snap.period==='daily'
+          ? d.toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})
+          : 'Week commencing ' + d.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+        document.getElementById('data-period-label').textContent = label + ' (saved report)';
+        document.getElementById('report-subtitle').textContent = (snap.period==='daily'?'Daily':'Weekly') + ' summary — ' + label + ' — saved ' + new Date(snap.generatedAt).toLocaleString('en-GB');
+      });
+    });
+  }, { onlyOnce: true });
+}
+
+// Auto-save a snapshot whenever entries change (debounced) — builds the history automatically
+let snapshotTimer = null;
+function scheduleSnapshotSave(){
+  clearTimeout(snapshotTimer);
+  snapshotTimer = setTimeout(maybeSaveSnapshot, 2000);
+}
+
+
+// ── TREND GRAPH ──
+function populateGraphIssueOptions(){
+  const cat = document.getElementById('graph-category').value;
+  const sel = document.getElementById('graph-issue');
+  if(cat === 'Both'){
+    sel.innerHTML = '<option value="__all__">All issues (total, both categories)</option>';
+    sel.disabled = true;
+  } else {
+    const list = cat === 'Quality' ? getQuality() : getSafety();
+    const labels = list.map(o => (o||'').split('—').slice(1).join('—').trim() || o);
+    sel.innerHTML = '<option value="__all__">All ' + cat.toLowerCase() + ' issues (total)</option>'
+      + labels.map(l => `<option value="${esc(l)}">${esc(l)}</option>`).join('');
+    sel.disabled = false;
+  }
+  renderTrendGraph();
+}
+document.getElementById('graph-category').addEventListener('change', populateGraphIssueOptions);
+document.getElementById('graph-issue').addEventListener('change', renderTrendGraph);
+
+function getTrendBuckets(period, numBuckets){
+  // Returns array of {label, start, end} buckets, oldest first
+  const buckets = [];
+  const now = graphAnchorDate ? new Date(graphAnchorDate) : new Date();
+  if(period === 'daily'){
+    for(let i = numBuckets - 1; i >= 0; i--){
+      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+      const end = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+      buckets.push({ label: d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}), start: d, end });
+    }
+  } else {
+    const day = now.getDay();
+    const diffToMon = (day === 0 ? -6 : 1) - day;
+    const thisMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMon);
+    for(let i = numBuckets - 1; i >= 0; i--){
+      const start = new Date(thisMonday); start.setDate(start.getDate() - 7*i);
+      const end = new Date(start); end.setDate(end.getDate() + 7);
+      buckets.push({ label: 'W/C ' + start.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}), start, end });
+    }
+  }
+  return buckets;
+}
+
+function countSeries(category, issueFilter, buckets){
+  return buckets.map(b=>{
+    return localEntries.filter(e=>{
+      const cat = (e.type||'').split('—')[0].trim();
+      if(cat !== category) return false;
+      const t = new Date(e.ts);
+      if(t < b.start || t >= b.end) return false;
+      if(issueFilter !== '__all__'){
+        const label = (e.type||'').split('—').slice(1).join('—').trim();
+        if(label !== issueFilter) return false;
+      }
+      return true;
+    }).length;
+  });
+}
+
+function buildLinePath(counts, buckets, scaleY, stepX, padL, yOffset){
+  yOffset = yOffset || 0;
+  let path = '';
+  counts.forEach((c,i)=>{
+    const x = padL + i * stepX;
+    const y = scaleY(c) + yOffset;
+    path += (i===0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+  });
+  return path.trim();
+}
+
+function buildPoints(counts, scaleY, stepX, padL, color, yOffset, labelAbove){
+  yOffset = yOffset || 0;
+  labelAbove = labelAbove === undefined ? true : labelAbove;
+  let points = '';
+  counts.forEach((c,i)=>{
+    const x = padL + i * stepX;
+    const y = scaleY(c) + yOffset;
+    const labelY = labelAbove ? y - 10 : y + 16;
+    points += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="transparent" data-idx="${i}" style="cursor:pointer"></circle>`;
+    points += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" fill="${color}" data-idx="${i}" style="cursor:pointer"><title>${c} \u2014 click to see details</title></circle>`;
+    points += `<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="middle" font-size="11" fill="var(--tx)" pointer-events="none">${c>0?c:''}</text>`;
+  });
+  return points;
+}
+
+function renderTrendGraph(){
+  closeDrilldownIfStale();
+  updateAnchorNote();
+  const period = dataPeriod; // reuse daily/weekly toggle
+  const category = document.getElementById('graph-category').value;
+  const issueFilter = document.getElementById('graph-issue').value;
+  const numBuckets = period === 'daily' ? 14 : 8;
+  const buckets = getTrendBuckets(period, numBuckets);
+
+  const svg = document.getElementById('trend-svg');
+  const legend = document.getElementById('graph-legend');
+
+  const isBoth = category === 'Both';
+  const qCounts = isBoth ? countSeries('Quality', '__all__', buckets) : (category==='Quality' ? countSeries('Quality', issueFilter, buckets) : null);
+  const sCounts = isBoth ? countSeries('Safety', '__all__', buckets) : (category==='Safety' ? countSeries('Safety', issueFilter, buckets) : null);
+
+  const allCounts = [...(qCounts||[]), ...(sCounts||[])];
+  currentTrendBuckets = buckets;
+  if(!allCounts.length || allCounts.every(c=>c===0)){
+    svg.innerHTML = '<text x="350" y="110" text-anchor="middle" font-size="13" fill="var(--tx3)">No data logged in this range yet</text>';
+    legend.innerHTML = '';
+    document.getElementById('graph-hint').style.display = 'none';
+    closeDrilldown();
+    return;
+  }
+  document.getElementById('graph-hint').style.display = '';
+
+  const W = 700, H = 220, padL = 32, padR = 16, padT = 20, padB = 30;
+  const max = Math.max(1, ...allCounts);
+  const stepX = (W - padL - padR) / Math.max(1, buckets.length - 1);
+  const scaleY = v => H - padB - (v / max) * (H - padT - padB);
+
+  const labelEvery = buckets.length > 10 ? 2 : 1;
+  let xLabels = '';
+  buckets.forEach((b,i)=>{
+    if(i % labelEvery !== 0 && i !== buckets.length-1) return;
+    const x = padL + i * stepX;
+    xLabels += `<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="10" fill="var(--tx3)">${b.label}</text>`;
+  });
+
+  const gridY1 = scaleY(0), gridYMax = scaleY(max);
+  const gridlines = `<line x1="${padL}" y1="${gridY1}" x2="${W-padR}" y2="${gridY1}" stroke="var(--bl)" stroke-width="1"/>
+    <text x="4" y="${gridY1+4}" font-size="10" fill="var(--tx3)">0</text>
+    <text x="4" y="${gridYMax+4}" font-size="10" fill="var(--tx3)">${max}</text>`;
+
+  let svgContent = gridlines;
+  let legendContent = '';
+
+  if(isBoth){
+    // Small vertical offset so overlapping values (same count) still show both lines distinctly
+    const OFFSET = 3.5;
+    const qPath = buildLinePath(qCounts, buckets, scaleY, stepX, padL, -OFFSET);
+    const sPath = buildLinePath(sCounts, buckets, scaleY, stepX, padL, OFFSET);
+    svgContent += `<path d="${qPath}" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    svgContent += `<path d="${sPath}" fill="none" stroke="#EA4B4B" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    svgContent += buildPoints(qCounts, scaleY, stepX, padL, '#3B82F6', -OFFSET, true);
+    svgContent += buildPoints(sCounts, scaleY, stepX, padL, '#EA4B4B', OFFSET, false);
+    svgContent += xLabels;
+
+    const qDir = qCounts[qCounts.length-1] > qCounts[0] ? 'up' : qCounts[qCounts.length-1] < qCounts[0] ? 'down' : 'flat';
+    const sDir = sCounts[sCounts.length-1] > sCounts[0] ? 'up' : sCounts[sCounts.length-1] < sCounts[0] ? 'down' : 'flat';
+    const arrow = d => d==='up' ? '&#8599;' : d==='down' ? '&#8600;' : '&#8594;';
+    const col = d => d==='up' ? '#A32D2D' : d==='down' ? '#0F6E56' : 'var(--tx2)';
+    legendContent = `<span><span class="dot" style="background:#3B82F6"></span>Quality <span style="color:${col(qDir)};font-weight:600">${arrow(qDir)}</span></span>
+      <span><span class="dot" style="background:#EA4B4B"></span>Safety <span style="color:${col(sDir)};font-weight:600">${arrow(sDir)}</span></span>`;
+  } else {
+    const counts = category === 'Quality' ? qCounts : sCounts;
+    const accent = category === 'Quality' ? '#3B82F6' : '#EA4B4B';
+    const path = buildLinePath(counts, buckets, scaleY, stepX, padL);
+    svgContent += `<path d="${path}" fill="none" stroke="${accent}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    svgContent += buildPoints(counts, scaleY, stepX, padL, accent);
+    svgContent += xLabels;
+
+    const direction = counts[counts.length-1] > counts[0] ? 'increase' : counts[counts.length-1] < counts[0] ? 'decrease' : 'no change';
+    const dirIcon = direction === 'increase' ? '&#8599;' : direction === 'decrease' ? '&#8600;' : '&#8594;';
+    const dirColor = direction === 'increase' ? '#A32D2D' : direction === 'decrease' ? '#0F6E56' : 'var(--tx2)';
+    legendContent = `<span><span class="dot" style="background:${accent}"></span>${issueFilter==='__all__'?'All '+category.toLowerCase()+' issues':esc(issueFilter)}</span>
+      <span style="color:${dirColor};font-weight:600">${dirIcon} ${direction} over this range</span>`;
+  }
+
+  svg.innerHTML = svgContent;
+  legend.innerHTML = legendContent;
+  svg.querySelectorAll('[data-idx]').forEach(el=>{
+    el.addEventListener('click', ()=> toggleDrilldown(parseInt(el.dataset.idx,10)));
+  });
+  if(ddOpenIdx !== null && ddOpenIdx < currentTrendBuckets.length){
+    renderDrilldown();
+  }
+}
+
+function closeDrilldownIfStale(){
+  // Buckets are about to be rebuilt for a possibly different period; drilldown re-renders itself after, so nothing to do here yet.
+}
+
+function openDrilldown(idx, category){
+  ddOpenIdx = idx;
+  if(category) ddCategory = category;
+  ddSelectedIssue = null;
+  renderDrilldown();
+  document.getElementById('graph-drilldown').classList.add('show');
+}
+
+function toggleDrilldown(idx){
+  if(ddOpenIdx === idx){ closeDrilldown(); return; }
+  openDrilldown(idx);
+  document.getElementById('graph-drilldown').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function updateAnchorNote(){
+  const note = document.getElementById('graph-anchor-note');
+  if(graphAnchorDate){
+    const dl = graphAnchorDate.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    note.classList.add('show');
+    note.innerHTML = '<span>Synced to History date \u2014 ' + dl + '</span><button id="btn-reset-anchor">Reset to today</button>';
+    document.getElementById('btn-reset-anchor').addEventListener('click', resetGraphAnchor);
+  } else {
+    note.classList.remove('show');
+    note.innerHTML = '';
+  }
+}
+
+function resetGraphAnchor(){
+  graphAnchorDate = null;
+  closeDrilldown();
+  renderTrendGraph();
+}
+
+function syncGraphToHistoryDate(){
+  const fd = document.getElementById('filter-date').value;
+  if(!fd || !adminUnlocked) return;
+  graphAnchorDate = new Date(fd + 'T00:00:00');
+  dataPeriod = 'daily';
+  document.getElementById('btn-period-daily').classList.add('active');
+  document.getElementById('btn-period-weekly').classList.remove('active');
+  showTab('data');
+  const idx = currentTrendBuckets.length - 1;
+  if(idx >= 0) openDrilldown(idx, 'Quality');
+}
+
+function closeDrilldown(){
+  ddOpenIdx = null;
+  ddSelectedIssue = null;
+  document.getElementById('graph-drilldown').classList.remove('show');
+}
+
+function renderDrilldown(){
+  if(ddOpenIdx === null) return;
+  const bucket = currentTrendBuckets[ddOpenIdx];
+  if(!bucket) return;
+  const entries = localEntries.filter(e=>{
+    const t = new Date(e.ts);
+    return t >= bucket.start && t < bucket.end;
+  });
+
+  document.getElementById('dd-title').textContent = bucket.label + ' \u2014 ' + ddCategory + ' reasons';
+  document.getElementById('dd-sub').textContent = entries.length + ' issue' + (entries.length!==1?'s':'') + ' logged this ' + (dataPeriod==='daily'?'day':'week');
+  document.getElementById('dd-btn-quality').classList.toggle('active', ddCategory==='Quality');
+  document.getElementById('dd-btn-safety').classList.toggle('active', ddCategory==='Safety');
+
+  const ranked = rankIssues(entries, ddCategory);
+  renderRankList('dd-ranklist', ranked, ddCategory==='Quality' ? '#3B82F6' : '#EA4B4B', {
+    onClick: (label)=>{ ddSelectedIssue = (ddSelectedIssue === label) ? null : label; renderDrilldown(); },
+    selected: ddSelectedIssue
+  });
+
+  let catEntries = entries.filter(e => (e.type||'').split('\u2014')[0].trim() === ddCategory);
+  if(ddSelectedIssue){
+    catEntries = catEntries.filter(e => {
+      const label = (e.type||'').split('\u2014').slice(1).join('\u2014').trim() || e.type;
+      return label === ddSelectedIssue;
+    });
+  }
+  catEntries = catEntries.sort((a,b)=> new Date(b.ts) - new Date(a.ts));
+
+  const noteEl = document.getElementById('dd-filter-note');
+  if(ddSelectedIssue){
+    noteEl.style.display = 'flex';
+    noteEl.innerHTML = '<span>Showing who logged: <strong>' + esc(ddSelectedIssue) + '</strong> (' + catEntries.length + ')</span><button id="dd-clear-issue">Show all</button>';
+    document.getElementById('dd-clear-issue').addEventListener('click', ()=>{ ddSelectedIssue=null; renderDrilldown(); });
+  } else {
+    noteEl.style.display = 'none';
+    noteEl.innerHTML = '';
+  }
+
+  const el = document.getElementById('dd-entries');
+  el.innerHTML = catEntries.map(e=>{
+    const dt = new Date(e.ts);
+    const ds = dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}) + ' ' + dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    return `<div class="dd-entry">
+      <div class="ddname">${esc(e.assembler)} <span style="font-weight:400;color:var(--tx3)">&middot; ${ds}</span></div>
+      <div class="ddtype">${esc(e.type)}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('dd-btn-quality').addEventListener('click', ()=>{ ddCategory='Quality'; ddSelectedIssue=null; renderDrilldown(); });
+document.getElementById('dd-btn-safety').addEventListener('click', ()=>{ ddCategory='Safety'; ddSelectedIssue=null; renderDrilldown(); });
+document.getElementById('dd-close').addEventListener('click', closeDrilldown);
+
+// ── Firebase listeners ──
+onValue(ref(db,DB_E),snap=>{
+  const data=snap.val()||{};
+  localEntries=Object.values(data).sort((a,b)=>b.id-a.id);
+  entriesLoaded = true;
+  renderHistory();renderEscalations();
+  if(document.getElementById('sec-data').classList.contains('active')){
+    renderDataTab();
+  }
+  scheduleSnapshotSave();
+});
+onValue(ref(db,DB_S+'/assemblers'),snap=>{if(snap.val()){cachedAssemblers=snap.val();refreshDropdowns();}});
+onValue(ref(db,DB_S+'/quality'),snap=>{if(snap.val()){cachedQuality=snap.val();updateIssueOptions();}});
+onValue(ref(db,DB_S+'/safety'),snap=>{if(snap.val()){cachedSafety=snap.val();updateIssueOptions();}});
+onValue(ref(db,'meetings/'+NODE),snap=>{cachedMeetings=snap.val()||{};renderHistory();renderEscalations();});
+
+showAdminBar();
+console.log('Quality Log build: v2026-06-18-photo-compression-fix');
+</script>
+</body>
+</html>
